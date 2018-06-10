@@ -1,0 +1,26 @@
+<!--предварительные страницы тестирования-->
+<ion-card margin-bottom *ngIf="preparePage">
+  <ion-card-content>
+    <div class="element-prepare" *ngFor="let element of preparePage.elements">
+      {{element.text}}
+    </div>
+  </ion-card-content>
+  <div class="next-page-control">
+    <button ion-button (click)="nextPage.emit()">
+      Далее
+    </button>
+  </div>
+</ion-card>
+
+<!--страницы вопросов тестирования-->
+<ion-card margin-bottom *ngIf="questionPage">
+  <div *ngIf="questionPage.type === 'input'">
+    <input-question [question]="questionPage" (nextPage)="nextPage.emit($event)"></input-question>
+  </div>
+  <div *ngIf="questionPage.type === 'listRadioGroup' || questionPage.type === 'radioGroup'">
+    <list-radiogroup-question [question]="questionPage" (nextPage)="nextPage.emit($event)"></list-radiogroup-question>
+  </div>
+  <div *ngIf="questionPage.type === 'checkboxGroup'">
+    <checkboxgroup-question [question]="questionPage" (nextPage)="nextPage.emit($event)"></checkboxgroup-question>
+  </div>
+</ion-card>

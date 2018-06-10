@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{test.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <page-test [containerPage]="currentPage" (nextPage)="nextPageTest($event)"></page-test>
+</ion-content>

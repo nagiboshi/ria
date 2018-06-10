@@ -1,0 +1,54 @@
+<app-base>
+  <mat-card>
+
+    <mat-card-header>
+      <mat-card-title>
+        <b style="padding-right: 16px;">Компании</b>
+        <button mat-raised-button color="primary" (click)="addCompany()">
+          <mat-icon>add</mat-icon>
+          <span>Добавить компанию</span>
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-table [dataSource]="companies">
+
+        <ng-container matColumnDef="editor">
+          <mat-header-cell class="button-cell" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="button-cell" *matCellDef="let company">
+            <button tabindex="-1" mat-icon-button (click)="editCompany(company)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="button-cell" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="button-cell" *matCellDef="let element">
+            <button tabindex="-1" mat-icon-button (click)="removeCompanyById(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Название</mat-header-cell>
+          <mat-cell *matCellDef="let company">
+            {{company.name}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <mat-header-cell *matHeaderCellDef>Код</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.code}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns"></mat-row>
+
+      </mat-table>
+    </mat-card-content>
+
+  </mat-card>
+</app-base>

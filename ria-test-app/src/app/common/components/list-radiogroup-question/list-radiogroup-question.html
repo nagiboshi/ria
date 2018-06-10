@@ -1,0 +1,21 @@
+<ion-card-header>
+  {{question.text}}
+</ion-card-header>
+<ion-card-content>
+  <ion-list radio-group *ngFor="let elemQuest of listQuestion" [(ngModel)]="elemQuest.select">
+    <ion-list-header no-padding *ngIf="question.text !== elemQuest.text">
+      {{elemQuest.text}}
+    </ion-list-header>
+    <ion-item no-padding *ngFor="let answer of elemQuest.answers">
+      <ion-label>
+        {{answer.text}}
+      </ion-label>
+      <ion-radio [value]="answer"></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-card-content>
+<div class="next-page-control">
+  <button ion-button (click)="submitResults()">
+    Далее
+  </button>
+</div>

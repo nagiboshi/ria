@@ -1,0 +1,13 @@
+<ion-card-header>
+  {{question.text}}
+</ion-card-header>
+<ion-card-content>
+  <ion-item no-padding>
+    <ion-input type="text" placeholder="Введите ответ" [(ngModel)]="valueInput"></ion-input>
+  </ion-item>
+</ion-card-content>
+<div class="next-page-control">
+  <button ion-button (click)="submitResults()">
+    Далее
+  </button>
+</div>

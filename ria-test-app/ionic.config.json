@@ -1,0 +1,8 @@
+{
+  "name": "ria-app-frontend",
+  "app_id": "b6c6815c",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

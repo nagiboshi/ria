@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Регистрация</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <img class="logo" src="./assets/imgs/logo.png">
+
+  <ion-item no-padding>
+    <ion-label color="primary" floating>Код компании</ion-label>
+    <ion-input [(ngModel)]="company"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding>
+    <ion-label color="primary" floating>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding>
+    <ion-label color="primary" floating>Пароль</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <button
+    margin-top
+    ion-button
+    block
+    [disabled]="!(company && email && password)"
+    color="primary"
+    (click)="signUp()">
+    Зарегистрироваться
+  </button>
+
+</ion-content>

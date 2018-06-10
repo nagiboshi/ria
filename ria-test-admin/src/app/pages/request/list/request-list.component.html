@@ -1,0 +1,51 @@
+<app-base>
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title><b>Заявки на консультацию</b></mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-table [dataSource]="requests">
+
+          <ng-container matColumnDef="isFinished">
+            <mat-header-cell class="button-cell" *matHeaderCellDef></mat-header-cell>
+            <mat-cell class="button-cell" *matCellDef="let request">
+              <mat-checkbox (click)="switchFinished(request)" [(ngModel)]="request.isFinished">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Тема</mat-header-cell>
+            <mat-cell *matCellDef="let request">{{request.title}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Имя</mat-header-cell>
+            <mat-cell *matCellDef="let request">{{request.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef>Телефон</mat-header-cell>
+            <mat-cell *matCellDef="let request">{{request.phoneNumber}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell *matCellDef="let request">{{request?.owner?.email || 'отсутствует'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef>Компания</mat-header-cell>
+            <mat-cell *matCellDef="let request">{{request?.company?.name || 'отсутствует'}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+      </mat-card-content>
+
+    </mat-card>
+  </app-base>

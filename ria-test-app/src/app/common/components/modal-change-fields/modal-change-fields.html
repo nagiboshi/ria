@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Редактирование поля</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item *ngFor="let field of listFields" no-padding>
+    <ion-label color="primary" floating>{{field.title || field.name}}</ion-label>
+    <ion-input type="text" [(ngModel)]="fieldsValues[field.name]"></ion-input>
+  </ion-item>
+
+  <button
+    margin-top
+    ion-button
+    color="primary"
+    (click)="saveFields()">
+    Сохранить
+  </button>
+</ion-content>

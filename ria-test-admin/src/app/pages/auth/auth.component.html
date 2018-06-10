@@ -1,0 +1,44 @@
+<div class="container">
+
+  <img style="width: 150px;" matCardImage src="/assets/images/logo.png">
+
+  <form #authForm="ngForm" (ngSubmit)="signIn(authForm)" novalidate>
+
+    <mat-form-field>
+      <input
+        required
+        ngModel
+        matInput
+        name="email"
+        type="email"
+        #email="ngModel"
+        placeholder="Email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        required
+        ngModel
+        matInput
+        name="password"
+        type="password"
+        #password="ngModel"
+        placeholder="Пароль">
+    </mat-form-field>
+
+    <button
+      type="submit"
+      [disabled]="!authForm.valid"
+      mat-button>
+      Войти
+    </button>
+
+    <div *ngIf="errorMessage" class="error-container">
+      {{errorMessage}}
+    </div>
+
+  </form>
+
+</div>
+
+

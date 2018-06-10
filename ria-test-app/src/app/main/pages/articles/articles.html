@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Рекомендации</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card
+    *ngFor="let article of viewListArticles"
+    margin-bottom
+    (click)="goToCurrentArticles(article.id)"
+  >
+    <ion-card-content no-padding>
+      <ion-item>
+        {{ article.title }}
+      </ion-item>
+      <img src="{{article.link}}"/>
+      <ion-item>
+        {{ article.text }}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

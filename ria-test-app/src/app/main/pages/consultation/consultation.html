@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Консультация</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <img src="./assets/imgs/logo.png">
+
+  <ion-textarea
+    [(ngModel)]="title"
+    placeholder="Если у вас возникли какие-то вопросы - просто напишите нам">
+  </ion-textarea>
+
+  <ion-item no-padding>
+    <ion-label floating>Имя</ion-label>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding>
+    <ion-label floating>Номер телефона</ion-label>
+    <ion-input type="text" [(ngModel)]="phoneNumber"></ion-input>
+  </ion-item>
+
+  <button
+    [disabled]="!(phoneNumber && name && title)"
+    ion-button
+    block
+    margin-top
+    color="primary"
+    (click)="createRequest()">
+    Оставить заявку
+  </button>
+
+</ion-content>
+

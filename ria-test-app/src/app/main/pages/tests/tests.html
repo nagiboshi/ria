@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Список тестов</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-spinner *ngIf="isLoadTests"></ion-spinner>
+  <ion-card
+    *ngFor="let test of listTests"
+    margin-bottom
+  >
+    <ion-card-content no-padding>
+      <ion-item>
+        <ion-label>
+          {{ test.title }}
+        </ion-label>
+      </ion-item>
+      <ion-list>
+        <ion-item  (click)="goToCurrentTest(test.testId)">
+          Пройти тестирование
+          <ion-icon name="arrow-forward" item-end></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="isLoadReports">
+            <ion-spinner></ion-spinner>          
+        </ion-item>
+        <ion-item *ngIf="test.resultPdf" (click)="loadResultTest(test.resultPdf)">
+          Загрузить файл с результатами
+          <ion-icon name="arrow-forward" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

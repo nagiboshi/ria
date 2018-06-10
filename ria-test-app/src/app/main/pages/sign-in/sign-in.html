@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Вход</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <img class="logo" src="./assets/imgs/logo.png">
+
+  <ion-item no-padding>
+    <ion-label color="primary" floating>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding>
+    <ion-label color="primary" floating>Пароль</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <button
+    margin-top
+    ion-button
+    block
+    [disabled]="!(email && password)"
+    color="primary"
+    (click)="signIn()">
+    Войти
+  </button>
+
+  <button
+    ion-button
+    block
+    color="white"
+    (click)="signUp()">
+    Создать аккаунт
+  </button>
+
+  <div class="spacer" style="width: 300px; height: 40px;"></div>
+
+  <button
+    ion-button
+    block
+    color="white"
+    (click)="passwordRecovery()">
+    Забыли пароль?
+  </button>
+
+</ion-content>

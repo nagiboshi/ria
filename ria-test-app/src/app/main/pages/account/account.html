@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Аккаунт</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-title>Уведомления</ion-title>
+  <ion-card class="push-settings">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label> Push-уведомления </ion-label>
+          <ion-toggle checked="isOnPushApp"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label> Уведомления на E-mail </ion-label>
+          <ion-toggle checked="isOnPushEmail"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-title>Информация о пользователе</ion-title>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <button ion-item (click)="changeName()">
+          {{ user.name }}
+          <ion-note item-end>
+            изменить
+          </ion-note>
+        </button>
+        <button ion-item>
+          {{ user.email }}
+        </button>
+        <button ion-item (click)="changePhoneNumber()">
+          {{ user.phoneNumber }}
+          <ion-note item-end>
+            изменить
+          </ion-note>
+        </button>
+        <button ion-item (click)="signOut()">
+          {{'Выйти из аккаунта'}}
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

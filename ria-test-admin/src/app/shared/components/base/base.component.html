@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <span>RIA ADMIN PANEL</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="signOut()">Выйти</button>
+</mat-toolbar>
+
+<mat-drawer-container>
+
+  <mat-drawer mode="side" opened="true">
+    <mat-nav-list>
+
+      <a routerLink="/user">
+        <mat-list-item>Пользователи</mat-list-item>
+      </a>
+
+      <a routerLink="/company">
+        <mat-list-item>Компании</mat-list-item>
+      </a>
+
+      <a routerLink="/request">
+        <mat-list-item>Заявки</mat-list-item>
+      </a>
+
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+
+</mat-drawer-container>
