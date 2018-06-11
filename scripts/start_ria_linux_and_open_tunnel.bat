@@ -1,3 +1,4 @@
+Taskkill /IM putty.exe /F
 cd C:
 cd "Program Files"
 cd PuTTY
