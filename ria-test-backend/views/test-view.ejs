@@ -443,148 +443,172 @@
                   </table>
                 </div>
               </td>
+              </tr>
             </tbody>
     </table>
-    <div class="section3 section">
-	  <div class="section-square-element"></div>
-	  <div class="section-content">
-		  <h1 class="section-title">Секция 3</h1>
-		  <h5 class="section-subtitle">Демографические показатели</h5>
-		  <% section3.demographicIndicators.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-		  <% }) %>
-		  <h5 class="section-subtitle">Наследственная заболеваемость</h5>
-		  <% section3.hereditaryIncidence.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-		  <% }) %>
-		  <h5 class="section-subtitle">Скрининг здоровья</h5>
-		  <% section3.healthScreening.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-		  <% }) %>
-		  <h5 class="section-subtitle">Медицинские осмотры</h5>
-		  <% section3.medicalCheckups.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-		  <% }) %>
-		  <h5 class="section-subtitle">Здоровье зубов</h5>
-		  <% section3.toothHealth.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-		  <% }) %>
-		  <h5 class="section-subtitle">Образ жизни</h5>
-		  <% section3.lifeStyle.forEach(item => {%>
-			<div class="paragraph">
-			  <%= item%>
-			</div>
-      <% }) %>
-	  </div>
-    </div>
-    <div class="section4 section">
-	  <div class="section-square-element"></div>
-	  <div class="section-content">
-      <h1 class="section-title">Секция 4</h1>
-	  <h5 class="section-subtitle">Факторы риска по ключевым заболеваниям</h5>
-		  <div class="container-block">
-			<div class="title-block-risk">Онкология</div>
-			<div class="container-icon">
-			  <% if(section1.oncology.resultRisk === 3) { %>
-				<i class="fas fa-user risk-indicator-red"></i>
-				<div class="caption">High</div>
-			  <% } %>
-			  <% if(section1.oncology.resultRisk === 2) { %>
-				<i class="fas fa-user risk-indicator-yellow"></i>
-				<div class="caption">Moderate</div>
-			  <% } %>
-			  <% if(section1.oncology.resultRisk === 1) { %>
-				<i class="fas fa-user risk-indicator-green"></i>
-				<div class="caption">Low</div>
-			  <% } %>
-			</div>
-		  </div>
-		  <div class="container-block">
-			<div class="title-block-risk">Диабет</div>
-			<div class="container-icon">
-			  <% if(section1.diabetes.resultRisk === 3) { %>
-				<i class="fas fa-user risk-indicator-red"></i>
-				<div class="caption">High</div>
-			  <% } %>
-			  <% if(section1.diabetes.resultRisk === 2) { %>
-				<i class="fas fa-user risk-indicator-yellow"></i>
-				<div class="caption">Moderate</div>
-			  <% } %>
-			  <% if(section1.diabetes.resultRisk === 1) { %>
-				<i class="fas fa-user risk-indicator-green"></i>
-				<div class="caption">Low</div>
-			  <% } %>
-			</div>
-		  </div>
-	
-		  <div class="container-block">
-			<div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
-			<div class="container-icon">
-			  <% if(section1.cardiovascular.resultRisk === 3) { %>
-				<i class="fas fa-user risk-indicator-red"></i>
-				<div class="caption">High</div>
-			  <% } %>
-			  <% if(section1.cardiovascular.resultRisk === 2) { %>
-				<i class="fas fa-user risk-indicator-yellow"></i>
-				<div class="caption">Moderate</div>
-			  <% } %>
-			  <% if(section1.cardiovascular.resultRisk === 1) { %>
-				<i class="fas fa-user risk-indicator-green"></i>
-				<div class="caption">Low</div>
-			  <% } %>
-			</div>
-		  </div>
-		  <div class="container-block">
-			<div class="title-block-risk">Психосоматические заболевания</div>
-			<div class="container-icon">
-			  <% if(section1.psychosomatic.resultRisk === 3) { %>
-				<i class="fas fa-user risk-indicator-red"></i>
-				<div class="caption">High</div>
-			  <% } %>
-			  <% if(section1.psychosomatic.resultRisk === 2) { %>
-				<i class="fas fa-user risk-indicator-yellow"></i>
-				<div class="caption">Moderate</div>
-			  <% } %>
-			  <% if(section1.psychosomatic.resultRisk === 1) { %>
-				<i class="fas fa-user risk-indicator-green"></i>
-				<div class="caption">Low</div>
-			  <% } %>
-			</div>
-		  </div>
-	  </div>
-    </div>
-    <div class="section5 section">
-	  <div class="section-square-element"></div>
-	  <div class="section-content">
-		  <h1 class="section-title">Секция 5</h1>
-		  <h3 class="general-title">Как правильно использовать результаты оценки риска возникновения хронических заболеваний?</h3>
-		  <div class="text-margin">Поздравляю с прохождением RIA Assessment!</div>
-		  <div>Верите Вы или нет, этот анализ – есть правильный  шаг к улучшению Вашего здоровья и благополучия.</div>
-		  <div class="text-margin">Что дальше?</div>
-		  <div class="text-margin">1. Прочитайте отчет!</div>
-		  <div>Потратьте немного времени, чтобы ознакомиться с отчетом. В этом отчете Вы найдете информацию о значимых факторах риска и возможной профилактике нарушения здоровья. Для того чтобы информация, полученная в данном отчете, была более полезна, прочтите данный отчет спустя какое-то время.</div>
-		  <div class="text-margin">2. Спланируйте прохождение медицинского осмотра.</div>
-		  <div>Секрет здоровья и долголетия – предупредить заболевание до того как оно начнется. Профилактические обследования – ключ для успеха. Данные Assessment - отличный способ понять, какие анализы и обследования необходимы. Возьмите календарь, и отметьте даты прохождения профилактического осмотра.</div>
-		  <div class="text-margin">3. Возьмите копию отчета к Вашему врачу.</div>
-		  <div>Когда Вы пойдете к своему лечащему врачу, возьмите копию отчета. Специалист с медицинским образованием даст Вам отличные профилактические рекомендации.</div>
-		  <div class="text-margin">4. Составьте план. </div>
-		  <div>Ваше здоровье – один из самых важных ресурсов, которые необходимо накапливать. Инвестируя в свое здоровье, Вы преумножаете ресурсы Вашего организма и получаете большие шансы на успех в профессиональной и личной жизни. Создайте личный план повышения ресурсов организма, обязательно  включите туда правильное питание, практику по профилактике стресса и физическую активность.</div>
-		  <div class="text-margin">5. Держите отчет поблизости.</div>
-		  <div>Начните внедрять программы по улучшению здоровья. Когда пройдет год или два, Вы сможете посмотреть динамику изменений, которые происходят в Вашем организме.</div>
-	  </div>
+    <table class="section-table">
+    <tbody>
+      <tr>
+        <td class="section-square-element-container">
+          <div class="section-square-element"></div>
+        </td>
+        <td>
+        <div class="section-content">
+          <h1 class="section-title">Секция 3</h1>
+          <h5 class="section-subtitle">Демографические показатели</h5>
+          <% section3.demographicIndicators.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Наследственная заболеваемость</h5>
+          <% section3.hereditaryIncidence.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Скрининг здоровья</h5>
+          <% section3.healthScreening.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Медицинские осмотры</h5>
+          <% section3.medicalCheckups.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Здоровье зубов</h5>
+          <% section3.toothHealth.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Образ жизни</h5>
+          <% section3.lifeStyle.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+        </div>
+        </td>
+        </tr>
+      </tbody>
+      </table>
+      <table class="section-table">
+        <tbody>
+          <tr>
+            <td class="section-square-element-container">
+              <div class="section-square-element"></div>
+            </td>
+            <td>
+            <div class="section-content">
+              <h1 class="section-title">Секция 4</h1>
+              <h5 class="section-subtitle">Факторы риска по ключевым заболеваниям</h5>
+              <div class="container-block">
+              <div class="title-block-risk">Онкология</div>
+              <div class="container-icon">
+                <% if(section1.oncology.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">High</div>
+                <% } %>
+                <% if(section1.oncology.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Moderate</div>
+                <% } %>
+                <% if(section1.oncology.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Low</div>
+                <% } %>
+              </div>
+              </div>
+              <div class="container-block">
+              <div class="title-block-risk">Диабет</div>
+              <div class="container-icon">
+                <% if(section1.diabetes.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">High</div>
+                <% } %>
+                <% if(section1.diabetes.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Moderate</div>
+                <% } %>
+                <% if(section1.diabetes.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Low</div>
+                <% } %>
+              </div>
+              </div>
+          
+              <div class="container-block">
+              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
+              <div class="container-icon">
+                <% if(section1.cardiovascular.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">High</div>
+                <% } %>
+                <% if(section1.cardiovascular.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Moderate</div>
+                <% } %>
+                <% if(section1.cardiovascular.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Low</div>
+                <% } %>
+              </div>
+              </div>
+              <div class="container-block">
+              <div class="title-block-risk">Психосоматические заболевания</div>
+              <div class="container-icon">
+                <% if(section1.psychosomatic.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">High</div>
+                <% } %>
+                <% if(section1.psychosomatic.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Moderate</div>
+                <% } %>
+                <% if(section1.psychosomatic.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Low</div>
+                <% } %>
+              </div>
+              </div>
+            </div>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+	  <table class="section-table">
+      <tbody>
+        <tr>
+          <td class="section-square-element-container">
+            <div class="section-square-element"></div>
+          </td>
+          <td>
+            <div class="section-content">
+              <h1 class="section-title">Секция 5</h1>
+              <h3 class="general-title">Как правильно использовать результаты оценки риска возникновения хронических заболеваний?</h3>
+              <div class="text-margin">Поздравляю с прохождением RIA Assessment!</div>
+              <div>Верите Вы или нет, этот анализ – есть правильный  шаг к улучшению Вашего здоровья и благополучия.</div>
+              <div class="text-margin">Что дальше?</div>
+              <div class="text-margin">1. Прочитайте отчет!</div>
+              <div>Потратьте немного времени, чтобы ознакомиться с отчетом. В этом отчете Вы найдете информацию о значимых факторах риска и возможной профилактике нарушения здоровья. Для того чтобы информация, полученная в данном отчете, была более полезна, прочтите данный отчет спустя какое-то время.</div>
+              <div class="text-margin">2. Спланируйте прохождение медицинского осмотра.</div>
+              <div>Секрет здоровья и долголетия – предупредить заболевание до того как оно начнется. Профилактические обследования – ключ для успеха. Данные Assessment - отличный способ понять, какие анализы и обследования необходимы. Возьмите календарь, и отметьте даты прохождения профилактического осмотра.</div>
+              <div class="text-margin">3. Возьмите копию отчета к Вашему врачу.</div>
+              <div>Когда Вы пойдете к своему лечащему врачу, возьмите копию отчета. Специалист с медицинским образованием даст Вам отличные профилактические рекомендации.</div>
+              <div class="text-margin">4. Составьте план. </div>
+              <div>Ваше здоровье – один из самых важных ресурсов, которые необходимо накапливать. Инвестируя в свое здоровье, Вы преумножаете ресурсы Вашего организма и получаете большие шансы на успех в профессиональной и личной жизни. Создайте личный план повышения ресурсов организма, обязательно  включите туда правильное питание, практику по профилактике стресса и физическую активность.</div>
+              <div class="text-margin">5. Держите отчет поблизости.</div>
+              <div>Начните внедрять программы по улучшению здоровья. Когда пройдет год или два, Вы сможете посмотреть динамику изменений, которые происходят в Вашем организме.</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 	</div>
-  </div>
-  </div>
   </div>
 </body>
 </html>
