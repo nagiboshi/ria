@@ -128,9 +128,9 @@ class TestController extends BaseController {
             base: './files/',
             type: "pdf",
             phantomPath: "./node_modules/phantomjs-prebuilt/bin/phantomjs",
-            header: {
-              height: "10mm"
-            },
+            // header: {
+            //   height: "10mm"
+            // },
             footer: {
               height: "10mm"
             }
