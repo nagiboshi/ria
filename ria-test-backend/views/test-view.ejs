@@ -89,7 +89,7 @@
       width: 100%;
     }
 
-    .container-report .section2 table .blue-style {
+    .blue-style {
       background: #004f9f;
     }
 	
@@ -99,7 +99,7 @@
 		text-align: center;
 		font-size: 1em;
 	}
-    .container-report .section2 table td,th {
+    .container-report table td,th {
       border: 1px solid #dddddd;
     }
 	
@@ -107,11 +107,11 @@
 		font-size: 11px;
 	}
 
-    .container-report .section3 .paragraph {
+    .container-report .paragraph {
       padding-top: 10px;
     }
 
-    .container-report .section4 .container-block {
+    .container-report .container-block {
       display: block;
       width: 100%;
       margin-bottom: 20px;
@@ -121,39 +121,39 @@
 		margin: 10px 0;
 		font-weight: bold;
 	} 
-    .container-report .section4 .container-block .container-icon {
+    .container-report .container-block .container-icon {
       display: inline-block;
       vertical-align: middle;
     }
 
-    .container-report .section4 .container-block .container-icon .risk-indicator-red {
+    .container-report .container-block .container-icon .risk-indicator-red {
       padding-top: 20px;
       font-size: 100px;
       color: #ff0000;
     }
 
-    .container-report .section4 .container-block .container-icon .caption {
+    .container-report .container-block .container-icon .caption {
       font-size: 16px;
       text-align: center;
     }
 
-    .container-report .section4 .container-block .container-icon .risk-indicator-yellow {
+    .container-report .container-block .container-icon .risk-indicator-yellow {
       padding-top: 20px;
       font-size: 100px;
       color: #ffff00;
     }
 
-    .container-report .section4 .container-block .container-icon .risk-indicator-green {
+    .container-report .container-block .container-icon .risk-indicator-green {
       padding-top: 20px;
       font-size: 100px;
       color: #00ff00;
     }
 
-    .container-report .section5 .general-title {
+    .container-report .general-title {
       margin-top: 20px;
     }
 
-    .container-report .section5 .text-margin {
+    .container-report .text-margin {
       margin-top: 10px;
     }
 
@@ -252,11 +252,14 @@
                 <h1 class="section-title">Секция 2</h1>
                   <div class="title-table">Таблица анализа рисков возникновения хронических заболеваний</div>
                   <table cellpadding="5px" cellspacing="0px">
+                    <thead>
                     <tr class="blue-style">
                       <th class="table-header">Демографические факторы</th>
                       <th class="table-header">Текущее значение на основе ассесмента</th>
                       <th class="table-header">Нормальные значения</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td class="table-cell">Возраст</td>
                       <td class="table-cell">
@@ -440,6 +443,7 @@
                       </td>
                       <td class="table-cell">Высокая</td>
                     </tr>
+                  </tbody>
                   </table>
                 </div>
               </td>
