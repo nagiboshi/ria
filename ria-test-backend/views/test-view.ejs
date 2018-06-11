@@ -99,8 +99,8 @@
 		text-align: center;
 		font-size: 1em;
 	}
-    .container-report table td,th {
-      border: 1px solid #dddddd;
+    .container-report .section-inner-table td {
+      border-right: 1px solid #FFF;
     }
 	
 	.table-cell{
@@ -110,6 +110,10 @@
     .container-report .paragraph {
       padding-top: 10px;
     }
+  
+  .inner-table-odd-even:nth-child(even){ 
+    background-color: #F0EFEE;
+  }
 
     .container-report .container-block {
       display: block;
@@ -251,7 +255,7 @@
               <div class="section-content">
                 <h1 class="section-title">Секция 2</h1>
                   <div class="title-table">Таблица анализа рисков возникновения хронических заболеваний</div>
-                  <table cellpadding="5px" cellspacing="0px">
+                  <table class="section-inner-table" cellpadding="5px" cellspacing="0px">
                     <thead>
                     <tr class="blue-style">
                       <th class="table-header">Демографические факторы</th>
@@ -260,14 +264,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Возраст</td>
                       <td class="table-cell">
                         <%= section2.age%>
                       </td>
                       <td class="table-cell"></td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Пол</td>
                       <td class="table-cell">
                         <%= section2.sex%>
@@ -279,21 +283,21 @@
                         Факторы риска на  основе оценки медицинских показателей
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Рост</td>
                       <td class="table-cell">
                         <%= section2.height%>
                       </td>
                       <td class="table-cell"></td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Вес</td>
                       <td class="table-cell">
                         <%= section2.weight%>
                       </td>
                       <td class="table-cell"></td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">ИМТ*</td>
                       <td class="table-cell">
                         <%= section2.massIndex%>
@@ -305,56 +309,56 @@
                         Если Вы профессионально занимаетесь спортом или имеете большой уровень мышечной массы, а также, если вы беременны, для правильной трактовки результатов обратитесь к специалисту
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Давление*</td>
                       <td class="table-cell">
                         <%= section2.pressure%>
                       </td>
                       <td class="table-cell">Менее 120/80 мм.рт.ст.</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Общий холестерин</td>
                       <td class="table-cell">
                         <%= section2.cholesterol%>
                       </td>
                       <td class="table-cell">Менее 5.6 ммоль/л</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">ЛПНП</td>
                       <td class="table-cell">
                         <%= section2.lpnp%>
                       </td>
                       <td class="table-cell">Менее 3.5 ммоль/л</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">ЛПВП</td>
                       <td class="table-cell">
                         <%= section2.lpvp%>
                       </td>
                       <td class="table-cell">Более 0.9 ммоль/л</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Глюкоза капиллярной крови</td>
                       <td class="table-cell">
                         <%= section2.glucoseCapillaryBlood%>
                       </td>
                       <td class="table-cell">Менее 5.5 ммоль/л</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Наличие наследственности по основным видам заболеваний</td>
                       <td class="table-cell">
                         <%= section2.presenceHeredityOfDiseases%>
                       </td>
                       <td class="table-cell">Отсутствие</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Прохождение медицинского осмотра</td>
                       <td class="table-cell">
                         <%= section2.medicalCheckupTherapist%>
                       </td>
                       <td class="table-cell">1 раз в год</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Осмотр стоматолога</td>
                       <td class="table-cell">
                         <%= section2.medicalCheckupDentist%>
@@ -366,77 +370,77 @@
                         Персональные поведенческие риски
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Физическая активность</td>
                       <td class="table-cell">
                         <%= section2.physicalActivity%>
                       </td>
                       <td class="table-cell">Высокая</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Курение</td>
                       <td class="table-cell">
                         <%= section2.smoking%>
                       </td>
                       <td class="table-cell">Отсутствие</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Пассивное курение</td>
                       <td class="table-cell">
                         <%= section2.secondHandSmoke%>
                       </td>
                       <td class="table-cell">Отсутствие</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Алкоголь</td>
                       <td class="table-cell">
                         <%= section2.alcohol%>
                       </td>
                       <td class="table-cell">Редко/ не очень часто</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Жирная пища</td>
                       <td class="table-cell">
                         <%= section2.fattyFood%>
                       </td>
                       <td class="table-cell">Низкое или нормальное потребление</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Фрукты/ овощи в диете</td>
                       <td class="table-cell">
                         <%= section2.fruitsVegetables%>
                       </td>
                       <td class="table-cell">5+ продуктов ежедневно</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Пищевые волокна в диете</td>
                       <td class="table-cell">
                         <%= section2.alimentaryFiber%>
                       </td>
                       <td class="table-cell">5+ продуктов ежедневно</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Стресс</td>
                       <td class="table-cell">
                         <%= section2.stress%>
                       </td>
                       <td class="table-cell">Низкий или средний уровень</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Депрессия</td>
                       <td class="table-cell">
                         <%= section2.depression%>
                       </td>
                       <td class="table-cell">Отсутствие</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Удовлетворенность личной жизнью</td>
                       <td class="table-cell">
                         <%= section2.satisfactionPrivacyLife%>
                       </td>
                       <td class="table-cell">Высокая</td>
                     </tr>
-                    <tr>
+                    <tr class="inner-table-odd-even">
                       <td class="table-cell">Удовлетворенность профессиональной жизнью</td>
                       <td class="table-cell">
                         <%= section2.satisfactionProfessionalLife%>
