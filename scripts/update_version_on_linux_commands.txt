@@ -1,0 +1,7 @@
+kill %%
+cd ~/dev/ria
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/ria
+git pull
+cd ~/dev/ria/ria-test-backend
+node server.js
