@@ -28,9 +28,17 @@
   
   .page{ 
     page-break-after: always;
+    margin-top: 40px;
+  }
+
+  .page.page--first{ 
+    margin-top: 0;
   }
 	
-	
+	.section-content{ 
+    margin-right: 50px;
+  }
+
 	.section-square-element{
 		height: 25px;
 		margin-top: 7px;
@@ -152,7 +160,7 @@
 <div class="main-container">
   <%- include test-view-header.ejs %>
   <div class="container-report">
-  <div class="page">
+  <div class="page page--first">
 	<table class="section-table">
 		<tbody>
 			<tr>
@@ -171,33 +179,19 @@
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Онкология</div>
-                <!-- <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %> -->
-                <%- include('risk-indicator', {resultRisk:1}) %>
-                <%- include('risk-indicator', {resultRisk:2}) %>
-                <%- include('risk-indicator', {resultRisk:3}) %>
-                <%- include('risk-indicator', {resultRisk:4}) %>
-                <%- include('risk-indicator', {resultRisk:5}) %>
-                <%- include('risk-indicator', {resultRisk:6}) %>
-                <%- include('risk-indicator', {resultRisk:7}) %>
-                <%- include('risk-indicator', {resultRisk:8}) %>
-                <%- include('risk-indicator', {resultRisk:9}) %>
-                <%- include('risk-indicator', {resultRisk:10}) %>
-                <%- include('risk-indicator', {resultRisk:11}) %>
-                <%- include('risk-indicator', {resultRisk:12}) %>
+                <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
               </div>
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Диабет</div>
               <div class="risk-indicator-container">
-                <!-- <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %> -->
-                <%- include('risk-indicator', {resultRisk:8}) %> 
+                <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
               </div>
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
               <div class="risk-indicator-container">
-                <!-- <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %> -->
-                <%- include('risk-indicator', {resultRisk:2}) %>
+                <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
               </div>
             </div>
             <div class="risk-container">
