@@ -35,11 +35,29 @@
         border-width: 10px 6px 0 6px;
         border-color: #004f9f transparent transparent transparent;
     }
+
+    .risk-indicator-value {
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+        color: #004f9f;
+    }
 </style>
 <div class="risk-indicator-container">
         <div id="risk-indicator" class="risk-indicator risk-indicator-position--<%=resultRisk %>">
           <div class="risk-indicator-triangle"></div>
           <div class="risk-indicator-border"></div>
+          <div class="risk-indicator-value">
+              <% if( resultRisk < 4 ) { %>
+                Низкий
+              <% } %>
+              <% if( resultRisk < 8 && resultRisk > 3 ) { %>
+                Средний
+              <% } %>
+              <% if( resultRisk > 7 ) { %>
+                Высокий
+              <% } %>
+          </div>
         </div>
         <div class="risk-person-icon">
             <% let maxPersonIcons = 12; %>
