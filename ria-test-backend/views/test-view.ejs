@@ -237,8 +237,10 @@
               <div class="risk-indicator-border">
               </div>
               <% let className = maxRisk === 2 ? 'risk-indicator-yellow': marRisk === 1 ? 'risk-indicator-green':'risk-indicator-red'; %>
+              <% let maxPersonIcons = 12; %>
+              <% for( i=0; i < maxPersonIcons; i++ ) {%>
               <%- include('test-view-person-icon',{className:className}); %> 
-              
+              <% } %>
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
 						<div class="risk-indicator-red"></div>
