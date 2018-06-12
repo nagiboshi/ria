@@ -23,15 +23,22 @@
   
   .risk-indicator-border {
     height: 60px;
-    width: 12px;
+    width: 10px;
     border-right: 2px dashed #004f9f;
   }
 
+  .risk-indicator { 
+    position: absolute;
+  }
+
+  .risk-indicator-container{ 
+    position: relative; 
+  }
   .risk-indicator-triangle {  
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 26px 13px 0 13px;
+    border-width: 22px 11px 0 11px;
     border-color: #004f9f transparent transparent transparent;
 }
 	
@@ -55,7 +62,7 @@
 		height: 25px;
 		margin-top: 7px;
 		margin-right: 10px;
-		width: 80px;
+		width: 50px;
 		min-width: 80px;
 		max-width: 80px;
 		background-color: #004f9f;
@@ -232,16 +239,19 @@
 						<div class="risk-indicator-green"></div>
 					  <% } %>
             <div class="title-block-risk">Онкология</div>
-            <div class="risk-indicator">
-              <div class="risk-indicator-triangle"></div>
-              <div class="risk-indicator-border">
+            <div class="risk-indicator-container">
+                <div class="risk-indicator">
+                  <div class="risk-indicator-triangle"></div>
+                  <div class="risk-indicator-border">
+                </div>
+                <% let maxPersonIcons = 12; %>
+                <% for( i=0; i < maxPersonIcons; i++ ) {%>
+                <% let className = 'risk-indicator-green'; %>
+                <% if( i > 8 ) { className = 'risk-indicator-red'; } %>
+                <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
+                <%- include('test-view-person-icon',{className:className}); %> 
+                <% } %>
               </div>
-              <% let maxPersonIcons = 12; %>
-              <% for( i=0; i < maxPersonIcons; i++ ) {%>
-              <% let className = 'risk-indicator-green'; %>
-              <% if( i < 8 && i > 3 ) { className = 'risk-indicator-green'; } %>
-              <%- include('test-view-person-icon',{className:className}); %> 
-              <% } %>
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
 						<div class="risk-indicator-red"></div>
