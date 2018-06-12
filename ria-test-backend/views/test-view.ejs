@@ -240,9 +240,10 @@
               </div>
               <div class="risk-indicators">
                 <% let maxPersonIcons = 12; %> 
-                <% for( var i = 0; i < maxPersonIcons; i++ ){ %>  
+                <% for( let i = 0; i < maxPersonIcons; i++ ){ %>  
+                    <%=i %>
+                  <% } %>
                   <%- include('test-view-person-icon',{ className: className  }); %> 
-                <% } %>
               </div>
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
