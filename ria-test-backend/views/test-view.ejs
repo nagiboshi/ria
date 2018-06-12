@@ -62,8 +62,8 @@
 		margin-top: 7px;
 		margin-right: 10px;
 		width: 50px;
-		min-width: 80px;
-		max-width: 80px;
+		min-width: 50px;
+		max-width: 50px;
 		background-color: #004f9f;
 	}
 	
@@ -198,9 +198,7 @@
                   <tr>
                     <td>
                       <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
-                      <div class="risk-indicator-container">
-                        <%- include('risk-indicator', {resultRisk:maxRisk}) %>
-                      </div>
+                      <%- include('risk-indicator', {resultRisk:maxRisk}) %>
                     </td>
                   </tr>
                   <tr>
