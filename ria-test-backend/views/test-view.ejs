@@ -226,12 +226,11 @@
 					  <% } %>
             <div class="title-block-risk">Онкология</div>
             <div class="risk-indicator">
-              <h1>lal</h1>
               <div class="risk-indicator-triangle"></div>
               <div class="risk-indicator-border">
               </div>
               <% let className = maxRisk === 2 ? 'risk-indicator-yellow': marRisk === 1 ? 'risk-indicator-green':'risk-indicator-red'; %>
-              <%- include('test-view-person-icon',{'className':className}) %> 
+              <%- include('test-view-person-icon',{className:className}); %> 
               
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
