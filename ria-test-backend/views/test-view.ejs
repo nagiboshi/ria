@@ -160,6 +160,18 @@
       text-align: center;
     }
 
+    .risk-indicator-yellow {
+      fill: #F3DB2B;
+    }
+
+    .risk-indicator-green {
+      fill: #ABC446;
+    }
+
+    .risk-indicator-red {
+      fill: #DE382C;
+    }
+
     .container-report .container-block .container-icon .risk-indicator-yellow {
       padding-top: 20px;
       font-size: 100px;
@@ -188,7 +200,7 @@
 </head>
 <body>
 <div class="main-container">
-  <%- include header.ejs %>
+  <%- include test-view-header.ejs %>
   <div class="container-report">
   <div class="page">
 	<table class="section-table">
@@ -217,16 +229,8 @@
               <div class="risk-indicator-triangle"></div>
               <div class="risk-indicator-border">
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.75 37.75">
-                <defs>
-                  <style>
-                    .a {
-                      fill: #f4de28;
-                    }
-                  </style>
-                </defs>
-                <path class="a" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
-              </svg>
+              <% let className = maxRisk === 2 ? 'risk-indicator-yellow': marRisk === 1 ? 'risk-indicator-green':'risk-indicator-red'; %>
+              <%- include('test-view-person-icon',{'className':className}) %> 
               
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
