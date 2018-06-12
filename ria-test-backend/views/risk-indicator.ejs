@@ -1,14 +1,16 @@
 <div class="risk-indicator-container">
         <div class="risk-indicator">
           <div class="risk-indicator-triangle"></div>
-          <div class="risk-indicator-border">
+          <div class="risk-indicator-border"></div>
         </div>
-        <% let maxPersonIcons = 12; %>
-        <% for( i=0; i < maxPersonIcons; i++ ) {%>
-        <% let className = 'risk-indicator-green'; %>
-        <% if( i > 7 ) { className = 'risk-indicator-red'; } %>
-        <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
-        <%- include('test-view-person-icon',{className:className}); %> 
-        <% } %>
+        <div class="risk-person-icon">
+            <% let maxPersonIcons = 12; %>
+            <% for( i=0; i < maxPersonIcons; i++ ) {%>
+            <% let className = 'risk-indicator-green'; %>
+            <% if( i > 7 ) { className = 'risk-indicator-red'; } %>
+            <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
+            <%- include('test-view-person-icon',{className:className}); %> 
+            <% } %>
+        </div>
       </div>
     </div>
