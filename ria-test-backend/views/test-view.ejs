@@ -103,7 +103,7 @@
   }
 
   .risk-container{ 
-    height: 45px;
+    height: 80px;
   }
   
   
@@ -195,12 +195,28 @@
 					  <h1 class="section-title">Секция 1</h1>
             <h5 class="section-subtitle">Персональный риск</h5>
             <div class="risk-container">
-              <div class="title-block-risk">Риск возникновения хронических заболеваний</div>
-              <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
-                <div class="risk-indicator-container">
-                  <%- include('risk-indicator', {resultRisk:maxRisk}) %>
-                </div>
-              <div class="result-risk-divider"></div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="title-block-risk">Риск возникновения хронических заболеваний</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
+                      <div class="risk-indicator-container">
+                        <%- include('risk-indicator', {resultRisk:maxRisk}) %>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="result-risk-divider"></div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+                    <div class="title-block-risk">Риск возникновения хронических заболеваний</div>
+             
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Онкология</div>
