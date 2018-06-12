@@ -1,5 +1,19 @@
+<% let width = 36, height = 38; %>
+<style>
+    .risk-indicator-position--1 {
+        left: 18px;
+    }
+
+    .risk-indicator-position--2 {
+        left: 36px;
+    }
+
+    .risk-indicator-position--3 {
+        left: 54px;
+    }
+</style>
 <div class="risk-indicator-container">
-        <div class="risk-indicator">
+        <div id="risk-indicator" class="risk-indicator risk-indicator-position--<%=resultRisk %>">
           <div class="risk-indicator-triangle"></div>
           <div class="risk-indicator-border"></div>
         </div>
@@ -9,7 +23,7 @@
             <% let className = 'risk-indicator-green'; %>
             <% if( i > 7 ) { className = 'risk-indicator-red'; } %>
             <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
-            <%- include('test-view-person-icon',{className:className}); %> 
+            <%- include('test-view-person-icon',{width: width, height: height, className:className}); %> 
             <% } %>
         </div>
       </div>
