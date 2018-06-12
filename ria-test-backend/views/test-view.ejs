@@ -233,20 +233,21 @@
 					  <% } %>
             <div class="title-block-risk">Онкология</div>
             
-            <%  
-              document.getElementById('x').style.display = 'absolute';
-              document.getElementById('x').style.top = '50%';
-            %>
+           
             <div id="x" class="risk-indicator">
               <div class="risk-indicator-triangle"></div>
               <div class="risk-indicator-border">
               </div>
+              <div class="risk-indicators">
                 <% let maxPersonIcons = 12; %> 
                 <% for( var i = 0; i < maxPersonIcons; i++ ){ %>  
-                  <% let className = i < 4 ? 'risk-indicator-green': i > 3 && i < 8 ? 'risk-indicator-yellow':'risk-indicator-red';
+                  <% let className= 'risk-indicator-green'; 
+                  <% if ( i > 3 ) { className = 'risk-indicator-yellow'; } %>
+                  <% if ( i > 7 ) { className = 'risk-indicator-red';} %> 
                   <%- include('test-view-person-icon',{ className: className  }); %> 
                 <% } %>
-                </div>
+              </div>
+            </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
 						<div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
 					  <% if(section1.cardiovascular.resultRisk === 3) { %>
