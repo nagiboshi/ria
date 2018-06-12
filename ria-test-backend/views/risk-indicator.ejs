@@ -2,7 +2,7 @@
 <style>
     .risk-indicator { 
         position: absolute;
-        top: -14px;
+        top: -16px;
     }
 
     .risk-indicator-position--1 {
@@ -18,7 +18,7 @@
     }
 
      .risk-indicator-border {
-        height: 40px;
+        height: 42px;
         width: 7px;
         border-right: 1px dotted #004f9f;
   }
@@ -26,7 +26,7 @@
   
     .risk-indicator { 
         position: absolute;
-        top: -15px;
+        top: -18px;
     }
 
     .risk-indicator-container{ 
@@ -38,11 +38,11 @@
         width: 0;
         height: 0;
         border-style: solid;
-        border-width: 15px 8px 0 8px;
+        border-width: 12px 6px 0 6px;
         border-color: #004f9f transparent transparent transparent;
     }
 </style>
-<h1><%=resultRisk %></h1>
+<% document.getElementById('risk-indicator').style.left=100 %>
 <div class="risk-indicator-container">
         <div id="risk-indicator" class="risk-indicator risk-indicator-position--1">
           <div class="risk-indicator-triangle"></div>
