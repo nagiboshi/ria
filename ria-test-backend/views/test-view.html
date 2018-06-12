@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Result</title>
+  <!--<link href="/views/test-view.css" rel="stylesheet" type="text/css">-->
+  <style>
+	html, body {
+		margin: 0 auto;
+		padding: 0;	
+		font-family: Arial;
+	}
+	
+  .risk-indicator-border {
+    height: 50px;
+    width: 7px;
+    border-right: 2px dashed #004f9f;
+  }
+
+
+  .risk-container {
+    width: 540px;
+  }
+  
+  .risk-indicator-container{ 
+    position: relative;
+    width: 100%;
+  }
+  
+  .risk-indicator-triangle {  
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 8px 0 8px;
+    border-color: #004f9f transparent transparent transparent;
+  }
+	
+  .result-risk-divider {
+    width: 100%;
+    height:1px;
+    border-bottom: 1px solid #E6E6E6;
+  }
+  
+  .section-table{ 
+		border-spacing: 0;
+	}
+	.section-square-element-container {
+		vertical-align: top;
+  }
+  
+  .page{ 
+    page-break-after: always;
+  }
+	
+	
+	.section-square-element{
+		height: 25px;
+		margin-top: 7px;
+		margin-right: 10px;
+		width: 50px;
+		min-width: 50px;
+		max-width: 50px;
+		background-color: #004f9f;
+	}
+	
+	.title-block-risk {
+		text-align: center;
+	}
+	
+	.section-title{ 
+		margin-top: 0;
+	}
+	.section-title, .section-subtitle{
+		color: #004f9f;
+	}
+    .container-report .section2 {
+      padding-top: 50px;
+    }
+
+    .container-report .section2 .title-table {
+      margin-bottom: 10px;
+    }
+
+    .container-report .section2 table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .blue-style {
+      background: #004f9f;
+    }
+	
+	.table-header {
+		font-weight: normal;
+		color: #FFF;
+		text-align: center;
+		font-size: 1em;
+  }
+
+  .container-report .section-inner-table td {
+      border-right: 1px solid #FFF;
+    }
+	
+	.table-cell{
+		font-size: 11px;
+	}
+
+    .container-report .paragraph {
+      padding-top: 10px;
+      font-size: 0.7em;
+    }
+  
+  .inner-table-odd-even:nth-child(even){ 
+    background-color: #F0EFEE;
+  }
+
+    .container-report .container-block {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+	.title-block-risk{ 
+		margin: 10px 0;
+		font-weight: bold;
+  } 
+  .text-title{ 
+    font-size: 1.1em;
+  }
+
+  .text-bold{
+    font-weight: bold;
+  }
+
+    .container-report .container-block .container-icon .caption {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .risk-indicator-yellow {
+      fill: #F3DB2B;
+    }
+
+    .risk-indicator-green {
+      fill: #ABC446;
+    }
+
+    .risk-indicator-red {
+      fill: #DE382C;
+    }
+
+    .container-report .container-block .container-icon .risk-indicator-yellow {
+      padding-top: 20px;
+      font-size: 100px;
+      color: #ffff00;
+    }
+
+    .container-report .general-title {
+      margin-top: 20px;
+    }
+
+    .container-report .text-margin {
+      margin-top: 10px;
+      font-size: 0.7em;
+    }
+
+
+  </style>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+</head>
+<body>
+<div class="main-container">
+  <%- include test-view-header.ejs %>
+  <div class="container-report">
+  <div class="page">
+	<table class="section-table">
+		<tbody>
+			<tr>
+				<td class="section-square-element-container">
+					<div class="section-square-element"></div>
+				</td>
+				<td>
+					<div class="section-content">
+					  <h1 class="section-title">Секция 1</h1>
+            <h5 class="section-subtitle">Персональный риск</h5>
+            <div class="risk-container">
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="title-block-risk">Риск возникновения хронических заболеваний</td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <div class="risk-indicator-container">
+                            <div class="risk-indicator">
+                              <div class="risk-indicator-triangle"></div>
+                              <div class="risk-indicator-border"></div>
+                            </div>
+                            <div class="risk-container">
+                            <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                              <svg width="33px" height="35px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="person-icon" x="0px" y="0px" viewBox="0 0 37.75 37.75" enable-background="new 0 0 37.75 37.75" xml:space="preserve">
+                                <path class="<%=className %>" d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="result-risk-divider"></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+             
+            </div>
+            <!-- <div class="risk-container">
+              <div class="title-block-risk">Онкология</div>
+                <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
+              <div class="title-block-risk">Диабет</div>
+              <div class="risk-indicator-container">
+                <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
+              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
+              <div class="risk-indicator-container">
+                <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
+						<div class="title-block-risk">Психосоматические заболевания</div>
+              <div class="risk-indicator-container"> 
+                <%- include('risk-indicator', {resultRisk:section1.psychosomatic.resultRisk}) %>
+              </div>
+            </div> -->
+					</div>
+			 </td>
+			</tr>
+		</tbody>
+  </table>
+</div>
+<div class="page">
+  <table class="section-table">
+        <tbody>
+          <tr>
+            <td class="section-square-element-container">
+              <div class="section-square-element"></div>
+            </td>
+            <td>
+              <div class="section-content">
+                <h1 class="section-title">Секция 2</h1>
+                  <div class="title-table">Таблица анализа рисков возникновения хронических заболеваний</div>
+                  <table class="section-inner-table" cellpadding="5px" cellspacing="0px">
+                    <thead>
+                    <tr class="blue-style">
+                      <th class="table-header">Демографические факторы</th>
+                      <th class="table-header">Текущее значение на основе ассесмента</th>
+                      <th class="table-header">Нормальные значения</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Возраст</td>
+                      <td class="table-cell">
+                        <%= section2.age%>
+                      </td>
+                      <td class="table-cell"></td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Пол</td>
+                      <td class="table-cell">
+                        <%= section2.sex%>
+                      </td>
+                      <td class="table-cell"></td>
+                    </tr>
+                    <tr class="blue-style">
+                      <td class="table-header" colspan="3">
+                        Факторы риска на  основе оценки медицинских показателей
+                      </td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Рост</td>
+                      <td class="table-cell">
+                        <%= section2.height%>
+                      </td>
+                      <td class="table-cell"></td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Вес</td>
+                      <td class="table-cell">
+                        <%= section2.weight%>
+                      </td>
+                      <td class="table-cell"></td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">ИМТ*</td>
+                      <td class="table-cell">
+                        <%= section2.massIndex%>
+                      </td>
+                      <td class="table-cell">18.5-24.9</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3">
+                        Если Вы профессионально занимаетесь спортом или имеете большой уровень мышечной массы, а также, если вы беременны, для правильной трактовки результатов обратитесь к специалисту
+                      </td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Давление*</td>
+                      <td class="table-cell">
+                        <%= section2.pressure%>
+                      </td>
+                      <td class="table-cell">Менее 120/80 мм.рт.ст.</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Общий холестерин</td>
+                      <td class="table-cell">
+                        <%= section2.cholesterol%>
+                      </td>
+                      <td class="table-cell">Менее 5.6 ммоль/л</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">ЛПНП</td>
+                      <td class="table-cell">
+                        <%= section2.lpnp%>
+                      </td>
+                      <td class="table-cell">Менее 3.5 ммоль/л</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">ЛПВП</td>
+                      <td class="table-cell">
+                        <%= section2.lpvp%>
+                      </td>
+                      <td class="table-cell">Более 0.9 ммоль/л</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Глюкоза капиллярной крови</td>
+                      <td class="table-cell">
+                        <%= section2.glucoseCapillaryBlood%>
+                      </td>
+                      <td class="table-cell">Менее 5.5 ммоль/л</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Наличие наследственности по основным видам заболеваний</td>
+                      <td class="table-cell">
+                        <%= section2.presenceHeredityOfDiseases%>
+                      </td>
+                      <td class="table-cell">Отсутствие</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Прохождение медицинского осмотра</td>
+                      <td class="table-cell">
+                        <%= section2.medicalCheckupTherapist%>
+                      </td>
+                      <td class="table-cell">1 раз в год</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Осмотр стоматолога</td>
+                      <td class="table-cell">
+                        <%= section2.medicalCheckupDentist%>
+                      </td>
+                      <td class="table-cell">1 раз в год</td>
+                    </tr>
+                    <tr class="blue-style">
+                      <td class="table-header" colspan="3">
+                        Персональные поведенческие риски
+                      </td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Физическая активность</td>
+                      <td class="table-cell">
+                        <%= section2.physicalActivity%>
+                      </td>
+                      <td class="table-cell">Высокая</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Курение</td>
+                      <td class="table-cell">
+                        <%= section2.smoking%>
+                      </td>
+                      <td class="table-cell">Отсутствие</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Пассивное курение</td>
+                      <td class="table-cell">
+                        <%= section2.secondHandSmoke%>
+                      </td>
+                      <td class="table-cell">Отсутствие</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Алкоголь</td>
+                      <td class="table-cell">
+                        <%= section2.alcohol%>
+                      </td>
+                      <td class="table-cell">Редко/ не очень часто</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Жирная пища</td>
+                      <td class="table-cell">
+                        <%= section2.fattyFood%>
+                      </td>
+                      <td class="table-cell">Низкое или нормальное потребление</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Фрукты/ овощи в диете</td>
+                      <td class="table-cell">
+                        <%= section2.fruitsVegetables%>
+                      </td>
+                      <td class="table-cell">5+ продуктов ежедневно</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Пищевые волокна в диете</td>
+                      <td class="table-cell">
+                        <%= section2.alimentaryFiber%>
+                      </td>
+                      <td class="table-cell">5+ продуктов ежедневно</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Стресс</td>
+                      <td class="table-cell">
+                        <%= section2.stress%>
+                      </td>
+                      <td class="table-cell">Низкий или средний уровень</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Депрессия</td>
+                      <td class="table-cell">
+                        <%= section2.depression%>
+                      </td>
+                      <td class="table-cell">Отсутствие</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Удовлетворенность личной жизнью</td>
+                      <td class="table-cell">
+                        <%= section2.satisfactionPrivacyLife%>
+                      </td>
+                      <td class="table-cell">Высокая</td>
+                    </tr>
+                    <tr class="inner-table-odd-even">
+                      <td class="table-cell">Удовлетворенность профессиональной жизнью</td>
+                      <td class="table-cell">
+                        <%= section2.satisfactionProfessionalLife%>
+                      </td>
+                      <td class="table-cell">Высокая</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+              </td>
+              </tr>
+            </tbody>
+    </table>
+  </div>
+  <div class="page">
+    <table class="section-table">
+    <tbody>
+      <tr>
+        <td class="section-square-element-container">
+          <div class="section-square-element"></div>
+        </td>
+        <td>
+        <div class="section-content">
+          <h1 class="section-title">Секция 3</h1>
+          <h5 class="section-subtitle">Демографические показатели</h5>
+          <% section3.demographicIndicators.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Наследственная заболеваемость</h5>
+          <% section3.hereditaryIncidence.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Скрининг здоровья</h5>
+          <% section3.healthScreening.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Медицинские осмотры</h5>
+          <% section3.medicalCheckups.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Здоровье зубов</h5>
+          <% section3.toothHealth.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+          <h5 class="section-subtitle">Образ жизни</h5>
+          <% section3.lifeStyle.forEach(item => {%>
+          <div class="paragraph">
+            <%= item%>
+          </div>
+          <% }) %>
+        </div>
+        </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+    <div class="page">
+      <table class="section-table">
+        <tbody>
+          <tr>
+            <td class="section-square-element-container">
+              <div class="section-square-element"></div>
+            </td>
+            <td>
+            <div class="section-content">
+              <h1 class="section-title">Секция 4</h1>
+              <h5 class="section-subtitle">Факторы риска по ключевым заболеваниям</h5>
+              <div class="container-block">
+              <div class="title-block-risk">Онкология</div>
+              <div class="container-icon">
+                 
+                  <i class="fas fa-user risk-indicator-red"></i>
+                  <div class="caption">Высокий</div>
+                  <div class="indicator"> 
+                      <div class="indicator-triangle"></div>
+                      <div class="indicator-border"></div>
+                  </div>
+                <% if(section1.oncology.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">Высокий</div>
+                <div class="indicator"> 
+                    <div class="indicator-triangle"></div>
+                    <div class="indicator-border"></div>
+                </div>
+                <% } %>
+                <% if(section1.oncology.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Средний</div>
+                <% } %>
+                <% if(section1.oncology.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Низкий</div>
+                <% } %>
+              </div>
+              </div>
+              <div class="container-block">
+              <div class="title-block-risk">Диабет</div>
+              <div class="container-icon">
+                <% if(section1.diabetes.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">Высокий</div>
+                <% } %>
+                <% if(section1.diabetes.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Средний</div>
+                <% } %>
+                <% if(section1.diabetes.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Низкий</div>
+                <% } %>
+              </div>
+              </div>
+          
+              <div class="container-block">
+              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
+              <div class="container-icon">
+                <% if(section1.cardiovascular.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">Высокий</div>
+                <% } %>
+                <% if(section1.cardiovascular.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Средний</div>
+                <% } %>
+                <% if(section1.cardiovascular.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Низкий</div>
+                <% } %>
+              </div>
+              </div>
+              <div class="container-block">
+              <div class="title-block-risk">Психосоматические заболевания</div>
+              <div class="container-icon">
+                <% if(section1.psychosomatic.resultRisk === 3) { %>
+                <i class="fas fa-user risk-indicator-red"></i>
+                <div class="caption">Высокий</div>
+                <% } %>
+                <% if(section1.psychosomatic.resultRisk === 2) { %>
+                <i class="fas fa-user risk-indicator-yellow"></i>
+                <div class="caption">Средний</div>
+                <% } %>
+                <% if(section1.psychosomatic.resultRisk === 1) { %>
+                <i class="fas fa-user risk-indicator-green"></i>
+                <div class="caption">Низкий</div>
+                <% } %>
+              </div>
+              </div>
+            </div>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  <div class="page">
+	  <table class="section-table">
+      <tbody>
+        <tr>
+          <td class="section-square-element-container">
+            <div class="section-square-element"></div>
+          </td>
+          <td>
+            <div class="section-content">
+              <h1 class="section-title">Секция 5</h1>
+              <h3 class="general-title">Как правильно использовать результаты оценки риска возникновения хронических заболеваний?</h3>
+              <div class="text-margin text-title">Поздравляю с прохождением RIA Assessment!</div>
+              <div>Верите Вы или нет, этот анализ – есть правильный  шаг к улучшению Вашего здоровья и благополучия.</div>
+              <div class="text-margin text-title">Что дальше?</div>
+              <div class="text-margin text-bold">1. Прочитайте отчет!</div>
+              <div class="paragraph">Потратьте немного времени, чтобы ознакомиться с отчетом. В этом отчете Вы найдете информацию о значимых факторах риска и возможной профилактике нарушения здоровья. Для того чтобы информация, полученная в данном отчете, была более полезна, прочтите данный отчет спустя какое-то время.</div>
+              <div class="text-margin text-bold">2. Спланируйте прохождение медицинского осмотра.</div>
+              <div class="paragraph">Секрет здоровья и долголетия – предупредить заболевание до того как оно начнется. Профилактические обследования – ключ для успеха. Данные Assessment - отличный способ понять, какие анализы и обследования необходимы. Возьмите календарь, и отметьте даты прохождения профилактического осмотра.</div>
+              <div class="text-margin text-bold">3. Возьмите копию отчета к Вашему врачу.</div>
+              <div class="paragraph">Когда Вы пойдете к своему лечащему врачу, возьмите копию отчета. Специалист с медицинским образованием даст Вам отличные профилактические рекомендации.</div>
+              <div class="text-margin text-bold">4. Составьте план. </div>
+              <div class="paragraph">Ваше здоровье – один из самых важных ресурсов, которые необходимо накапливать. Инвестируя в свое здоровье, Вы преумножаете ресурсы Вашего организма и получаете большие шансы на успех в профессиональной и личной жизни. Создайте личный план повышения ресурсов организма, обязательно  включите туда правильное питание, практику по профилактике стресса и физическую активность.</div>
+              <div class="text-margin text-bold">5. Держите отчет поблизости.</div>
+              <div class="paragraph">Начните внедрять программы по улучшению здоровья. Когда пройдет год или два, Вы сможете посмотреть динамику изменений, которые происходят в Вашем организме.</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+	</div>
+  </div>
+</body>
+</html>
