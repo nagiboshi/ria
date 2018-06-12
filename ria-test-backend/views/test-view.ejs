@@ -22,13 +22,15 @@
   }
   
   .risk-indicator-border {
-    height: 60px;
-    width: 10px;
+    height: 50px;
+    width: 7px;
     border-right: 2px dashed #004f9f;
   }
 
   .risk-indicator { 
     position: absolute;
+    top: 0;
+    left: 30px;
   }
 
   .risk-indicator-container{ 
@@ -38,7 +40,7 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 22px 11px 0 11px;
+    border-width: 15px 8px 0 8px;
     border-color: #004f9f transparent transparent transparent;
 }
 	
@@ -247,7 +249,7 @@
                 <% let maxPersonIcons = 12; %>
                 <% for( i=0; i < maxPersonIcons; i++ ) {%>
                 <% let className = 'risk-indicator-green'; %>
-                <% if( i > 8 ) { className = 'risk-indicator-red'; } %>
+                <% if( i >= 9 ) { className = 'risk-indicator-red'; } %>
                 <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
                 <%- include('test-view-person-icon',{className:className}); %> 
                 <% } %>
