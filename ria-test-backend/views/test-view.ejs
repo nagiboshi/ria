@@ -232,19 +232,36 @@
 						<div class="risk-indicator-green"></div>
 					  <% } %>
             <div class="title-block-risk">Онкология</div>
-            
-           
-            <div id="x" class="risk-indicator">
+            <div class="risk-indicator">
               <div class="risk-indicator-triangle"></div>
               <div class="risk-indicator-border">
               </div>
-              <div class="risk-indicators">
-                <% let maxPersonIcons = 12; %> 
-                <% let className='green';  %>
-                  <%- include('test-view-person-icon',{ className: className  }); %> 
-              </div>
+              <% let className = maxRisk === 2 ? 'risk-indicator-yellow': marRisk === 1 ? 'risk-indicator-green':'risk-indicator-red'; %>
+              <%- include('test-view-person-icon',{className:className}); %> 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.75 37.75">
+                <path d="M30.67,26H28.31a4.72,4.72,0,0,1-4.72-4.72V19.72a11.76,11.76,0,0,0,2.26-4.26c0-.26.3-.39.47-.57a2.91,2.91,0,0,0,.4-3.51c-.09-.17-.26-.31-.25-.52,0-1.38,0-2.76,0-4.15a6.94,6.94,0,0,0-1.68-4.64A6.63,6.63,0,0,0,21.21.22a12,12,0,0,0-5.14.12,6.27,6.27,0,0,0-3.66,2.48,7.28,7.28,0,0,0-1.13,3.74c0,1.4,0,2.82,0,4.23,0,.28-.2.47-.31.7a2.92,2.92,0,0,0,.67,3.58,1.36,1.36,0,0,1,.4.79,11.56,11.56,0,0,0,2.13,3.81v1.56A4.72,4.72,0,0,1,9.44,26H7.08S2.8,27.13,0,33v2.36a2.36,2.36,0,0,0,2.36,2.36h33a2.36,2.36,0,0,0,2.36-2.36V33C35,27.13,30.67,26,30.67,26Z" transform="translate(0 0)"/>
+            </svg>
+            <%- include test-view-person-icon.ejs %>
             </div>
 					  <% if(section1.oncology.resultRisk === 3) { %>
+						<div class="risk-indicator-red"></div>
+					  <% } %>
+					  <% if(section1.oncology.resultRisk === 2) { %>
+						<div class="risk-indicator-yellow"></div>
+					  <% } %>
+					  <% if(section1.oncology.resultRisk === 1) { %>
+						<div class="risk-indicator-green"></div>
+					  <% } %>
+						<div class="title-block-risk">Диабет</div>
+					  <% if(section1.diabetes.resultRisk === 3) { %>
+						<div class="risk-indicator-red"></div>
+					  <% } %>
+					  <% if(section1.diabetes.resultRisk === 2) { %>
+						<div class="risk-indicator-yellow"></div>
+					  <% } %>
+					  <% if(section1.diabetes.resultRisk === 1) { %>
+						<div class="risk-indicator-green"></div>
+					  <% } %>
 						<div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
 					  <% if(section1.cardiovascular.resultRisk === 3) { %>
 						<div class="risk-indicator-red"></div>
