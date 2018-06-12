@@ -2,7 +2,8 @@
 <style>
     .risk-indicator { 
         position: absolute;
-        top: -11px;
+        top: -9px;
+        height: 65px;
     }
 
     .risk-indicator-position--1 {
@@ -96,7 +97,7 @@
                     Низкий
                 </div>
               <% } %>
-              <% if( resultRisk < 8 && resultRisk > 3 ) { %>
+              <% if( resultRisk <= 8 && resultRisk > 3 ) { %>
                 <div class="risk-indicator-value risk-indicator-value--medium">
                     Средний
                 </div>
