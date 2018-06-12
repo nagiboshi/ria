@@ -240,7 +240,6 @@
               <% for( i=0; i < maxPersonIcons; i++ ) {%>
               <% let className = 'risk-indicator-green';
               <% if( i < 8 && i > 3 ) { className = 'risk-indicator-green'; } %>
-              <% if( i > 8 ) { className = 'risk-indicator-red'; } %> 
               <%- include('test-view-person-icon',{className:className}); %> 
               <% } %>
             </div>
