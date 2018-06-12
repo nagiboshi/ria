@@ -187,19 +187,38 @@
 				<td>
 					<div class="section-content">
 					  <h1 class="section-title">Секция 1</h1>
-					  <h5 class="section-subtitle">Персональный риск</h5>
-					  <div class="title-block-risk">Риск возникновения хронических заболеваний</div>
-            <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
-            <%- include('risk-indicator', {resultRisk:maxRisk}) %>
-            <div class="result-risk-divider"></div>
-            <div class="title-block-risk">Онкология</div>
-            <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
-            <div class="title-block-risk">Диабет</div>
-            <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
-            <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
-            <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
+            <h5 class="section-subtitle">Персональный риск</h5>
+            <div class="risk-container">
+              <div class="title-block-risk">Риск возникновения хронических заболеваний</div>
+              <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
+                <div class="risk-indicator-container">
+                  <%- include('risk-indicator', {resultRisk:maxRisk}) %>
+                </div>
+              <div class="result-risk-divider"></div>
+            </div>
+            <div class="risk-container">
+              <div class="title-block-risk">Онкология</div>
+                <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
+              <div class="title-block-risk">Диабет</div>
+              <div class="risk-indicator-container">
+                <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
+              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
+              <div class="risk-indicator-container">
+                <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
+              </div>
+            </div>
+            <div class="risk-container">
 						<div class="title-block-risk">Психосоматические заболевания</div>
-            <%- include('risk-indicator', {resultRisk:section1.psychosomatic.resultRisk}) %>
+              <div class="risk-indicator-container"> 
+                <%- include('risk-indicator', {resultRisk:section1.psychosomatic.resultRisk}) %>
+              </div>
+            </div>
 					</div>
 			 </td>
 			</tr>
