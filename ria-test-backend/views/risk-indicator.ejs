@@ -14,7 +14,43 @@
     }
 
     .risk-indicator-position--3 {
-        left: 84px;
+        left: 90px;
+    }
+
+    .risk-indicator-position--4 {
+        left: 129px;
+    }
+
+    .risk-indicator-position--5 {
+        left: 168px;
+    }
+
+    .risk-indicator-position--6 {
+        left: 207px;
+    }
+
+    .risk-indicator-position--7 {
+        left: 246px;
+    }
+
+    .risk-indicator-position--8 {
+        left: 285px;
+    }
+
+    .risk-indicator-position--9 {
+        left: 324px;
+    }
+
+    .risk-indicator-position--10 {
+        left: 363px;
+    }
+
+    .risk-indicator-position--11 {
+        left: 402px;
+    }
+    
+    .risk-indicator-position--12 {
+        left: 441px;
     }
 
     .risk-indicator-container{ 
@@ -39,6 +75,15 @@
         font-size: 10px;
         color: #004f9f;
     }
+
+    .risk-indicator-value--low{
+        left: -11px;
+    }
+
+    .risk-indicator-value--medium, .risk-indicator-value--high{
+        left: -13px;
+    }
+
 </style>
 <div class="risk-indicator-container">
         <div class="risk-indicator risk-indicator-position--<%=resultRisk %>">
@@ -46,15 +91,20 @@
                 <polygon points="11.68 0 5.84 10.12 0 0 11.68 0" style="fill: #004f9f"/>
                 <path d="M6.34,57.71h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Z" style="fill: #004f9f"/>
           </svg>
-          <div class="risk-indicator-value">
               <% if( resultRisk < 4 ) { %>
-                Низкий
+                <div class="risk-indicator-value risk-indicator-value--low">
+                    Низкий
+                </div>
               <% } %>
               <% if( resultRisk < 8 && resultRisk > 3 ) { %>
-                Средний
+                <div class="risk-indicator-value risk-indicator-value--medium">
+                    Средний
+                </div>
               <% } %>
               <% if( resultRisk > 7 ) { %>
-                Высокий
+                <div class="risk-indicator-value risk-indicator-value--high">   
+                    Высокий
+                </div>
               <% } %>
           </div>
         </div>
