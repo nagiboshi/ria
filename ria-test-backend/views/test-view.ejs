@@ -237,8 +237,8 @@
               <div class="risk-indicator-border">
               </div>
               <% let maxPersonIcons = 12; %>
+              <% let className = 'risk-indicator-green';              
               <% for( i=0; i < maxPersonIcons; i++ ) {%>
-              <% let className = 'risk-indicator-green';
               <%- include('test-view-person-icon',{className:className}); %> 
               <% } %>
             </div>
