@@ -115,6 +115,6 @@
             <% let className = 'risk-indicator-green'; %>
             <% if( i > 7 ) { className = 'risk-indicator-red'; } %>
             <% if( i < 8 && i > 3 ) { className = 'risk-indicator-yellow'; } %>
-            <%- include('person-icon',{width: width, height: height, className:className}); %> 
+            <%- include('./components/person-icon',{width: width, height: height, className:className}); %> 
             <% } %>
     </div>
