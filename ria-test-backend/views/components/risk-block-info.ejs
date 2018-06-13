@@ -1,19 +1,38 @@
-<table>
-<tbody>
-    <tr>
-        <td>
-            <div class="risk-person-icon">
-                <% let className = 'risk-indicator-green'; %>
-                <% let riskTitle = 'Низкий'; %>
-                <% if( resultRisk > 7 ) { className = 'risk-indicator-red'; riskTitle = 'Высокий'; } %>
-                <% if( resultRisk < 8 && resultRisk > 3 ) { className = 'risk-indicator-yellow'; riskTitle = 'Средний'; } %>
-                <%- include('./person-icon',{width: 80, height: 90, className:className}); %> 
-            </div>
-            <div class="risk-person-value"><%= riskTitle %></div>
-        </td>
-        <td>
-            <div class="title-block-risk"><%= title %></div>
-        </td>
-    </tr>
-</tbody>
-</table>
+<style>
+    .risk-block-info__content{ 
+        vertical-align: top;
+    }
+
+    .risk-person-value {
+        width: 100%;
+        font-size: 0.5em;
+        color:#7D7D7D;
+        text-align: center;
+    }
+
+    .risk-block-info { 
+        width: 100%;
+        border-bottom: 1px solid #DAD9D9;
+    }
+</style>
+<div class="risk-block-info">
+    <table>
+    <tbody>
+        <tr>
+            <td>
+                <div class="risk-person-icon">
+                    <% let className = 'risk-indicator-green'; %>
+                    <% let riskTitle = 'Низкий'; %>
+                    <% if( resultRisk > 7 ) { className = 'risk-indicator-red'; riskTitle = 'Высокий'; } %>
+                    <% if( resultRisk < 8 && resultRisk > 3 ) { className = 'risk-indicator-yellow'; riskTitle = 'Средний'; } %>
+                    <%- include('./person-icon',{width: 80, height: 90, className:className}); %> 
+                </div>
+                <div class="risk-person-value"><%= riskTitle %></div>
+            </td>
+            <td class="risk-block-info__content">
+                <div class="title-block-risk"><%= title %></div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+</div>
