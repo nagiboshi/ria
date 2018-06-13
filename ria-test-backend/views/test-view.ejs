@@ -63,6 +63,10 @@
     letter-spacing: -1px;
     font-size:27px;
   }
+
+  .section-subtitle {
+    font-size: 0.8em;
+  }
   
 	.section-title, .section-subtitle{ 
 		color: #004f9f;
@@ -135,11 +139,6 @@
     font-weight: bold;
   }
 
-  .container-report .container-block .container-icon .caption {
-    font-size: 16px;
-    text-align: center;
-  }
-
   .risk-indicator-yellow {
     fill: #F3DB2B;
   }
@@ -150,12 +149,6 @@
 
   .risk-indicator-red {
     fill: #DE382C;
-  }
-
-  .container-report .container-block .container-icon .risk-indicator-yellow {
-    padding-top: 20px;
-    font-size: 100px;
-    color: #ffff00;
   }
 
   .container-report .general-title {
@@ -186,25 +179,25 @@
             <div class="risk-container">
               <div class="title-block-risk">Риск возникновения хронических заболеваний</div>
                 <% let maxRisk = Math.max(section1.oncology.resultRisk, section1.diabetes.resultRisk, section1.cardiovascular.resultRisk, section1.psychosomatic.resultRisk) %>
-                <%- include('risk-indicator', {resultRisk:maxRisk}) %>
+                <%- include('components/risk-indicator', {resultRisk:maxRisk}) %>
               <div class="result-risk-divider"></div>
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Онкология</div>
-                <%- include('risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
+                <%- include('components/risk-indicator', {resultRisk:section1.oncology.resultRisk}) %>
               </div>
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Диабет</div>
-                <%- include('risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
+                <%- include('components/risk-indicator', {resultRisk:section1.diabetes.resultRisk}) %>
             </div>
             <div class="risk-container">
               <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
-                <%- include('risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
+                <%- include('components/risk-indicator', {resultRisk:section1.cardiovascular.resultRisk}) %>
             </div>
             <div class="risk-container">
 						<div class="title-block-risk">Психосоматические заболевания</div>
-                <%- include('risk-indicator', {resultRisk:section1.psychosomatic.resultRisk}) %>
+                <%- include('components/risk-indicator', {resultRisk:section1.psychosomatic.resultRisk}) %>
             </div>
 					</div>
 			 </td>
@@ -487,85 +480,17 @@
               <h1 class="section-title">Секция 4</h1>
               <h5 class="section-subtitle">Факторы риска по ключевым заболеваниям</h5>
               <div class="container-block">
-              <div class="title-block-risk">Онкология</div>
-              <div class="container-icon">
-                 
-                  <i class="fas fa-user risk-indicator-red"></i>
-                  <div class="caption">Высокий</div>
-                  <div class="indicator"> 
-                      <div class="indicator-triangle"></div>
-                      <div class="indicator-border"></div>
-                  </div>
-                <% if(section1.oncology.resultRisk === 3) { %>
-                <i class="fas fa-user risk-indicator-red"></i>
-                <div class="caption">Высокий</div>
-                <div class="indicator"> 
-                    <div class="indicator-triangle"></div>
-                    <div class="indicator-border"></div>
-                </div>
-                <% } %>
-                <% if(section1.oncology.resultRisk === 2) { %>
-                <i class="fas fa-user risk-indicator-yellow"></i>
-                <div class="caption">Средний</div>
-                <% } %>
-                <% if(section1.oncology.resultRisk === 1) { %>
-                <i class="fas fa-user risk-indicator-green"></i>
-                <div class="caption">Низкий</div>
-                <% } %>
-              </div>
+                <%- include('components/risk-block-info', {resultRisk: section1.oncology.resultRisk, title: 'Онкология'}); %>
               </div>
               <div class="container-block">
-              <div class="title-block-risk">Диабет</div>
-              <div class="container-icon">
-                <% if(section1.diabetes.resultRisk === 3) { %>
-                <i class="fas fa-user risk-indicator-red"></i>
-                <div class="caption">Высокий</div>
-                <% } %>
-                <% if(section1.diabetes.resultRisk === 2) { %>
-                <i class="fas fa-user risk-indicator-yellow"></i>
-                <div class="caption">Средний</div>
-                <% } %>
-                <% if(section1.diabetes.resultRisk === 1) { %>
-                <i class="fas fa-user risk-indicator-green"></i>
-                <div class="caption">Низкий</div>
-                <% } %>
-              </div>
-              </div>
-          
+                <%- include('components/risk-block-info', {resultRisk: section1.diabetes.resultRisk, title: 'Диабет'}); %>
+              </div> 
               <div class="container-block">
-              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
-              <div class="container-icon">
-                <% if(section1.cardiovascular.resultRisk === 3) { %>
-                <i class="fas fa-user risk-indicator-red"></i>
-                <div class="caption">Высокий</div>
-                <% } %>
-                <% if(section1.cardiovascular.resultRisk === 2) { %>
-                <i class="fas fa-user risk-indicator-yellow"></i>
-                <div class="caption">Средний</div>
-                <% } %>
-                <% if(section1.cardiovascular.resultRisk === 1) { %>
-                <i class="fas fa-user risk-indicator-green"></i>
-                <div class="caption">Низкий</div>
-                <% } %>
-              </div>
-              </div>
+                <%- include('components/risk-block-info', {resultRisk: section1.cardiovascular.resultRisk, title: 'Болезни сердечно-сосудистой системы'}); %>
+              </div>  
               <div class="container-block">
-              <div class="title-block-risk">Психосоматические заболевания</div>
-              <div class="container-icon">
-                <% if(section1.psychosomatic.resultRisk === 3) { %>
-                <i class="fas fa-user risk-indicator-red"></i>
-                <div class="caption">Высокий</div>
-                <% } %>
-                <% if(section1.psychosomatic.resultRisk === 2) { %>
-                <i class="fas fa-user risk-indicator-yellow"></i>
-                <div class="caption">Средний</div>
-                <% } %>
-                <% if(section1.psychosomatic.resultRisk === 1) { %>
-                <i class="fas fa-user risk-indicator-green"></i>
-                <div class="caption">Низкий</div>
-                <% } %>
-              </div>
-              </div>
+               <%- include('components/risk-block-info', {resultRisk: section1.psychosomatic.resultRisk, title: 'Психосоматические заболевания'}); %>
+              </div> 
             </div>
         </td>
       </tr>
