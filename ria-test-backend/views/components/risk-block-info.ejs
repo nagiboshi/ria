@@ -4,6 +4,6 @@
         <% let riskTitle = 'Низкий';
         <% if( resultRisk > 7 ) { className = 'risk-indicator-red'; riskTitle = 'Высокий' } %>
         <% if( resultRisk < 8 && resultRisk > 3 ) { className = 'risk-indicator-yellow'; riskTitle = 'Средний' } %>
-        <%- include('person-icon',{width: 40, height: 50, className:className}); %> 
+        <%- include('components/person-icon',{width: 40, height: 50, className:className}); %> 
     <div class="risk-person-value">{%= riskTitle }</div>
 </div>
