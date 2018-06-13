@@ -111,9 +111,11 @@
 
   .container-report .paragraph {
     padding-top: 10px;
-    font-size: 0.7em;
+    font-size: 0.6em;
+    line-height: 1.5;
+    color: #1c1c1b;
   }
-  
+    
   .inner-table-odd-even:nth-child(even){ 
     background-color: #F0EFEE;
   }
@@ -482,6 +484,15 @@
               <div class="container-block">
                 <%- include('./components/risk-block-info', {resultRisk: section1.oncology.resultRisk, title: 'Онкология'}); %>
               </div>
+              <div class="container-block"></div>
+                <%- include('./components/risk-block-info', {resultRisk: section1.diabetes.resultRisk, title: 'Диабет'}); %>
+            </div> 
+            <div class="container-block">
+                <%- include('./components/risk-block-info', {resultRisk: section1.cardiovascular.resultRisk, title: 'Болезни сердечно-сосудистой системы'}); %>
+            </div>  
+            <div class="container-block">
+                <%- include('./components/risk-block-info', {resultRisk: section1.psychosomatic.resultRisk, title: 'Психосоматические заболевания'}); %>
+            </div> 
             </div>
         </td>
       </tr>
