@@ -53,6 +53,7 @@ class TestController extends BaseController {
         testId: req.body.testId,
         result: req.body.result
       }).save();
+   
       next();
     } catch(error) {
       next(errorService.user.default.ex(error));
@@ -157,14 +158,13 @@ class TestController extends BaseController {
 
   async generateReportTestAndSendMail(req, res, next){ 
     let nameNewFile = 'report-' + req.resultTest.testId + '.pdf';
-      this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
-      
+     this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
         let attachments = [{content: result, contentType: 'application/pdf' , filename: nameNewFile}];
         mailService.sendMessageWithAttachments(req.user.email, 'RIA Результат тестирования', '','', attachments);
         
         next();
       }).catch((error)=>{
-        next(error);
+       next(error);
       });      
   }
 

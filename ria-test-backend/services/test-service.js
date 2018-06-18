@@ -1806,7 +1806,6 @@ class TestService extends BaseController {
         this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
         this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Выкуривание вейпов(электронных сигарет) в течении недели');     
       }
-      debugger;
       req.reportTest = this.reportTest;
       next();
     } catch(error) {
