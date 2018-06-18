@@ -115,11 +115,15 @@
   }
 
 	.title-block-risk{ 
-		margin: 7px 0 10px 0;
+		margin: 7px 0 20px 0;
     font-weight: bold;
-		text-align: left;
-    
+		text-align: center;
   } 
+
+  .title-block-risk.title-block-risk--left-align{ 
+    margin:0;
+    text-align: left;
+  }
   
   .text-title{ 
     font-size: 1.1em;
@@ -481,7 +485,7 @@
               <h1 class="section-title">Секция 4</h1>
               <h5 class="section-subtitle">Факторы риска по ключевым заболеваниям</h5>
               <div class="container-block">
-              <div class="title-block-risk">Онкология</div>
+              <div class="title-block-risk title-block-risk--left-align">Онкология</div>
               <div class="container-icon">
                  
                   <i class="fas fa-user risk-indicator-red"></i>
@@ -509,7 +513,7 @@
               </div>
               </div>
               <div class="container-block">
-              <div class="title-block-risk">Диабет</div>
+              <div class="title-block-risk title-block-risk--left-align">Диабет</div>
               <div class="container-icon">
                 <% if(section1.diabetes.resultRisk === 3) { %>
                 <i class="fas fa-user risk-indicator-red"></i>
@@ -527,7 +531,7 @@
               </div>
           
               <div class="container-block">
-              <div class="title-block-risk">Болезни сердечно-сосудистой системы</div>
+              <div class="title-block-risk title-block-risk--left-align">Болезни сердечно-сосудистой системы</div>
               <div class="container-icon">
                 <% if(section1.cardiovascular.resultRisk === 3) { %>
                 <i class="fas fa-user risk-indicator-red"></i>
@@ -544,7 +548,7 @@
               </div>
               </div>
               <div class="container-block">
-              <div class="title-block-risk">Психосоматические заболевания</div>
+              <div class="title-block-risk title-block-risk--left-align">Психосоматические заболевания</div>
               <div class="container-icon">
                 <% if(section1.psychosomatic.resultRisk === 3) { %>
                 <i class="fas fa-user risk-indicator-red"></i>
