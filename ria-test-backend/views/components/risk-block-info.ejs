@@ -1,7 +1,11 @@
 <style>
     .risk-block-info__content{ 
         vertical-align: top;
-        padding-left: 5px;
+        padding-left: 10px;
+    }
+
+    .risk-block-info__person-icon{
+        vertical-align: top;
     }
 
     .risk-block-info__risk-name{
@@ -43,7 +47,7 @@
     <table>
     <tbody>
         <tr>
-            <td>
+            <td class="risk-block-info__person-icon">
                 <div class="risk-person-icon">
                     <% let className = 'risk-indicator-green'; %>
                     <% let riskTitle = 'Низкий риск'; %>
