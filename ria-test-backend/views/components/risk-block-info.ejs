@@ -1,6 +1,7 @@
 <style>
     .risk-block-info__content{ 
         vertical-align: top;
+        padding-left: 5px;
     }
 
     .risk-person-value {
@@ -8,6 +9,19 @@
         font-size: 0.5em;
         color:#7D7D7D;
         text-align: center;
+    }
+
+    .risk-block-info__risk-title{
+        font-weight: bold;
+        font-size: 0.8em;
+    }
+
+    .risk-block-info__factor{ 
+        font-size: 0.7em;
+    }
+
+    .title-block-info-preventable{
+        margin-top: 4px;
     }
 
     .risk-block-info { 
@@ -37,10 +51,12 @@
                     <% if ( section.resultRisk == 2 ){ resultRiskValue = 'averageRisk' }
                        else if( section.resultRisk == 3 ){ resultRiskValue = 'highRisk' }; %>
                     <div class="title-block-info__title">
-                        Не предотвратимые факторы: 
+                        <div class="risk-block-info__risk-title">
+                            Не предотвратимые факторы: 
+                        </div>
                         <% if (resultRiskValue!='low') { %>
                             <%  for( let unpreventableFactor of  section[resultRiskValue].unpreventableFactors ) { %> 
-                                <div class="risk-block-info__unpreventable-factor"><%=unpreventableFactor%></div>
+                                <div class="risk-block-info__factor"><%=unpreventableFactor%></div>
                             <% } %>
                         <%  } %>
                     </div>
@@ -48,10 +64,12 @@
                 </div>    
                 <div class="title-block-info-preventable">
                     <div class="title-block-info__title">
-                        Предотвратимые факторы: 
+                        <div class="risk-block-info__risk-title">
+                            Предотвратимые факторы: 
+                        </div>
                         <% if (resultRiskValue!='low') { %>
                             <%  for( let preventableFactor of  section[resultRiskValue].preventableFactors ) { %> 
-                                <div class="risk-block-info__predictable-factor"><%=preventableFactor%></div>
+                                <div class="risk-block-info__factor"><%=preventableFactor%></div>
                             <% } %>
                         <%  } %>
                     </div>

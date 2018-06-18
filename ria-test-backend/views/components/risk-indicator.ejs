@@ -7,51 +7,15 @@
     }
 
     .risk-indicator-position--1 {
-        left: 12px;
+        left: 72px;
     }
 
     .risk-indicator-position--2 {
-        left: 52px;
+        left:234px;
     }
 
     .risk-indicator-position--3 {
-        left: 93px;
-    }
-
-    .risk-indicator-position--4 {
-        left: 133px;
-    }
-
-    .risk-indicator-position--5 {
-        left: 174px;
-    }
-
-    .risk-indicator-position--6 {
-        left: 214px;
-    }
-
-    .risk-indicator-position--7 {
-        left: 255px;
-    }
-
-    .risk-indicator-position--8 {
-        left: 295px;
-    }
-
-    .risk-indicator-position--9 {
-        left: 335px;
-    }
-
-    .risk-indicator-position--10 {
-        left: 376px;
-    }
-
-    .risk-indicator-position--11 {
-        left: 416px;
-    }
-    
-    .risk-indicator-position--12 {
-        left: 457px;
+        left: 396px;
     }
 
     .risk-indicator-container{ 
@@ -92,17 +56,17 @@
                 <polygon points="11.68 0 5.84 10.12 0 0 11.68 0" style="fill: #004f9f"/>
                 <path d="M6.34,57.71h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Zm0-4h-1v-3h1Z" style="fill: #004f9f"/>
           </svg>
-              <% if( resultRisk < 4 ) { %>
+              <% if( resultRisk == 1 ) { %>
                 <div class="risk-indicator-value risk-indicator-value--low">
                     Низкий
                 </div>
               <% } %>
-              <% if( resultRisk <= 8 && resultRisk > 3 ) { %>
+              <% if( resultRisk == 2 ) { %>
                 <div class="risk-indicator-value risk-indicator-value--medium">
                     Средний
                 </div>
               <% } %>
-              <% if( resultRisk > 8 ) { %>
+              <% if( resultRisk == 3 ) { %>
                 <div class="risk-indicator-value risk-indicator-value--high">   
                     Высокий
                 </div>
