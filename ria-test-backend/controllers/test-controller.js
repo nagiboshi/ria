@@ -156,6 +156,7 @@ class TestController extends BaseController {
   }
 
   async generateReportTestAndSendMail(req, res, next){ 
+    debugger;
     let nameNewFile = 'report-' + req.resultTest.testId + '-' + req.resultTest.userId + '.pdf';
       this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
       
@@ -173,7 +174,7 @@ class TestController extends BaseController {
       this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
         res.send({
           success: true,
-          data: result
+          data:  result
         });
       }).catch((error)=>{
         next(error);
