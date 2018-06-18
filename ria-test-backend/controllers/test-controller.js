@@ -36,7 +36,6 @@ class TestController extends BaseController {
 
   async setResultTest(req, res, next) {
     try {
-      debugger;
       req.checkBody('testId').notEmpty();
       req.checkBody('result').notEmpty();
 
@@ -49,7 +48,7 @@ class TestController extends BaseController {
         testId: req.body.testId
       }).remove();
 
-      await new TestResult({
+      req.resultTest = await new TestResult({
         userId: req.user._id,
         testId: req.body.testId,
         result: req.body.result
@@ -116,56 +115,69 @@ class TestController extends BaseController {
     }
   }
 
-  async generateReportTest(req, res, next) {
-    try {
-      debugger;
-      ejs.renderFile('./views/test-view.ejs', req.reportTest, (err, result) => {
-        // render on success
-        if (result) {
-          let htmlData = result;
-          let nameNewFile = 'report-' + req.resultTest.testId + '-' + req.resultTest.userId + '.pdf';
-          let options = {
-            filename: nameNewFile,
-            format: 'A4',
-            orientation: 'portrait',
-            base: './files/',
-            type: "pdf",
-            phantomPath: "./node_modules/phantomjs-prebuilt/bin/phantomjs",
-            
-            footer: {
-              height: "10mm"
-            }
-          };
-          // можно создавать файл локально
-          // pdf.create(htmlData, options).toBuffer('./files/' + nameNewFile, (err, result) => {
-          //   if (err) next(error);
-          //   fs.readFile(result.filename, function (err, data){
-          //     res.contentType("application/pdf");
-          //     res.send({
-          //       success: true,
-          //       data: data
-          //     });
-          //   });
-          // });
-
-          pdf.create(htmlData, options).toBuffer((err, buffer) => {
-            if (err){ 
-              next(err);
-            } 
-            let attachments = [{content: buffer, contentType: 'application/pdf' , filename: options.filename}];
-            mailService.sendMessageWithAttachments(req.user.email, 'RIA Результат тестирования', '','', attachments);
-             res.send({
-              success: true,
-              data: buffer
+  generatePDFReport(name, data){ 
+    let promise = new Promise((resolve, reject) => {
+      try {
+        ejs.renderFile('./views/test-view.ejs', data, (err, result) => {
+          // render on success
+          if( err ){ 
+            reject(err);
+          }
+          if (result) {
+            let htmlData = result;
+            let options = {
+              filename: name,
+              format: 'A4',
+              orientation: 'portrait',
+              base: './files/',
+              type: "pdf",
+              phantomPath: "./node_modules/phantomjs-prebuilt/bin/phantomjs",
+              
+              footer: {
+                height: "10mm"
+              }
+            };
+    
+            pdf.create(htmlData, options).toBuffer((err, buffer) => {
+              if (err){ 
+                reject(err);
+              } else { 
+                resolve(buffer);
+              }
             });
-   
-          });
-        }
+          }
+        
+        });
+      } catch(error) {
+        reject(errorService.user.default.ex(error));
+      }
+    });
+    return promise;
+  }
+
+  async generateReportTestAndSendMail(req, res, next){ 
+    let nameNewFile = 'report-' + req.resultTest.testId + '-' + req.resultTest.userId + '.pdf';
+      this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
       
-      });
-    } catch(error) {
-      next(errorService.user.default.ex(error));
-    }
+        let attachments = [{content: result, contentType: 'application/pdf' , filename: options.filename}];
+        mailService.sendMessageWithAttachments(req.user.email, 'RIA Результат тестирования', '','', attachments);
+        
+        next();
+      }).catch((error)=>{
+        next(error);
+      });      
+  }
+
+  async generateReportTest(req, res, next) {
+    let nameNewFile = 'report-' + req.resultTest.testId + '-' + req.resultTest.userId + '.pdf';
+      this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
+        res.send({
+          success: true,
+          data: result
+        });
+      }).catch((error)=>{
+        next(error);
+      });   
   }
 }
 
