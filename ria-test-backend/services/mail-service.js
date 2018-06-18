@@ -62,7 +62,6 @@ class MailService {
     if( !attachments && attachments.length == 0 ){ 
       this.sendMessage(toEmail, subject, text, html );
     }
-      debugger;
     
     await transporter.sendMail(new MailWithAttachments('wedrobetona@yandex.ru', toEmail, subject, html, text, attachments));
   }

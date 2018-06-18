@@ -5,4 +5,4 @@ ssh-add ~/.ssh/ria
 git pull
 cd ~/dev/ria/ria-test-backend
 fuser -k 3000/tcp
-node server.js
+node --inspect server.js
