@@ -3,8 +3,24 @@ const errorService = require('./error-service');
 
 
 class TestService extends BaseController {
+  static get SECTION_SUBTYPES(){ 
+    return ['oncology', 'diabetes', 'cardiovascular','psychosomatic'] 
+  };
+  
   constructor() {
     super();
+  }
+
+
+  static getResultRisk(sectionObjWithSubtype){ 
+    if(sectionObjWithSubtype.highRisk.symptoms >= sectionObjWithSubtype.highRisk.minSymptoms) {
+      return 3;
+    } else
+    if(sectionObjWithSubtype.averageRisk.symptoms >= sectionObjWithSubtype.averageRisk.minSymptoms){
+      return 2;
+    } else {
+      return 1;
+    }
   }
   
   initReportTest() {
@@ -20,7 +36,9 @@ class TestService extends BaseController {
             minSymptoms: 4,
             symptoms: 0
           },
-          resultRisk: 0
+          get resultRisk() { 
+          return TestService.getResultRisk(this);
+          } 
         },
         diabetes: {
           averageRisk: {
@@ -31,7 +49,9 @@ class TestService extends BaseController {
             minSymptoms: 4,
             symptoms: 0
           },
-          resultRisk: 0
+          get resultRisk() {
+           return TestService.getResultRisk(this);
+          },
         },
         cardiovascular: {
           averageRisk: {
@@ -42,7 +62,9 @@ class TestService extends BaseController {
             minSymptoms: 4,
             symptoms: 0
           },
-          resultRisk: 0
+          get resultRisk() {
+            return TestService.getResultRisk(this);
+          }
         },
         psychosomatic: {
           averageRisk: {
@@ -53,8 +75,10 @@ class TestService extends BaseController {
             minSymptoms: 4,
             symptoms: 0
           },
-          resultRisk: 0
-        }
+          get resultRisk() {
+            return TestService.getResultRisk(this);
+          }
+        },
       },
       section2: {
         age: null,
@@ -90,10 +114,79 @@ class TestService extends BaseController {
         toothHealth: [],
         lifeStyle: []
       },
-      section4: {},
-      section5: {},
-    };
+      section4: {
+        oncology: {
+          averageRisk: {
+            minSymptoms: 2,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          highRisk: {
+            minSymptoms: 4,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          get resultRisk(){
+            return TestService.getResultRisk(this);
+          } 
+        },
+        diabetes: {
+          averageRisk: {
+            minSymptoms: 2,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          highRisk: {
+            minSymptoms: 4,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          get resultRisk(){
+            return TestService.getResultRisk(this);
+          }
+        },
+        cardiovascular: {
+          averageRisk: {
+            minSymptoms: 2,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          highRisk: {
+            minSymptoms: 4,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          get resultRisk(){
+            return TestService.getResultRisk(this);
+          }
+        },
+        psychosomatic: {
+          averageRisk: {
+            minSymptoms: 2,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          highRisk: {
+            minSymptoms: 4,
+            symptoms: 0,
+            preventableFactors: [],
+            unpreventableFactors: []
+          },
+          get resultRisk(){
+            return TestService.getResultRisk(this);
+          }
+        }
+  },
+      section5: {}
   }
+}
   
   prepareResultTest(resultTest) {
     //подготовка результатов теста для анализа
@@ -134,8 +227,11 @@ class TestService extends BaseController {
           fieldRisk.symptoms++;
         }
       }
+
     }
   }
+
+  
 
   checkQuestionAnswer(questionNumber, answerValue, type) {
     if(this.objResult[questionNumber]) {
@@ -170,6 +266,10 @@ class TestService extends BaseController {
     return false;
   }
 
+  // addRiskWithRiskFactor(sectionSubType, message, excludeSection ){
+    
+  // }
+
   async prepareDataForReportTest(req, res, next) {
     try {
       if(!req.resultTest) {
@@ -201,7 +301,7 @@ class TestService extends BaseController {
         this.reportTest.section1.oncology.highRisk.symptoms ++;
       }
       this.checkQuestionAnswerAndAddRisk('34', '1', 'equal', this.reportTest.section1.oncology.averageRisk);
-      this.checkQuestionAnswerAndAddRisk('35', 9, 'more', this.reportTest.section1.oncology.averageRisk);
+      this.checkQuestionAnswerAndAddRisk('35', '9', 'more', this.reportTest.section1.oncology.averageRisk);
       this.checkQuestionAnswerAndAddRisk('36', '2', 'equal', this.reportTest.section1.oncology.averageRisk);
       this.checkQuestionAnswerAndAddRisk('36', '3', 'equal', this.reportTest.section1.oncology.highRisk);
       this.checkQuestionAnswerAndAddRisk('36', '4', 'equal', this.reportTest.section1.oncology.highRisk);
@@ -212,14 +312,6 @@ class TestService extends BaseController {
       this.checkQuestionAnswerAndAddRisk('45', '4', 'equal', this.reportTest.section1.oncology.averageRisk);
       this.checkQuestionAnswerAndAddRisk('45', '4', 'equal', this.reportTest.section1.oncology.highRisk);
 
-      if(this.reportTest.section1.oncology.highRisk.symptoms >= this.reportTest.section1.oncology.highRisk.minSymptoms) {
-        this.reportTest.section1.oncology.resultRisk = 3;
-      } else
-      if(this.reportTest.section1.oncology.averageRisk.symptoms >= this.reportTest.section1.oncology.averageRisk.minSymptoms){
-        this.reportTest.section1.oncology.resultRisk = 2;
-      } else {
-        this.reportTest.section1.oncology.resultRisk = 1;
-      }
       //секция 1 диабет
       if(this.age > 40) this.reportTest.section1.diabetes.averageRisk.symptoms ++;
       if(this.massIndex > 29.9) {
@@ -257,14 +349,7 @@ class TestService extends BaseController {
       this.checkQuestionAnswerAndAddRisk('45', '3', 'equal', this.reportTest.section1.diabetes.averageRisk);
       this.checkQuestionAnswerAndAddRisk('45', '4', 'equal', this.reportTest.section1.diabetes.highRisk);
 
-      if(this.reportTest.section1.diabetes.highRisk.symptoms >= this.reportTest.section1.diabetes.highRisk.minSymptoms) {
-        this.reportTest.section1.diabetes.resultRisk = 3;
-      } else
-      if(this.reportTest.section1.diabetes.averageRisk.symptoms >= this.reportTest.section1.diabetes.averageRisk.minSymptoms){
-        this.reportTest.section1.diabetes.resultRisk = 2;
-      } else {
-        this.reportTest.section1.diabetes.resultRisk = 1;
-      }
+     
       //секция 1 Болезни сердечно-сосудистой системы
       if(this.age > 40) this.reportTest.section1.cardiovascular.averageRisk.symptoms ++;
       if(this.massIndex > 29.9) {
@@ -318,14 +403,6 @@ class TestService extends BaseController {
       this.checkQuestionAnswerAndAddRisk('45', '3', 'equal', this.reportTest.section1.cardiovascular.averageRisk);
       this.checkQuestionAnswerAndAddRisk('45', '4', 'equal', this.reportTest.section1.cardiovascular.highRisk);
 
-      if(this.reportTest.section1.cardiovascular.highRisk.symptoms >= this.reportTest.section1.cardiovascular.highRisk.minSymptoms) {
-        this.reportTest.section1.cardiovascular.resultRisk = 3;
-      } else
-      if(this.reportTest.section1.cardiovascular.averageRisk.symptoms >= this.reportTest.section1.cardiovascular.averageRisk.minSymptoms){
-        this.reportTest.section1.cardiovascular.resultRisk = 2;
-      } else {
-        this.reportTest.section1.cardiovascular.resultRisk = 1;
-      }
       //секция 1 психоматические заболевания
       this.checkQuestionAnswerAndAddRisk('6', '2', 'equal', this.reportTest.section1.psychosomatic.averageRisk);
       this.checkQuestionAnswerAndAddRisk('6', '2', 'equal', this.reportTest.section1.psychosomatic.highRisk);
@@ -364,14 +441,6 @@ class TestService extends BaseController {
       this.checkQuestionAnswerAndAddRisk('48', '4', 'equal', this.reportTest.section1.psychosomatic.highRisk);
       this.checkQuestionAnswerAndAddRisk('49', '1', 'equal', this.reportTest.section1.psychosomatic.highRisk);
 
-      if(this.reportTest.section1.psychosomatic.highRisk.symptoms >= this.reportTest.section1.psychosomatic.highRisk.minSymptoms) {
-        this.reportTest.section1.psychosomatic.resultRisk = 3;
-      } else
-      if(this.reportTest.section1.psychosomatic.averageRisk.symptoms >= this.reportTest.section1.psychosomatic.averageRisk.minSymptoms){
-        this.reportTest.section1.psychosomatic.resultRisk = 2;
-      } else {
-        this.reportTest.section1.psychosomatic.resultRisk = 1;
-      }
       //секция 2
       this.reportTest.section2.age = this.age;
       this.reportTest.section2.sex = (this.sex === 1) ? 'Мужской' : 'Женский';
@@ -1001,7 +1070,743 @@ class TestService extends BaseController {
         this.reportTest.section3.lifeStyle.push("Удовлетворенность личной жизнью. Вы ответили, что вы не удовлетворены вашей личной жизнью. Очень важно иметь позитивное отношение к происходящему, даже если на пути встречаются трудности. Поддерживать в отличном состоянии душевное здоровье Вам поможет регулярная физическая нагрузка. Если Вы чувствуете, что неудовлетворённость в личной жизни может привести к негативным последствиям, обратитесь к специалисту.");
       }
 
-      console.log("this.reportTest", this.reportTest.section1);
+      //секция 4 онкология средний риск
+      if(this.massIndex > 24.9 && this.massIndex <= 29.9 ){
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Избыточный индекс массы тела (превышает 24.9)');
+      }
+
+      if( this.age > 40 ) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.unpreventableFactors.push(`Ваш возраст больше 40 лет`);
+      }
+
+      if( this.checkQuestionAnswer('24','1', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.unpreventableFactors.push('Онкология');
+      }
+
+
+      if( this.checkQuestionAnswer('31','2', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Вы выкуриваете самокрутки');
+      }
+
+      if( this.checkQuestionAnswer('31','3', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Вы выкуриваете трубку');
+      }
+
+      if( this.checkQuestionAnswer('31','4', 'equals')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Вы выкуриваете сигары, манильские сигары или сигариллы');
+      }
+
+      if( this.checkQuestionAnswer('31','5', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Вы выкуриваете сигары папиросы');
+      }
+
+      if( this.checkQuestionAnswer('31','6', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push('Вы выкуриваете кальян');
+      }
+
+      if( this.checkQuestionAnswer('32','0', 'more') && this.checkQuestionAnswer('32','10','less')  ) {
+          this.reportTest.section4.oncology.averageRisk.symptoms++;
+          this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Выкуривание ${this.objResult[33]} сигарет в день`);
+      }
+
+      if( this.checkQuestionAnswer('33','10', 'less') && this.checkQuestionAnswer('33','0', 'more')) {
+          this.reportTest.section4.oncology.averageRisk.symptoms++;
+          this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Курение на протяжении ${this.objResult[33]} лет`);
+      }
+
+      if( this.checkQuestionAnswer('35','9', 'less') && this.checkQuestionAnswer('35','0','more')) {
+          this.reportTest.section4.oncology.averageRisk.symptoms++;
+          this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Употребление ${this.objResult[35]} алкогольных напитков в неделю`);
+      }
+        
+      if( this.checkQuestionAnswer('36', '2', 'equal')){
+          this.reportTest.section4.oncology.averageRisk.symptoms++;
+          this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Употребляете  ${this.objResult[35]} алкогольных напитков 1 раз в неделю`);
+      }
+
+
+      if( this.checkQuestionAnswer('37','3', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Малое употребление свежих фруктов и овощей в день (1-2 порции)` );
+      }
+
+      if( this.checkQuestionAnswer('38','3', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Малое употребление хлеба, круп, орехов в ден (1-2 порции)` );
+      }
+
+      if( this.checkQuestionAnswer('39','2', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Высокое употребляете жирной пищи в день (3-4 порции)` );
+      }
+
+      if( this.checkQuestionAnswer('48','3', 'equal')) {
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push(`Стресс часто является для Вас проблемой` );
+      }
+      //конец секции 4 онкология средний риск
+
+      //секция 4 онкология высокий риск
+      if( this.massIndex > 29.9 ){ 
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(`Избыточный индекс массы тела (более 29.9)` );
+      }
+
+      if( this.checkQuestionAnswer('24','5', 'equal') ){ 
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.unpreventableFactors.push(`Рак` );
+      }
+
+      if( this.checkQuestionAnswer('25','1','equal')){
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.unpreventableFactors.push(`Онкология` );
+      }
+
+      if( this.age > 40 && this.checkQuestionAnswer('29','1:4','equal')){ 
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(`Не прохождение наружного осмотра врача после 40 лет`);
+      }
+
+      if( this.sex === 1 && this.checkQuestionAnswer('29', '5:4', 'equal')){
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(`Не прохождение флюорографии` );
+      }
+
+      if( this.sex === 2 && this.checkQuestionAnswer('29', '4:4', 'equal')){
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(`Не прохождение маммографии` );
+      }
+
+      if( this.checkQuestionAnswer('31','1', 'equals' )) {
+        const message = 'Выкуривание промышленно производственных сигарет в течении недели';
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(message);
+        this.reportTest.section4.oncology.averageRisk.symptoms++;
+        this.reportTest.section4.oncology.averageRisk.preventableFactors.push(message);
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(message);
+      }
+
+      if( this.checkQuestionAnswer('31','2', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выкуривание самокруток в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','3', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выкуривание трубки в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','4', 'equals')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выкуривание сигар, манильских сигар или сигарилл в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','5', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выкуриваете папирос в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','6', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выкуривание кальянов в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('36','3', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выпивание более 5 алкогольных напитков 2-3 раза в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('36','4', 'equal')) {
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push('Выпивание более 5 алкогольных напитков 3-4 раза в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('37','4', 'equal')) {
+          const message = 'Редкое/Отсутствующее употребление фруктов и овощей';
+          this.reportTest.section4.oncology.highRisk.symptoms++;
+          this.reportTest.section4.oncology.highRisk.preventableFactors.push(message);
+          this.reportTest.section4.diabetes.highRisk.symptoms++;
+          this.reportTest.section4.diabetes.highRisk.preventableFactors.push(message);
+          this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+          this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push(message);
+        }
+
+      if( this.checkQuestionAnswer('38','4', 'equal')) {
+        const message = 'Редкое/Отсутствующее употребление хлеба, круп, орехов';
+        for( let sectionSubType of TestService.SECTION_SUBTYPES ){ 
+            if( sectionSubType == 'psychosomatic') {
+              continue;
+            } else {
+            this.reportTest.section4[sectionSubType].highRisk.symptoms++;
+            this.reportTest.section4[sectionSubType].highRisk.preventableFactors.push(message);
+          }
+        }
+        
+       
+      }
+
+      if( this.checkQuestionAnswer('39','1', 'equal')) {
+        const message = 'Очень высокое употребление жирной пищи в день( 5-6 порций )';
+        this.reportTest.section4.oncology.highRisk.symptoms++;
+        this.reportTest.section4.oncology.highRisk.preventableFactors.push(message);
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push(message);
+      }
+
+      if( this.checkQuestionAnswer('48','4', 'equal')) {
+        const message = 'Стресс всегда является для Вас проблеммой';
+        for( let sectionSubType of TestService.SECTION_SUBTYPES ){
+          this.reportTest.section4[sectionSubType].highRisk.symptoms++;
+          this.reportTest.section4[sectionSubType].highRisk.preventableFactors.push(message);
+        }
+      }
+      
+      //конец секции 4 онология высокий риск
+
+      //начало секции 4 диабет средний риск
+      if( this.age > 40) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.unpreventableFactors.push('Возраст старше 40 лет');
+      }
+
+      if( this.massIndex >= 24.9 && this.massIndex < 29.9 ) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push(`Избыточный индекс массы тела (${this.massIndex})`);
+      }
+
+      if( this.checkQuestionAnswer('17', '2', 'equal')) {
+        const message = 'Пограничный уровень холестерина (5-6.4)';
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push(message);
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(message);
+      }
+
+      if( this.checkQuestionAnswer('18', '2', 'equal')) {
+        const message = 'Пограничный уровень ЛПНП "плохого" холестерина (3.5-4)';
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push(message);
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(message);
+      }
+
+      if( this.checkQuestionAnswer('19', '2', 'equal')) {
+        const message = 'Средний уровень ЛПВП "хорошего" холестерина (1-1.5)';
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push(message);
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(message);
+      }
+
+      if( this.checkQuestionAnswer('20', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Прохождение более 5 лет назад исследования крови на уровень холестерина');
+      }
+
+      if( this.checkQuestionAnswer('20', '3', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Непрохождение исследования крови на уровень холестерина');
+      }
+
+      if( this.checkQuestionAnswer('21', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Пограничный(5.5 - 6.7) уровень глюкозы в крови');
+      }
+
+      if( this.checkQuestionAnswer('22', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Непрохождение ( более 3 лет назад ) исследования крови на глюкозу');
+      }
+
+      if( this.checkQuestionAnswer('25', '3', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.unpreventableFactors.push('Диагностированный диабет у родственников');
+      }
+
+      if( this.checkQuestionAnswer('37', '3', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Редкое употребление фруктов/овощей в день(1-2 порции)');
+      }
+      
+      if( this.checkQuestionAnswer('38', '3', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Вы употребляете 1-2 порции хлеба, круп, орехов в день');
+      }
+
+      if( this.checkQuestionAnswer('39', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Вы употребляете 2-3 порции жирной пищи в течении дня');
+      }
+
+      if( this.checkQuestionAnswer('44', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Вы делаете физические упражнения 1-2 раза в неделю');
+      }
+
+      if( this.checkQuestionAnswer('45', '2', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Вы проходите 20-40 минут быстрым шагом в день');
+      }
+
+      if( this.checkQuestionAnswer('46','3','equal')) {
+        const message = 'Высокая длительность провождения времени в сидячем положение в день (4-6 часа)';
+        for( let subType of TestService.SECTION_SUBTYPES ){ 
+          if( subType == 'oncology'){
+            continue;
+          } else {
+            this.reportTest.section4[subType].averageRisk.symptoms++;
+            this.reportTest.section4[subType].averageRisk.preventableFactors.push(message);     
+          }
+        }
+      }
+
+      if( this.checkQuestionAnswer('48','3', 'equal')) {
+        this.reportTest.section4.diabetes.averageRisk.symptoms++;
+        this.reportTest.section4.diabetes.averageRisk.preventableFactors.push('Стресс часто является для Вас проблемой');
+      }
+
+      //конец секции 4 диабет средний риск
+      
+      //начало секции 4 диабет высокий риск
+      if (this.massIndex > 29.9) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Избыточный индекс массы  тела (${this.massIndex})`);
+      }
+
+      if (this.checkQuestionAnswer('17','3', 'equal' )) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Уровень холестерина в последний раз был высоким (более 6.5)`);
+      }
+
+      if (this.checkQuestionAnswer('18','3', 'equal' )) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Уровень ЛПНП "плохого" холестерина в последний раз был высоким (больше 4)`);
+      }
+
+      if (this.checkQuestionAnswer('18', '4', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Вы не знаете уровень ЛПНП "плохого" холестерина`);
+      }
+
+      if (this.checkQuestionAnswer('19', '3', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Низкий уровень ЛПВП "хорошего" холестерина (менее 1)`);
+      }
+
+      if (this.checkQuestionAnswer('21', '3', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Высокий уровень глюкозы в крови (больше 6.7)`);
+      }
+
+      if (this.checkQuestionAnswer('21', '4', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push(`Незнание уровня глюкозы в крови`);
+      }
+
+      if (this.checkQuestionAnswer('24', '9', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.unpreventableFactors.push(`Диабет`);
+      }
+
+      if ( this.checkQuestionAnswer('25','3', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.unpreventableFactors.push(`Диагностированный диабет у ближайших родственников`);
+      }
+
+
+      if( this.checkQuestionAnswer('44','1', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push('Вы делаете зарядку реже одного раза в неделю');
+      }
+
+      if( this.checkQuestionAnswer('45','1', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push('Вы проходите менее 20 минут в день быстрым шагом');
+      }
+
+      if( this.checkQuestionAnswer('46','4', 'equal')) {
+        this.reportTest.section4.diabetes.highRisk.symptoms++;
+        this.reportTest.section4.diabetes.highRisk.preventableFactors.push('Вы проводите более 6 часов в день в сидячем положении');
+      }
+
+
+      //конец секции 4 диабет высокий риск
+
+
+      //начало секции 4 сердечно сосудистые заболевания средний риск
+      if( this.age > 40 ) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.unpreventableFactors.push('Возраст старше 40 лет');
+      }
+
+      if( this.massIndex >= 24.9 && this.massIndex < 29.9 ) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Избыточный индекс массы тела более 24.9` );
+      }
+
+      if( this.checkQuestionAnswer('15','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Повышенное от 120/80 до 139/89 давление` );
+      }
+
+      if( this.checkQuestionAnswer('16','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Редкое измерение артериального давления ( в прошлом году )` );
+      }
+
+
+      if( this.checkQuestionAnswer('25', '2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.unpreventableFactors.push('Диагностированные сердечно-сосудистые заболевания у ближайших родственников');
+      }
+
+      if( this.checkQuestionAnswer('31','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push('Выкуривание самокруток в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push('Выкуривание трубок в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','4', 'equals')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push('Вы выкуриваете сигары, манильские сигары или сигариллы');
+      }
+
+      if( this.checkQuestionAnswer('31','5', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push('Выкуривание папирос в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('31','6', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push('Выкуривание кальяна в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('32','0', 'more') && this.checkQuestionAnswer('32','10','less')  ) {
+          this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+          this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Выкуривание ${this.objResult[33]} сигарет в день`);
+      }
+
+      if( this.checkQuestionAnswer('33','10', 'less') && this.checkQuestionAnswer('33','0', 'more')) {
+          this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+          this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Курение менее 10 (${this.objResult[33]} лет`);
+      }
+      const smokingIndexEtalon = 140;
+
+      const smokerCigarettesValueAsString = this.objResult[32][0]
+      const intRegExp = /^\d+$/;
+      if( smokerCigarettesValueAsString && intRegExp.test(smokerCigarettesValueAsString)) { 
+          if( parseInt(smokerCigarettesValueAsString)*12 < smokingIndexEtalon ) {
+            this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+            this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Высокий индекс курильщика (${smokerCigarettesValueAsString})`);
+        }
+      }
+
+      if( this.checkQuestionAnswer('34','1', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`В течение прошедших 30 дней курили в помещении, в котором вы находились`);
+      } 
+
+      if( this.checkQuestionAnswer('35','9', 'more')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Употребление более 9 (${this.objResult[35][0]}) алкогольных напитков в неделю`);
+      } 
+
+      if( this.checkQuestionAnswer('36','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Употребление более 5 (${this.objResult[36][0]}) алкогольных напитков 1 раз в неделю`);
+      }
+
+      if( this.checkQuestionAnswer('37','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Употребление 1-2 порций фруктов/овощей в день`);
+      }
+
+      if( this.checkQuestionAnswer('38','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Употребление 1-2 порций хлеба, порций, круп в день`);
+      }
+
+      if( this.checkQuestionAnswer('39','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Высокое употребление (3-4 порции) жирной пищи в день`);
+      }
+
+      if( this.checkQuestionAnswer('44','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Низкая физическая активность (1-2 раза в неделю)`);
+      }
+
+      if( this.checkQuestionAnswer('45','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Низкая физическая активность (Хождение менее 20 минут в день быстрым шагом)`);
+      }
+
+      if( this.checkQuestionAnswer('46','2', 'equal')) {
+        const message = 'Средняя длительность провождения времени в сидячем положение в день(2-4 часа)';
+        for( let subType of TestService.SECTION_SUBTYPES ){ 
+
+          if( subType == 'oncology') {
+            continue;
+          } else {
+            this.reportTest.section4[subType].averageRisk.symptoms++;
+            this.reportTest.section4[subType].averageRisk.preventableFactors.push(message);    
+          }
+        }
+      }
+
+      if( this.checkQuestionAnswer('48','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Часто стресс является проблемой`);
+      }
+
+      if( this.checkQuestionAnswer('42','4', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Не задумывались над количеством потребляемой соли`);
+      }
+
+      if( this.checkQuestionAnswer('42','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Не употребление соли`);
+      }
+
+      if( this.checkQuestionAnswer('43','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Редкое досаливание уже приготовленных блюд`);
+      }
+
+      if( this.checkQuestionAnswer('43','5', 'equal')) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Не задумываетесь над тем или досаливаете блюда`);
+      }
+      //конец секции 4 сердечно-сосудистые заболевания средний риск
+
+      //начало секции 4 сердечно-сосудистые заболевания высокий риск
+      if( this.massIndex > 29.9 ) {
+        this.reportTest.section4.cardiovascular.averageRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.averageRisk.preventableFactors.push(`Избыточный индекс массы тела (${this.massIndex})`);
+      }
+
+      if( this.checkQuestionAnswer('36','3', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Выпивание более 5 алкогольных напитков 2-3 раза в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('36','4', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Выпивание более более 5 алкогольных напитков 3-4 раза в течении недели');
+      }
+
+      if( this.checkQuestionAnswer('44','1', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Вы делаете зарядку реже одного раза в неделю');
+      }
+
+      if( this.checkQuestionAnswer('45','1', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Вы проходите менее 20 минут в день быстрым шагом');
+      }
+
+      if( this.checkQuestionAnswer('46','4', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Вы проводите более 6 часов в день в сидячем положении');
+      }
+
+
+      if( this.checkQuestionAnswer('42','1', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Невысокое употребление соли (менее 1 чайной ложки в день)');
+      }
+
+      if( this.checkQuestionAnswer('42','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Очень высокое употребление соли (2 и более чайной ложки в день)');
+      }
+      
+      if( this.checkQuestionAnswer('43','1', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Досаливание уже приготовленных блюд (Всегда\\Почти всегда)');
+      }
+
+      if( this.checkQuestionAnswer('43','2', 'equal')) {
+        this.reportTest.section4.cardiovascular.highRisk.symptoms++;
+        this.reportTest.section4.cardiovascular.highRisk.preventableFactors.push('Досаливание уже приготовленных блюд (Время от времени)');
+      }
+      //конец секции 4 сердечно-сосудистые заболевания высокий риск
+      
+      //начало секции 4 психосоматические и психологические проблемы средний риск
+
+      if( this.sex == 2 ){
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Женский пол');
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.unpreventableFactors.push('Женский пол');
+      }
+
+      if( this.checkQuestionAnswer('7','4','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Излишняя професссиональная деяытельность (более 46 часов в неделю)');
+      }
+
+      if( this.checkQuestionAnswer('8','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Холост / не замужем');
+      }
+
+      if( this.checkQuestionAnswer('8','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        if( this.sex == 1 ){ 
+          this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Вдовец');
+        } else {
+          this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Вдова');
+        }
+      
+      }
+
+      if( this.checkQuestionAnswer('9','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Кандидат наук или доктор наук');     
+      }
+
+
+      if( this.checkQuestionAnswer('9','4','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('MBA или два высших образования');     
+      }
+
+      if( this.checkQuestionAnswer('10','1','equal')) {
+        const message = 'Неблагоприятный микроклимат на рабочем месте';
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push(message); 
+        this.reportTest.section4.psychosomatic.highRisk.unpreventableFactors.push(message);    
+      }
+
+      if( this.checkQuestionAnswer('10','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Недостаточный уровень освещения на рабочем месте');     
+        this.reportTest.section4.psychosomatic.highRisk.unpreventableFactors.push('Неблагоприятный микроклимат на рабочем месте');
+      }
+
+      if( this.checkQuestionAnswer('25','4','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.unpreventableFactors.push('Хроническая депрессия у ближайших родственников');
+        this.reportTest.section4.psychosomatic.highRisk.unpreventableFactors.push('Хроническая депрессия у ближайших родственников');     
+      }
+
+      if( this.checkQuestionAnswer('35','9','more')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Употребление более 9 алкогольных напитков в неделю');     
+      }
+
+      if( this.checkQuestionAnswer('36','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Употребление более 5 алкогольных напитков 1 раз в неделю');     
+      }
+
+      if( this.checkQuestionAnswer('36', '3','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Употребление более 5 алкогольных напитков 2-3 раза в неделю');     
+      }
+
+      if( this.checkQuestionAnswer('36', '4','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Употребление более 5 алкогольных напитков 3-4 раза в неделю');     
+      }
+
+      if( this.checkQuestionAnswer('44','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Нечастая физическая активность ( кардионагрузки 1-2 раза в неделю )');     
+      }
+
+      if( this.checkQuestionAnswer('44','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Нечастая физическая активность ( кардионагрузки 1-2 раза в неделю )');     
+      }
+
+      if( this.checkQuestionAnswer('44','1','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Нечастая физическая активность ( кардионагрузки менее 1 раза в неделю )');     
+      }
+
+      if( this.checkQuestionAnswer('45','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Хождение быстрым шагом не более 20-40 минут в день');     
+      }
+
+      if( this.checkQuestionAnswer('45','1','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Хождение быстрым шагом менее 20 минут в день быстрым шагом');     
+      }
+
+      if( this.checkQuestionAnswer('46','4','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Очень высокая длительность провождения времени в сидячем положение в день( более 4-6 часов )');     
+      }
+
+      if( this.checkQuestionAnswer('48','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Стресс часто является проблемой');     
+      }
+
+      if( this.checkQuestionAnswer('48','4','equal')) {
+       
+      }
+
+      if( this.checkQuestionAnswer('49','2','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Иногда трудно справится со стрессом');     
+      }
+
+      if( this.checkQuestionAnswer('49','3','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Часто трудно справится со стрессом');     
+      }
+
+      if( this.checkQuestionAnswer('50','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Частичная удовлетворенность личной жизнью');     
+      }
+
+      if( this.checkQuestionAnswer('50','4','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Неудовлетворенность личной жизнью');     
+      }
+      
+      if( this.checkQuestionAnswer('51','3','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Частичная удовлетворенность профессиональной деятельностью');     
+      }
+
+      if( this.checkQuestionAnswer('51','4','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Неудовлетворенность профессиональной деятельностью');     
+      }
+
+      if( this.checkQuestionAnswer('52','1','equal')) {
+        this.reportTest.section4.psychosomatic.highRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.highRisk.preventableFactors.push('Депрессия или печаль в последние 6 месяцев');     
+      }
+
+      if( this.checkQuestionAnswer('31','7','equal')) {
+        this.reportTest.section4.psychosomatic.averageRisk.symptoms++;
+        this.reportTest.section4.psychosomatic.averageRisk.preventableFactors.push('Выкуривание вейпов(электронных сигарет) в течении недели');     
+      }
+      debugger;
       req.reportTest = this.reportTest;
       next();
     } catch(error) {

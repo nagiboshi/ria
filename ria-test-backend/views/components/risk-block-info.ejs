@@ -24,16 +24,42 @@
                 <div class="risk-person-icon">
                     <% let className = 'risk-indicator-green'; %>
                     <% let riskTitle = 'Низкий риск'; %>
-                    <% if( resultRisk > 7 ) { className = 'risk-indicator-red'; riskTitle = 'Высокий риск'; } %>
-                    <% if( resultRisk < 8 && resultRisk > 3 ) { className = 'risk-indicator-yellow'; riskTitle = 'Средний риск'; } %>
+                    <% if( section.resultRisk == 3 ) { className = 'risk-indicator-red'; riskTitle = 'Высокий риск'; } %>
+                    <% if( section.resultRisk == 2 ) { className = 'risk-indicator-yellow'; riskTitle = 'Средний риск'; } %>
                     <%- include('./person-icon',{width: 80, height: 90, className:className}); %> 
                 </div>
                 <div class="risk-person-value"><%= riskTitle %></div>
             </td>
             <td class="risk-block-info__content">
                 <div class="title-block-risk"><%= title %></div>
+                <div class="title-block-info__preventable-factor">
+                    <% let resultRiskValue = 'low'; %>
+                    <% if ( section.resultRisk == 2 ){ resultRiskValue = 'averageRisk' }
+                       else if( section.resultRisk == 3 ){ resultRiskValue = 'highRisk' }; %>
+                    <div class="title-block-info__title">
+                        Не предотвратимые факторы: 
+                        <% if (resultRiskValue!='low') { %>
+                            <%  for( let unpreventableFactor of  section[resultRiskValue].unpreventableFactors ) { %> 
+                                <div class="risk-block-info__unpreventable-factor"><%=unpreventableFactor%></div>
+                            <% } %>
+                        <%  } %>
+                    </div>
+                    
+                </div>    
+                <div class="title-block-info-preventable">
+                    <div class="title-block-info__title">
+                        Предотвратимые факторы: 
+                        <% if (resultRiskValue!='low') { %>
+                            <%  for( let preventableFactor of  section[resultRiskValue].preventableFactors ) { %> 
+                                <div class="risk-block-info__predictable-factor"><%=preventableFactor%></div>
+                            <% } %>
+                        <%  } %>
+                    </div>
+
+                </div>
             </td>
         </tr>
+        
     </tbody>
     </table>
 </div>

@@ -18,7 +18,7 @@ export class CurrentTestPage implements OnInit {
   questionPages: QuestionPageTest[];
   currentPage: object;
   listResult: string[] = [];
-
+  showLoader: boolean; 
   constructor(
     private _navCtrl: NavController,
     private testService: TestService,
@@ -29,6 +29,7 @@ export class CurrentTestPage implements OnInit {
     this.idTest = this.navParams.get('id');
     this.test = this.testService.getTestWithCurrentId(this.idTest);
     this.prepareTest();
+    this.showLoader = false;
   }
 
   prepareTest() {
@@ -73,8 +74,10 @@ export class CurrentTestPage implements OnInit {
   }
 
   endTest() {
+    this.showLoader = true;
     this.testService.newResultTest(this.idTest, this.listResult)
       .subscribe(result => {
+        this.showLoader = false;
         this._navCtrl.pop();
       })
   }

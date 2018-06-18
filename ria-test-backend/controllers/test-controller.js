@@ -7,6 +7,7 @@ const TestResult = require('../models/test-result');
 const ejs = require('ejs');
 const pdf = require('html-pdf');
 const fs = require('fs');
+const mailService = require('../services/mail-service');
 
 class TestController extends BaseController {
   constructor() {
@@ -35,6 +36,7 @@ class TestController extends BaseController {
 
   async setResultTest(req, res, next) {
     try {
+      debugger;
       req.checkBody('testId').notEmpty();
       req.checkBody('result').notEmpty();
 
@@ -116,6 +118,7 @@ class TestController extends BaseController {
 
   async generateReportTest(req, res, next) {
     try {
+      debugger;
       ejs.renderFile('./views/test-view.ejs', req.reportTest, (err, result) => {
         // render on success
         if (result) {
@@ -128,9 +131,7 @@ class TestController extends BaseController {
             base: './files/',
             type: "pdf",
             phantomPath: "./node_modules/phantomjs-prebuilt/bin/phantomjs",
-            // header: {
-            //   height: "10mm"
-            // },
+            
             footer: {
               height: "10mm"
             }
@@ -146,18 +147,21 @@ class TestController extends BaseController {
           //     });
           //   });
           // });
+
           pdf.create(htmlData, options).toBuffer((err, buffer) => {
-            if (err) next(err);
-            res.send({
+            if (err){ 
+              next(err);
+            } 
+            let attachments = [{content: buffer, contentType: 'application/pdf' , filename: options.filename}];
+            mailService.sendMessageWithAttachments(req.user.email, 'RIA Результат тестирования', '','', attachments);
+             res.send({
               success: true,
               data: buffer
             });
+   
           });
         }
-        // render or error
-        else {
-          next(error);
-        }
+      
       });
     } catch(error) {
       next(errorService.user.default.ex(error));

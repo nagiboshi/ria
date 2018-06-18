@@ -30,8 +30,6 @@ export class TestsPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.isLoadTests = true;
-    this.isLoadReports = true;
     this.loadTests();
     this.loadReportLocal();
   }
@@ -43,6 +41,8 @@ export class TestsPage implements OnInit, OnDestroy {
   }
 
   loadTests() {
+    this.isLoadTests = true;
+    this.isLoadReports = true;
     let objSubTestLocal = this.testService.getTestsLocal()
     .subscribe((result) => {
       this.isLoadTests = false;
