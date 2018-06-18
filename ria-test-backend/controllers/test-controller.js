@@ -156,11 +156,10 @@ class TestController extends BaseController {
   }
 
   async generateReportTestAndSendMail(req, res, next){ 
-    debugger;
-    let nameNewFile = 'report-' + req.resultTest.testId + '-' + req.resultTest.userId + '.pdf';
+    let nameNewFile = 'report-' + req.resultTest.testId + '.pdf';
       this.generatePDFReport(nameNewFile, req.reportTest).then((result) => {
       
-        let attachments = [{content: result, contentType: 'application/pdf' , filename: options.filename}];
+        let attachments = [{content: result, contentType: 'application/pdf' , filename: nameNewFile}];
         mailService.sendMessageWithAttachments(req.user.email, 'RIA Результат тестирования', '','', attachments);
         
         next();
