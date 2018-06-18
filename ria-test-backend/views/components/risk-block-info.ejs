@@ -4,6 +4,12 @@
         padding-left: 5px;
     }
 
+    .risk-block-info__risk-name{
+        font-weight: bold;
+        text-align: left;
+        margin: 0;
+    }
+
     .risk-person-value {
         width: 100%;
         font-size: 0.5em;
@@ -18,6 +24,7 @@
 
     .risk-block-info__factor{ 
         font-size: 0.6em;
+        line-height: 2;
     }
 
     .title-block-info-preventable{
@@ -45,7 +52,7 @@
                 <div class="risk-person-value"><%= riskTitle %></div>
             </td>
             <td class="risk-block-info__content">
-                <div class="title-block-risk"><%= title %></div>
+                <div class="risk-block-info__risk-name"><%= title %></div>
                 <div class="title-block-info__preventable-factor">
                     <% let resultRiskValue = 'low'; %>
                     <% if ( section.resultRisk == 2 ){ resultRiskValue = 'averageRisk' }
