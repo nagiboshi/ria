@@ -8,8 +8,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class ApiService {
 
-  private _basePath: string = 'http://localhost:3000/';
-  // private _basePath: string = 'https://ria-test-backend.herokuapp.com/';
+ // private _basePath: string = 'http://localhost:3000/';
+  private _basePath: string = 'https://ria-test-backend.herokuapp.com/';
   httpOptions: object = { headers: HttpHeaders };
 
   constructor(

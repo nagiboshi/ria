@@ -93,7 +93,14 @@
     <allow-navigation href="http://10.196.181.108:8100" />
     <allow-navigation href="http://172.26.61.177:8100" />
     <allow-navigation href="http://192.168.43.105:8100" />
-    <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.4" />
     <engine name="browser" spec="5.0.3" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="^2.4.0">
+        <variable name="XWALK_VERSION" value="23+" />
+        <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
+        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
+        <variable name="XWALK_MODE" value="embedded" />
+        <variable name="XWALK_MULTIPLEAPK" value="true" />
+    </plugin>
+    <engine name="android" spec="~7.0.0" />
 </widget>

@@ -1,22 +1,22 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, Inject } from '@angular/core';
-import {ICompanyModel} from '../../../../models/company.model';
-import {CompanyService} from '../../../../services/company.service';
+import {IArticleModel} from '../../../../models/article.model';
+import {ArticleService} from '../../../../services/article.service';
 
 @Component({
-  selector: 'app-company-add-dialog',
-  templateUrl: 'company-add-dialog.component.html',
-  styleUrls: ['company-add-dialog.component.css']
+  selector: 'app-article-add-dialog',
+  templateUrl: 'article-add-dialog.component.html',
+  styleUrls: ['article-add-dialog.component.css']
 })
 
-export class CompanyAddDialogComponent {
+export class ArticleAddDialogComponent {
 
   public errorMessage: string;
 
   constructor(
-    private _dialog: MatDialogRef<CompanyAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public companyName: string,
-    private _companyService: CompanyService
+    private _dialog: MatDialogRef<ArticleAddDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public articleName: string,
+    private _articleService: ArticleService
   ) {}
 
   onNoClick(): void {
@@ -28,8 +28,8 @@ export class CompanyAddDialogComponent {
   }
 
   add() {
-    this._companyService
-      .addCompany(this.companyName)
+    this._articleService
+      .addArticle(this.articleName)
       .then(() => this._dialog.close())
       .catch(this._errorHandler.bind(this));
   }

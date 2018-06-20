@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { IServerResponseModel } from '../models/server-response.model';
 
 @Injectable()
 export class ApiService {
 
-  // basePath: string = 'http://0.0.0.0:3000/';
-  _basePath = 'https://ria-test-backend.herokuapp.com/';
+  //  basePath: string = 'http://0.0.0.0:3000/';
+  // _basePath = 'https://ria-test-backend.herokuapp.com/';
+  _basePath = 'http://trust2.info/';
   _httpOptions: object = { headers: null };
 
   constructor(private _http: HttpClient) {}

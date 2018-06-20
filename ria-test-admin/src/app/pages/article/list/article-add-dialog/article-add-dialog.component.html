@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Новая компания</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field>
+    <input cdkFocusInitial matInput placeholder="Название" [(ngModel)]="companyName">
+  </mat-form-field>
+
+  <div *ngIf="errorMessage" class="error-container">
+    <span>{{errorMessage}}</span>
+  </div>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <button mat-button (click)="close()">Отмена</button>
+
+  <button
+    [disabled]="!companyName"
+    mat-button
+    (click)="add()">
+    Добавить
+  </button>
+
+</div>

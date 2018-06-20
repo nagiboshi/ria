@@ -1,0 +1,20 @@
+.button-cell {
+  max-width: 40px;
+  padding: 0;
+}
+
+mat-header-cell {
+  text-align: left;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
+
+mat-row {
+  padding-left: 0;
+}
+
+mat-header-row {
+  padding-left: 0;
+}
