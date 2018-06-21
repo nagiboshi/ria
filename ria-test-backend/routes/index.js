@@ -9,6 +9,10 @@ router.use(require('./company'));
 
 router.use(require('./request'));
 
+router.use(require('./article'));
+
+router.use(require('./riskgroups'));
+
 router.use(require('./test'));
 
 router.use((req, res, next) => res.send({ success: true, data: req.dataOut }));

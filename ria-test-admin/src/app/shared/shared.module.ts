@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ComaSeparatedRisks } from '../pipes/comaSeparatedRisks.pipe';
 
 const modules = [
   CommonModule,
@@ -29,7 +30,7 @@ const modules = [
 ];
 
 const components = [
-  BaseComponent
+  BaseComponent, ComaSeparatedRisks
 ];
 
 @NgModule({

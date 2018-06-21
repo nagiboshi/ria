@@ -14,7 +14,7 @@ export class ArticleService {
     private _api: ApiService
   ) { }
 
-  getCompanies(): Observable<IArticleModel[]> {
+  getArticles(): Observable<IArticleModel[]> {
     if (!this._isLoaded) {
       this._api
         .get('articles')

@@ -102,7 +102,13 @@ let listError = {
       message: 'Bad request for consultation.'
     }
   },
-
+  riskGroup: {
+    default: {
+      code: 7000, 
+      message: 'Internal riskgroup error.'
+    }
+  },
+  
   company:{ 
 
     default: {

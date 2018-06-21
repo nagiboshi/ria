@@ -3,21 +3,21 @@
 
     <mat-card-header>
       <mat-card-title>
-        <b style="padding-right: 16px;">Компании</b>
-        <button mat-raised-button color="primary" (click)="addCompany()">
+        <b style="padding-right: 16px;">Статьи</b>
+        <button mat-raised-button color="primary" (click)="addArticle()">
           <mat-icon>add</mat-icon>
-          <span>Добавить компанию</span>
+          <span>Добавить Статью</span>
         </button>
       </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <mat-table [dataSource]="companies">
+      <mat-table [dataSource]="articles">
 
         <ng-container matColumnDef="editor">
           <mat-header-cell class="button-cell" *matHeaderCellDef></mat-header-cell>
-          <mat-cell class="button-cell" *matCellDef="let company">
-            <button tabindex="-1" mat-icon-button (click)="editCompany(company)">
+          <mat-cell class="button-cell" *matCellDef="let article">
+            <button tabindex="-1" mat-icon-button (click)="editArticle(article)">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-cell>
@@ -25,23 +25,37 @@
 
         <ng-container matColumnDef="delete">
           <mat-header-cell class="button-cell" *matHeaderCellDef></mat-header-cell>
-          <mat-cell class="button-cell" *matCellDef="let element">
-            <button tabindex="-1" mat-icon-button (click)="removeCompanyById(element)">
+          <mat-cell class="button-cell" *matCellDef="let article">
+            <button tabindex="-1" mat-icon-button (click)="removeArticleById(article)">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef>Название</mat-header-cell>
-          <mat-cell *matCellDef="let company">
-            {{company.name}}
+          <mat-cell *matCellDef="let article">
+            {{article.title}}
           </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="code">
-          <mat-header-cell *matHeaderCellDef>Код</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.code}}</mat-cell>
+        <ng-container matColumnDef="body">
+          <mat-header-cell *matHeaderCellDef>Статья</mat-header-cell>
+          <mat-cell [title]="article.body" *matCellDef="let article">{{article.body.substring(0,50)}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="image">
+          <mat-header-cell *matHeaderCellDef>Картинка</mat-header-cell>
+          <mat-cell *matCellDef="let article">
+            <img *ngIf="article.image" height="90" width="60" [src]="article.image"/>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="riskGroups">
+          <mat-header-cell *matHeaderCellDef>Группы риска</mat-header-cell>
+          <mat-cell *matCellDef="let article"> 
+            {{article.riskGroups|comaSeparatedRisks}} 
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

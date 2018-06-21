@@ -4,8 +4,8 @@ import { ArticleEditDialogComponent } from './article-edit-dialog/article-edit-d
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ArticleService } from '../../../services/article.service';
-import {ArticleRemoveDialogComponent} from './article-remove-dialog/article-remove-dialog.component';
-
+import { ArticleRemoveDialogComponent } from './article-remove-dialog/article-remove-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -15,17 +15,18 @@ export class ArticleListComponent implements OnInit {
 
   @Input() articleName: string;
 
-  companies: IArticleModel[] = [];
-  columns: string[] = [ 'delete', 'editor', 'name', 'code' ];
+  articles: IArticleModel[] = [];
+  columns: string[] = [ 'delete', 'editor', 'title', 'body', 'image', 'riskGroups' ];
 
   constructor(
     private _articleService: ArticleService,
-    private _dialogCtrl: MatDialog
+    private _dialogCtrl: MatDialog,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this._articleService.getCompanies().subscribe((companies: IArticleModel[]) => {
-      this.companies = companies;
+    this._articleService.getArticles().subscribe((articles: IArticleModel[]) => {
+      this.articles = articles;
     });
   }
 
@@ -37,6 +38,10 @@ export class ArticleListComponent implements OnInit {
   editArticle(article: IArticleModel) {
     this._dialogCtrl
       .open(ArticleEditDialogComponent, { width: '250px', data: { ...article } });
+  }
+
+  unblockURL(url) {
+    return this._sanitizer.bypassSecurityTrustUrl(url);
   }
 
   removeArticleById(article: IArticleModel) {

@@ -37,7 +37,7 @@ export class ArticleAddDialogComponent {
   _errorHandler(error) {
     switch (error.code) {
       case 5002:
-        this.errorMessage = 'Компания с таким названием уже существует';
+        this.errorMessage = 'Статья с таким названием уже существует';
         break;
       default: return console.error(error);
     }
