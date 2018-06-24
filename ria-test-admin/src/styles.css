@@ -6,6 +6,7 @@
   padding: 0;
   margin: 0;
   font-family: Arial;
+  overflow: hidden;
 }
 
 mat-cell {
@@ -15,4 +16,5 @@ mat-cell {
 mat-header-cell {
   padding-left: 8px;
 }
+
 

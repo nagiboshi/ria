@@ -4,7 +4,8 @@ import {
   MatToolbarModule, MatButtonModule, MatIconModule, MatTableModule, MatCardModule, MatListModule, MatSidenavModule, MatFormFieldModule,
   MatInputModule, MatCheckboxModule,
   MatDialogModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -20,6 +21,7 @@ const modules = [
   MatCardModule,
   MatTableModule,
   MatIconModule,
+  MatProgressSpinnerModule,
   MatButtonModule,
   MatToolbarModule,
   MatListModule,

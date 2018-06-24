@@ -14,6 +14,7 @@ import { RiskGroupService } from '../../../services/riskGroup.service';
 })
 export class ArticleListComponent implements OnInit {
   riskGroups: IRiskGroup[] = [];
+  isBusy = false;
   @Input() articleName: string;
 
   articles: IArticleModel[] = [];
@@ -27,6 +28,10 @@ export class ArticleListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    this._articleService.isBusy.subscribe((busyResult) => { 
+      this.isBusy = busyResult;
+    });
     this._riskGroupService.getAll().then((risks) => { 
       this.riskGroups =  risks;
       this._articleService.getArticles().subscribe((articles: IArticleModel[]) => {

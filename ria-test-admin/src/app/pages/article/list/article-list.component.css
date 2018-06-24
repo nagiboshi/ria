@@ -18,3 +18,17 @@ mat-row {
 mat-header-row {
   padding-left: 0;
 }
+
+.article-list-loading {
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  z-index: 9999;
+}
+
+.article-list-changing{
+  z-index: 1;
+  background: white;
+  opacity: 0.7;
+  width: 100%;
+}

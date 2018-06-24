@@ -69,9 +69,9 @@ export class ArticleDialogComponent implements OnInit {
   }
 
   add() {
+    this._dialog.close();
     this._articleService
       .addArticle(this.article)
-      .then(() => this._dialog.close())
       .catch(this._errorHandler.bind(this));
   }
 

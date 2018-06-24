@@ -1,6 +1,6 @@
 <app-base>
-  <mat-card>
-
+  <mat-spinner [ngClass]="'article-list-loading'" [diameter]="'100'" [strokeWidth]="'1'" *ngIf="isBusy"></mat-spinner>
+  <mat-card [ngClass]="{'article-list-changing':isBusy}">
     <mat-card-header>
       <mat-card-title>
         <b style="padding-right: 16px;">Статьи</b>
