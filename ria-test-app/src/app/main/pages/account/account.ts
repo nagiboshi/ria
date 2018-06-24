@@ -21,8 +21,8 @@ export class AccountPage implements OnInit, OnDestroy {
     public modalCtrl: ModalController
   ) {}
 
-  isOnPushApp = false;
-  isOnPushEmail = false;
+  isOnPushApp = true;
+  isOnPushEmail = true;
 
   ngOnInit() {
     this.subList.push(
