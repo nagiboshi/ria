@@ -26,13 +26,13 @@ export class ArticleDialogComponent implements OnInit {
   ) {}
 
   selectedArticlesFunc(o1, o2) {
-   if ( !o1.name ) {
+   if ( !o1 ) {
      return false;
    }
-   if ( !o2.name ) {
+   if ( !o2 ) {
      return false;
    }
-   return o1.name === o2.name;
+   return o1 === o2._id;
   }
 
   onImageUpload(e) {

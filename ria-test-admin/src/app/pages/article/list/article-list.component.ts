@@ -47,12 +47,12 @@ export class ArticleListComponent implements OnInit {
   addArticle() {
     const article: IArticleModel = this.newArticle();
     this._dialogCtrl
-      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, isNew: true } });
+      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, 'isNew': true } });
   }
 
   editArticle(article: IArticleModel) {
     this._dialogCtrl
-      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, isNew: false } });
+      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, 'isNew': false } });
   }
 
   unblockURL(url) {

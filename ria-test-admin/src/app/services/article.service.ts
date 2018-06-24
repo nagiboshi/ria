@@ -28,7 +28,6 @@ export class ArticleService {
   }
 
   addArticle(article: IArticleModel): Promise<void> {
-    debugger;
     return this._api
       .post('article/add', { article })
       .then((savedArticle: IArticleModel) => {
