@@ -13,7 +13,7 @@ class RiskGroupController extends BaseController {
       let groups = await RiskGroup
         .find()
         .exec();
-      req.dataOut = groups.map(group => group.clear());
+      req.dataOut = groups;
       next();
     } catch(error) {
       next(errorService.riskGroup.default.ex(error));

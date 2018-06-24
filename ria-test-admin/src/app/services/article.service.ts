@@ -27,11 +27,12 @@ export class ArticleService {
     return this._articles.asObservable();
   }
 
-  addArticle(name: string): Promise<void> {
+  addArticle(article: IArticleModel): Promise<void> {
+    debugger;
     return this._api
-      .post('article/add', { name })
-      .then((article: IArticleModel) => {
-        this._articles.next([ ...this._articles.getValue(), article ]);
+      .post('article/add', { article })
+      .then((savedArticle: IArticleModel) => {
+        this._articles.next([ ...this._articles.getValue(), savedArticle ]);
       });
   }
 
@@ -50,7 +51,7 @@ export class ArticleService {
 
   removeById(_id: string): Promise<void> {
     return this._api
-      .get('article/remove', { _id })
+      .post('article/remove', { _id })
       .then(() => {
         const articles = this._articles.getValue().filter((article: IArticleModel) => {
           return article._id !== _id;

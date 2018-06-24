@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import {
   MatToolbarModule, MatButtonModule, MatIconModule, MatTableModule, MatCardModule, MatListModule, MatSidenavModule, MatFormFieldModule,
   MatInputModule, MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ComaSeparatedRisks } from '../pipes/comaSeparatedRisks.pipe';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { RiskGroupService } from '../services/riskGroup.service';
 const modules = [
   CommonModule,
   BrowserModule,
@@ -21,7 +23,9 @@ const modules = [
   MatButtonModule,
   MatToolbarModule,
   MatListModule,
+  MatSelectModule,
   MatSidenavModule,
+  FlexLayoutModule,
   MatInputModule,
   MatDialogModule,
   MatFormFieldModule,
@@ -37,6 +41,6 @@ const components = [
   imports: [...modules],
   exports: [...modules, ...components],
   declarations: [...components],
-  providers: [],
+  providers: [ RiskGroupService ],
 })
 export class SharedModule { }

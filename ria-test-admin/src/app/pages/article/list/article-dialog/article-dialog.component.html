@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{ isNew ? 'Новая статья':'Редактировать статью'}}</h1>
+
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <mat-form-field>
+      <input cdkFocusInitial matInput placeholder="Название статьи" [(ngModel)]="article.title">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Группы риска" [compareWith]="selectedArticlesFunc" [(ngModel)]="article.riskGroups" multiple>
+          <mat-option *ngFor="let riskGroup of riskGroups" [value]="riskGroup._id">{{riskGroup.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div fxFlex fxLayout="column" class="row">
+      <div class="article-image-uploader" fxFlex fxLayoutAlign="start center" fxLayout="row">
+        <input type='file' (change)="onImageUpload($event)" #imageUploader/>
+        <mat-icon *ngIf="article.image" fxFlex fxLayoutAlign="start center" (click)="deleteImg($event)" class="article-image-delete">delete</mat-icon>
+      </div> 
+      <div>
+        <img height="auto" *ngIf="article.image" width="20%" #imagePreview [src]="article.image" alt="Картинка статьи" />
+      </div>
+    </div>
+    <div class="mat-app-background basic-container">
+      <ngx-wig [(ngModel)]="article.body" [placeholder]="'Начните писать статью ...'"></ngx-wig>
+    </div>
+    <div *ngIf="errorMessage" class="error-container">
+      <span>{{errorMessage}}</span>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Отмена</button>
+  <button
+    [disabled]="!article.title || article.title.length == 0 
+              || !article.body || article.body.length == 0 
+              || !article.image || article.image.length == 0
+              || !article.riskGroups || article.riskGroups.length == 0"
+    mat-button
+    (click)="add()">
+    Добавить
+  </button>
+
+</div>

@@ -46,17 +46,17 @@ let listError = {
   article: {
 
     default: {
-      code: 3000,
+      code: 6000,
       message: 'Internal article error.'
     },
 
     notFound: {
-      code: 3001,
+      code: 6001,
       message: 'Article not found.'
     },
 
     badRequest : {
-      code: 3002,
+      code: 6002,
       message: 'Bad request.'
     }
 

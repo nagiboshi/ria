@@ -5,19 +5,21 @@ import { NgModule } from '@angular/core';
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleRemoveDialogComponent } from './list/article-remove-dialog/article-remove-dialog.component';
 import { ArticleService } from '../../services/article.service';
-import { ArticleEditDialogComponent } from './list/article-edit-dialog/article-edit-dialog.component';
+import { NgxWigModule } from 'ngx-wig';
+import { ArticleDialogComponent } from './list/article-dialog/article-dialog.component';
 
 const components = [
   ArticleComponent,
   ArticleListComponent,
   ArticleRemoveDialogComponent,
-  ArticleEditDialogComponent
+  ArticleDialogComponent
 ];
 
 @NgModule({
   imports: [
     SharedModule,
-    ArticleRoutingModule
+    ArticleRoutingModule, 
+    NgxWigModule
   ],
   exports: [],
   providers: [ ArticleService ],

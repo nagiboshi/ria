@@ -1,0 +1,22 @@
+mat-form-field {
+  width: 100%;
+}
+
+.error-container {
+  width: 100%;
+  /*padding: 8px;*/
+  color: red;
+}
+
+.article-image-uploader{
+  margin-bottom: 10px;
+}
+
+.row{
+  margin: 10px 0;
+}
+
+.article-image-delete{
+  cursor: pointer;
+  color: #ff0000;
+}

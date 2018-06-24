@@ -1,18 +1,19 @@
 import { IArticleModel } from './../../../models/article.model';
-import { ArticleAddDialogComponent } from './article-add-dialog/article-add-dialog.component';
-import { ArticleEditDialogComponent } from './article-edit-dialog/article-edit-dialog.component';
+import { ArticleDialogComponent } from './article-dialog/article-dialog.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ArticleService } from '../../../services/article.service';
 import { ArticleRemoveDialogComponent } from './article-remove-dialog/article-remove-dialog.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IRiskGroup } from '../../../models/riskgroup.model';
+import { RiskGroupService } from '../../../services/riskGroup.service';
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-
+  riskGroups: IRiskGroup[] = [];
   @Input() articleName: string;
 
   articles: IArticleModel[] = [];
@@ -21,23 +22,37 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private _articleService: ArticleService,
     private _dialogCtrl: MatDialog,
+    private _riskGroupService: RiskGroupService,
     private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this._articleService.getArticles().subscribe((articles: IArticleModel[]) => {
-      this.articles = articles;
+    this._riskGroupService.getAll().then((risks) => { 
+      this.riskGroups =  risks;
+      this._articleService.getArticles().subscribe((articles: IArticleModel[]) => {
+        this.articles = articles;
+      });
     });
+
+    
   }
 
+  private newArticle() {
+    return { _id:  null,
+      title: '',
+      body: '',
+      image: '',
+      riskGroups: [] };
+  }
   addArticle() {
+    const article: IArticleModel = this.newArticle();
     this._dialogCtrl
-      .open(ArticleAddDialogComponent, { width: '250px' });
+      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, isNew: true } });
   }
 
   editArticle(article: IArticleModel) {
     this._dialogCtrl
-      .open(ArticleEditDialogComponent, { width: '250px', data: { ...article } });
+      .open(ArticleDialogComponent, { width: '80%', data: {'article': article, isNew: false } });
   }
 
   unblockURL(url) {
