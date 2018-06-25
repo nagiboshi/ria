@@ -1,4 +1,4 @@
-import { Consts } from '../misc/const';
+const Consts = require('../misc/const');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({

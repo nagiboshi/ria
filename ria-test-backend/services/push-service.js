@@ -1,4 +1,3 @@
-import {Consts} from '../misc/const';
 class PushService { 
     // iosPushOptions;
     constructor() {

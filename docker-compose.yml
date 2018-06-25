@@ -1,50 +1,46 @@
 version: '3'
 services:
-  #nginx:
-  #  image: nginx
-  #  ports:
-  #    - "80:80"
-  #  volumes:
-   #   - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  #  links:
-     # - backend
-    #  - app
-   #   - admin
-  #  restart: on-failure:5
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - backend
+      - app
+      - admin
+    restart: on-failure:5
  
   admin:
     image: ria/admin
-    depends_on: 
-      - mongo
+#    depends_on: 
+#      - mongo
     ports:
       - "8080:8080"
     restart: on-failure:5
 
   backend:
     image: ria/backend
-    depends_on: 
-      - mongo
+#   depends_on: 
+#      - mongo
     ports:
       - "3000:3000"
     restart: on-failure:5
 
-  mongo:
-    image: mongo
-    restart: always
-    ports:
-      - "27017:27017"
-    links:
-      - backend
-      - admin
-  #   - app
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: W7swsa1jKwlo6veszX3Q
+ # mongo:
+ #   image: mongo
+ #   restart: always
+ #   ports:
+ #     - "27017:27017"
+ #   environment:
+ #     MONGO_INITDB_ROOT_USERNAME: root
+ #     MONGO_INITDB_ROOT_PASSWORD: W7swsa1jKwlo6veszX3Q
 
-  #app:
-  #  image: ria/app
-  #depends_on: 
-  #    - backend
-  #  ports:
-  #    - "3001:3001"
-  #  restart: on-failure:5
+  app:
+    image: ria/app
+    depends_on: 
+      - backend
+    ports:
+      - "3001:3001"
+    restart: on-failure:5
