@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "161459370733",
+    "firebase_url": "https://ria-test-app.firebaseio.com",
+    "project_id": "ria-test-app",
+    "storage_bucket": "ria-test-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161459370733:android:539cbf1dc5d5cab1",
+        "android_client_info": {
+          "package_name": "io.app.ria1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161459370733-nkol9pie96ikjp5vfajtkbo7m04kkt09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq1E0CkCqGK15l4Yyd-NT3SP-U1ExECoo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import {ToastController} from "ionic-angular";
 
-import {AnswerTest} from '../../models/answer-test';
 import {QuestionPageTest} from '../../models/question-page-test';
 
 @Component({

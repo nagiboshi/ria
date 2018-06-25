@@ -7,7 +7,6 @@ import {FileService} from "../../../common/services/file.service";
 import {CurrentTestPage} from './current-test/current-test';
 import * as FileSaver from 'file-saver';
 import { Platform } from 'ionic-angular';
-import { FileOpener } from '@ionic-native/file-opener';
 
 @Component({
   selector: 'tests-page',

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from "../../../common/services/auth.service";
 import {NavController, ToastController, ViewController} from "ionic-angular";
 import { MainPage } from "../../main";
-import { SignInPage } from "../sign-in/sign-in";
 
 @Component({
   selector: 'sign-up',

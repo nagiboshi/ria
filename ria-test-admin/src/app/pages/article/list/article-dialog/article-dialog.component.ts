@@ -4,6 +4,7 @@ import {IArticleModel} from '../../../../models/article.model';
 import {ArticleService} from '../../../../services/article.service';
 import { IRiskGroup } from '../../../../models/riskgroup.model';
 import { RiskGroupService } from '../../../../services/riskGroup.service';
+import { NgxWigToolbarService } from 'ngx-wig';
 
 @Component({
   selector: 'app-article-dialog',
@@ -22,6 +23,7 @@ export class ArticleDialogComponent implements OnInit {
     private _dialog: MatDialogRef<ArticleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _articleService: ArticleService,
+    private ngxWigToolbarService: NgxWigToolbarService,
     private _riskGroupService: RiskGroupService
   ) {}
 
@@ -58,6 +60,8 @@ export class ArticleDialogComponent implements OnInit {
     });
     this.article = this.data.article;
     this.isNew = this.data.isNew;
+    this.ngxWigToolbarService.addStandardButton('wow', 'wow', '', '');
+    // this.ngxWigToolbarService.setButtons(['wow']);
   }
 
   onNoClick(): void {

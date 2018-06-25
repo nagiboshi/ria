@@ -6,7 +6,6 @@ import { FileOpener } from '@ionic-native/file-opener';
 @Injectable()
 export class FileService {
   constructor(
-    private _api: ApiService,
     public _file: File,
     private _fileOpener: FileOpener
   ) {}

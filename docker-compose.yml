@@ -14,18 +14,37 @@ services:
  
   admin:
     image: ria/admin
+    depends_on: 
+      - mongo
     ports:
       - "8080:8080"
     restart: on-failure:5
 
   backend:
     image: ria/backend
+    depends_on: 
+      - mongo
     ports:
       - "3000:3000"
     restart: on-failure:5
 
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    links:
+      - backend
+      - admin
+  #   - app
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: W7swsa1jKwlo6veszX3Q
+
   #app:
   #  image: ria/app
+  #depends_on: 
+  #    - backend
   #  ports:
   #    - "3001:3001"
   #  restart: on-failure:5

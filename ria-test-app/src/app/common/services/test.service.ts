@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs/Observable";
-import {of} from "rxjs/observable/of";
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 import {Test} from '../models/test';

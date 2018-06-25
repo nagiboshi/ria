@@ -1,16 +1,17 @@
+import { Consts } from '../misc/const';
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'Yandex',
+  service: 'gmail',
   auth: {
-    user: 'wedrobetona@yandex.ru',
-    pass: 'betonawedro'
+    user: Consts.GMAIL_USER,
+    pass: Consts.GMAIL_PASSWORD
   }
 });
 
 class Mail {
   constructor( from, to, subject, html, text ){ 
-    this.from = 'wedrobetona@yandex.ru';
+    this.from = from;
     this.to = to;
     this.subject = subject; 
     this.html = html;
@@ -63,7 +64,7 @@ class MailService {
       this.sendMessage(toEmail, subject, text, html );
     }
     
-    await transporter.sendMail(new MailWithAttachments('wedrobetona@yandex.ru', toEmail, subject, html, text, attachments));
+    await transporter.sendMail(new MailWithAttachments(Consts.GMAIL_USER, toEmail, subject, html, text, attachments));
   }
 
   async sendMessage (toEmail, subject, text, html) {

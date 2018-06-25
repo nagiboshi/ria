@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-import { NavController, NavParams, ToastController , ViewController} from "ionic-angular";
+import { NavParams, ToastController , ViewController} from "ionic-angular";
 import {IUserModel} from "../../models/user";
 import {Input} from "@angular/core";
 import {FieldUpdate} from "../../models/field-update";
-import {AccountPage} from "../../../main/pages/account/account";
 
 @Component({
   selector: 'modal-change-fields',
@@ -20,7 +19,6 @@ export class ModalChangeFields implements OnInit, OnDestroy {
 
   constructor(
     private _authService: AuthService,
-    private _navCtrl: NavController,
     private params: NavParams,
     private _toastCtrl: ToastController,
     public viewCtrl: ViewController
