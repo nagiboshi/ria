@@ -1,6 +1,8 @@
 const errorService = require('../services/error-service');
 const BaseController = require('../controllers/base-controller');
 const Article = require('../models/article');
+const config = require('jconf');
+const fs = require('fs');
 class ArticleController extends BaseController {
   constructor() {
     super();     
@@ -14,7 +16,7 @@ class ArticleController extends BaseController {
   return  { _id: articleModel._id,
             title:articleModel.title,
             body: articleModel.body,
-            image: this.getBase64ImageFromBuffer(articleModel.image),
+            image: articleModel.image,
             riskGroups: articleModel.riskGroups
           };
   }
@@ -43,52 +45,112 @@ class ArticleController extends BaseController {
       next(errorService.article.default.ex(error));
     }
   }
+
+  getArticleImgPath(article){ 
+    let filePath = this.fixFilePath(config.articleImgs);
+    let projectPath = process.cwd();
+    let generatedFilePath = projectPath + filePath + article.image;
+    return generatedFilePath;
+  }
+
+  fixFilePath(path) {
+    if ( !path.endsWith('/')) {
+      path+=path + "/";
+    }
+    return path;
+  }
+
+  generateArticleImgPath(imageFormat) {
+    let filePath = this.fixFilePath(config.articleImgs);
+    let projectPath = process.cwd();
+    let imageName = Date.now() + "." + imageFormat; 
+    let generatedFilePath = projectPath + filePath + imageName;
+    return generatedFilePath;
+  }
+
+  removeArticleImage(articleModel) {
+    if( articleModel && articleModel.image ) {
+      fs.unlink(this.getArticleImgPath(articleModel), (err) => {
+        if( err ) { 
+        errorService.article.default.ex(err);
+       } 
+      });
+    }
+  }
+
+  saveArticleImage(req, next) {
+    let reqArticle = req.body.article;
+    let b64ImageWithFormat = reqArticle.image.split("base64,");
+    if(b64ImageWithFormat && b64ImageWithFormat.length == 2) {
+      // image format is data:image/[FORMAT];   
+      // so we substring from 11 to the end - 1 
+      const startIndex = 11;
+      const lastIndex = b64ImageWithFormat[0].length - 1;
+      let imageFormat = b64ImageWithFormat[0].substring(startIndex,lastIndex);
+      let b64Image = b64ImageWithFormat[1];
+      debugger;
+      let articleFilePath = this.generateArticleImgPath(imageFormat);
+      fs.writeFile(articleFilePath, b64Image, 'base64', (err) => {
+        if( err )  {
+          next(errorService.article.badRequest.ex(err));
+        }
+      });
+
+      return articleFilePath;
+    }
+  }
+
+  getArticleImageNameFromPath(path) {
+    let pathChunks = path.split('/');
+    return pathChunks[pathChunks.length - 1];
+  }
+
+  validateReq( req ) {
+    req.checkBody('_id').notEmpty();
+    req.checkBody('title').notEmpty();
+    req.checkBody('body').notEmpty();
+    req.checkBody('image').notEmpty();
+    req.checkBody('riskGroups').notEmpty();
+  }
+
   async addArticle(req, res, next) {
     try {
-      req.checkBody('_id').notEmpty();
-      req.checkBody('title').notEmpty();
-      req.checkBody('body').notEmpty();
-      req.checkBody('image').notEmpty();
-      req.checkBody('riskGroups').notEmpty();
-      let reqArticle = req.body.article;
-      let b64ImageWithFormat = reqArticle.image.split("base64,");
-      if(b64ImageWithFormat && b64ImageWithFormat.length == 2) {
-        // image format is data:[FORMAT];   
-        // so we substring from 5 to the end - 1 
-        const startIndex = 5;
-        const lastIndex = b64ImageWithFormat[0].length - 1;
-        let imageFormat = b64ImageWithFormat[0].substring(startIndex,lastIndex);
-        let b64Image = b64ImageWithFormat[1];
-        let imageBlob = {data:Buffer.from(b64Image, "base64"), contentType:imageFormat};
-
-        let image = imageBlob;
+        this.validateReq(req);
+        let articleImagePath = this.saveArticleImage(req, next);
+        let image = this.getArticleImageNameFromPath(articleImagePath);
+        let reqArticle = req.body.article;
         let title = reqArticle.title;
         let body = reqArticle.body;
         let riskGroups = reqArticle.riskGroups;
         let articleModel = await new Article({image, title, body, riskGroups}).save();
-        req.dataOut = this.getArticleFromModel(articleModel);
+        let articleModelWithRiskGroups = await Article.populate(articleModel, 'riskGroups');
+        req.dataOut = this.getArticleFromModel(articleModelWithRiskGroups);
         next();
-      }
     } catch(error) {
-      next(errorService.company.default.ex(error));
+      next(errorService.article.default.ex(error));
     }
   }
+  
 
   async updateArticle(req, res, next) {
     try {
-      req.checkBody('_id').notEmpty();
+      this.validateReq(req);
 
-      await this.getValidationResult(req);
-
-      let article = await Article.findById(req.body._id);
-
-      if (!article) {
+      let newArticleReq = req.body.article;
+      let oldArticle = await Article.findById(newArticleReq._id);
+      if (!oldArticle) {
         throw errorService.article.notFound;
       }
-
-      req.dataOut = await article.update(req.body);
       
-      req.dataOut = await req.dataOut.clear();
+      if( newArticleReq.image.startsWith("data:")){ 
+        this.removeArticleImage(oldArticle);
+        let imagePath = this.saveArticleImage(req, next);
+        newArticleReq.image = this.getArticleImageNameFromPath(imagePath);
+      }
+
+      await oldArticle.update(newArticleReq);
+      req.dataOut = await Article.findById(oldArticle._id).populate('riskGroups');
+      
       next();
     } catch(error) {
       next(errorService.article.default.ex(error));
@@ -104,7 +166,8 @@ class ArticleController extends BaseController {
       }
 
       await article.remove();
-      
+      debugger;
+      this.removeArticleImage(article);
       req.dataOut = await Article.find();
       next();
     } catch(error) {

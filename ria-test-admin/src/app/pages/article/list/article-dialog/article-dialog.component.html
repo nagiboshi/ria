@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="mat-app-background basic-container">
-      <ngx-wig [buttons]="'wow'" [(ngModel)]="article.body" [placeholder]="'Начните писать статью ...'"></ngx-wig>
+      <ngx-wig [(ngModel)]="article.body" [placeholder]="'Начните писать статью ...'"></ngx-wig>
     </div>
     <div *ngIf="errorMessage" class="error-container">
       <span>{{errorMessage}}</span>
@@ -37,7 +37,7 @@
               || !article.riskGroups || article.riskGroups.length == 0"
     mat-button
     (click)="add()">
-    Добавить
+    {{ isNew? 'Добавить':'Обновить' }}
   </button>
 
 </div>

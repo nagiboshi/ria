@@ -7,6 +7,7 @@ import { ArticleRemoveDialogComponent } from './article-remove-dialog/article-re
 import { DomSanitizer } from '@angular/platform-browser';
 import { IRiskGroup } from '../../../models/riskgroup.model';
 import { RiskGroupService } from '../../../services/riskGroup.service';
+import { ApiService } from '../../../services/api.service';
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -24,7 +25,8 @@ export class ArticleListComponent implements OnInit {
     private _articleService: ArticleService,
     private _dialogCtrl: MatDialog,
     private _riskGroupService: RiskGroupService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _apiService: ApiService
   ) {}
 
   ngOnInit() {
@@ -35,7 +37,13 @@ export class ArticleListComponent implements OnInit {
     this._riskGroupService.getAll().then((risks) => { 
       this.riskGroups =  risks;
       this._articleService.getArticles().subscribe((articles: IArticleModel[]) => {
-        this.articles = articles;
+        articles.map((article) => { 
+          if ( article.image && !article.image.startsWith(this._apiService._basePath)) { 
+           article['image'] = this._apiService._basePath + article.image;
+          }
+        });
+
+        this.articles =  articles;
       });
     });
 
@@ -72,7 +80,7 @@ export class ArticleListComponent implements OnInit {
         if (!answer) {
           return;
         }
-
+        
         this._articleService.removeById(article._id);
       });
   }

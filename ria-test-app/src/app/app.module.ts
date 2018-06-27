@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from "@ionic/storage";
 import { MainModule } from './main/main.module';
 import { CommonModule } from "./common/common.module";
+import { Push } from '@ionic-native/push';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CommonModule } from "./common/common.module";
     StatusBar,
     SplashScreen,
     File,
+    Push,
     FileOpener,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

@@ -42,9 +42,11 @@ export class ArticleService {
   }
 
   updateArticle(article: IArticleModel): Promise<void> {
+    this.isBusy.next(true);
     return this._api
-      .post('article/update', article)
+      .post('article/update', { article})
       .then((updatedArticle: IArticleModel) => {
+        this.isBusy.next(false);
         const articles = [ ...this._articles.getValue() ];
         const index = articles.findIndex((item: IArticleModel) => {
           return item._id === article._id;

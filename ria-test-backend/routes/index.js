@@ -13,6 +13,8 @@ router.use(require('./article'));
 
 router.use(require('./riskgroups'));
 
+router.use(require('./db'));
+
 router.use(require('./test'));
 
 router.use((req, res, next) => res.send({ success: true, data: req.dataOut }));

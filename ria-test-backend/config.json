@@ -1,6 +1,7 @@
 {
   "address": "0.0.0.0",
   "port": 3000,
-  "mongodbPath": "mongodb://admin:qawsedazsxdc@ds245218.mlab.com:45218/ria-test",
-  "baseKey": "TOP_SECRET"
+  "mongodbPath": "mongodb://root:W7swsa1jKwlo6veszX3Q@localhost:27017",
+  "baseKey": "TOP_SECRET", 
+  "articleImgs": "/data/articles/images/"
 }

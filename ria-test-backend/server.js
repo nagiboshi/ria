@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));
 app.use(express.static(__dirname + '/files'));
-
+app.use(express.static(__dirname + '/data/articles/images'));
 app.use(require('./routes/index'));
 
 database
