@@ -6,7 +6,7 @@ import { IServerResponseModel } from '../models/server-response.model';
 @Injectable()
 export class ApiService {
 
-     _basePath = 'http://localhost:3000/';
+     _basePath = 'http://backend.riatest.okpixels.ru/';
   // _basePath = 'https://ria-test-backend.herokuapp.com/';
   // _basePath = 'http://trust2.info/';
   _httpOptions: object = { headers: null };

@@ -77,6 +77,7 @@ export class CurrentTestPage implements OnInit {
     this.showLoader = true;
     this.testService.newResultTest(this.idTest, this.listResult)
       .subscribe(result => {
+        debugger;
         this.showLoader = false;
         this._navCtrl.pop();
       })

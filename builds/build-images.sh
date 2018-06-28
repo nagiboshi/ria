@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ria-test-admin
+cd ../ria-test-admin
 docker build . -t ria/admin
 cd ../ria-test-app
 docker build . -t ria/app
