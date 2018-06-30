@@ -1,7 +1,7 @@
 {
   "address": "0.0.0.0",
   "port": 3000,
-  "mongodbPath": "mongodb://root:W7swsa1jKwlo6veszX3Q@mongo:27017",
+  "mongodbPath": "mongodb://root:W7swsa1jKwlo6veszX3Q@localhost:27017",
   "baseKey": "TOP_SECRET", 
   "articleImgs": "/data/articles/images/"
 }

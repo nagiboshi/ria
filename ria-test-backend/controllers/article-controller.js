@@ -1,4 +1,5 @@
 const errorService = require('../services/error-service');
+const articleService = require('../services/push-service');
 const BaseController = require('../controllers/base-controller');
 const Article = require('../models/article');
 const config = require('jconf');
@@ -88,7 +89,6 @@ class ArticleController extends BaseController {
       const lastIndex = b64ImageWithFormat[0].length - 1;
       let imageFormat = b64ImageWithFormat[0].substring(startIndex,lastIndex);
       let b64Image = b64ImageWithFormat[1];
-      debugger;
       let articleFilePath = this.generateArticleImgPath(imageFormat);
       fs.writeFile(articleFilePath, b64Image, 'base64', (err) => {
         if( err )  {
@@ -115,10 +115,11 @@ class ArticleController extends BaseController {
 
   async addArticle(req, res, next) {
     try {
-        this.validateReq(req);
-        let articleImagePath = this.saveArticleImage(req, next);
-        let image = this.getArticleImageNameFromPath(articleImagePath);
-        let reqArticle = req.body.article;
+      this.validateReq(req);
+      let articleImagePath = this.saveArticleImage(req, next);
+      let image = this.getArticleImageNameFromPath(articleImagePath);
+      let reqArticle = req.body.article;
+      articleService.send('New artile added ' + reqArticle.title);
         let title = reqArticle.title;
         let body = reqArticle.body;
         let riskGroups = reqArticle.riskGroups;

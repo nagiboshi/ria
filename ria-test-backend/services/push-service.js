@@ -1,3 +1,5 @@
+const fireBaseAdmin = require('firebase-admin');
+
 class PushService { 
     // iosPushOptions;
     constructor() {
@@ -10,12 +12,32 @@ class PushService {
         //         console.error(err);
         //     }
         // };
+
+        const serviceAccount = "./serviceAccountKey.json";
+
+        fireBaseAdmin.initializeApp({
+        credential: fireBaseAdmin.credential.cert(serviceAccount),
+        databaseURL: "https://riatest-ec40b.firebaseio.com"
+        });
     }
 
 
-    send(devices, message) {
-       
-    }
+send(text) {
+// See documentation on defining a message payload.
+let topic = "articles";
+var message = {
+  data: {
+    article: text
+  },
+  topic: topic
+};
+fireBaseAdmin.messaging().send(message).then((response) => {
+    console.log(`Message ${response} successfully sended `);
+}).catch((error) => {
+    console.error(`Error sending message. Reason :`, error);
+});
+     //   fireBaseAdmin.messaging().send()
+}
 
 
 }

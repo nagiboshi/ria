@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "161459370733",
-    "firebase_url": "https://ria-test-app.firebaseio.com",
-    "project_id": "ria-test-app",
-    "storage_bucket": "ria-test-app.appspot.com"
+    "project_number": "383883584635",
+    "firebase_url": "https://riatest-ec40b.firebaseio.com",
+    "project_id": "riatest-ec40b",
+    "storage_bucket": "riatest-ec40b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:161459370733:android:539cbf1dc5d5cab1",
+        "mobilesdk_app_id": "1:383883584635:android:539cbf1dc5d5cab1",
         "android_client_info": {
           "package_name": "io.app.ria1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "161459370733-nkol9pie96ikjp5vfajtkbo7m04kkt09.apps.googleusercontent.com",
+          "client_id": "383883584635-9pccbn013ot4sefhfmg9tgu5d2b9chst.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDq1E0CkCqGK15l4Yyd-NT3SP-U1ExECoo"
+          "current_key": "AIzaSyCw6DS3FJZPWcGP6m_UDPHRCEfY4XFpSo8"
         }
       ],
       "services": {

@@ -11,7 +11,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from "@ionic/storage";
 import { MainModule } from './main/main.module';
 import { CommonModule } from "./common/common.module";
-import { Push } from '@ionic-native/push';
+import { FcmService } from './common/services/fcm.service';
+import { Firebase } from '@ionic-native/firebase';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+export const firebase = {
+  apiKey: "AIzaSyCw6DS3FJZPWcGP6m_UDPHRCEfY4XFpSo8",
+  authDomain: "riatest-ec40b.firebaseapp.com",
+  databaseURL: "https://riatest-ec40b.firebaseio.com",
+  projectId: "riatest-ec40b",
+  storageBucket: "riatest-ec40b.appspot.com",
+  messagingSenderId: "383883584635",
+};
 
 @NgModule({
   declarations: [
@@ -24,6 +37,8 @@ import { Push } from '@ionic-native/push';
       name: 'ria-db',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
+    AngularFireModule.initializeApp(firebase), 
+    AngularFirestoreModule,
     MainModule,
     CommonModule,
   ],
@@ -32,8 +47,9 @@ import { Push } from '@ionic-native/push';
   providers: [
     StatusBar,
     SplashScreen,
+    Firebase,
     File,
-    Push,
+    FcmService,
     FileOpener,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

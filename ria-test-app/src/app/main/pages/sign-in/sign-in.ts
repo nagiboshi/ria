@@ -22,6 +22,9 @@ export class SignInPage {
   ) {}
 
   signIn() {
+    
+
+
     if (!this.email || !this.password) {
       return;
     }
@@ -29,7 +32,26 @@ export class SignInPage {
     this._authService
       .signIn(this.email, this.password)
       .subscribe(
-        () => this._navCtrl.setRoot(MainPage),
+        () => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            // Get a FCM token
+            fcm.saveToken(this.email);
+
+            // Listen to incoming messages
+            fcm.listenToNotifications().pipe(
+              tap(msg => {
+                // show a toast
+                const toast = toastCtrl.create({
+                  message: msg.body,
+                  duration: 3000
+                });
+                toast.present();
+              })
+            )
+            .subscribe();
+          this._navCtrl.setRoot(MainPage);
+        },
         err => {
           let params = null;
 
