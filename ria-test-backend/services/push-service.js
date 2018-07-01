@@ -25,10 +25,29 @@ class PushService {
 send(text) {
     let topic = "articles";
     let message = {
-    data: {
-        updated: 'true'
-    },
-    topic: topic
+        "message": {
+            "topic": topic,
+            "notification": {
+                "body":"У вас новые статьи! Посмотрите в рекомендации",
+                "title":"ria.test.okpixels.ru"
+            },
+            "data" : {
+                "url" : "http://ria.test.okpixels.ru/#articles"
+              },
+              "android":{
+                "priority":"normal"
+              },
+              "apns":{
+                "headers":{
+                  "apns-priority":"5"
+                }
+              },
+              "webpush": {
+                "headers": {
+                  "Urgency": "high"
+                }
+              }
+        }
     };
     
     fireBaseAdmin.messaging().send( message).then((response) => {

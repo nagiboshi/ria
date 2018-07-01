@@ -55,7 +55,7 @@ export class SignInPage {
                                         tap(msg => {
                                           // show a toast
                                           const toast = this._toastCtrl.create({
-                                            message: msg.body,
+                                            message: 'yo',
                                             duration: 3000
                                           });
                                           toast.present();
