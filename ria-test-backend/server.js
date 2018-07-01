@@ -4,7 +4,6 @@ const expressValidator = require('express-validator');
 const config = require('jconf');
 const app = express();
 const database = require('./models');
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
 

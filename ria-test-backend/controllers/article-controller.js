@@ -4,9 +4,21 @@ const BaseController = require('../controllers/base-controller');
 const Article = require('../models/article');
 const config = require('jconf');
 const fs = require('fs');
+const schedule = require('node-schedule');
+
 class ArticleController extends BaseController {
   constructor() {
-    super();     
+    super();    
+    
+    var rule = new schedule.RecurrenceRule();
+    // Run notification every wednesday and saturday
+      rule.dayOfWeek = [3,6];
+      rule.hour = 14;
+      rule.minute = 0;
+      
+      let j = schedule.scheduleJob(rule, ()=>{
+      });
+    });
   }
 
   getBase64ImageFromBuffer(image) {

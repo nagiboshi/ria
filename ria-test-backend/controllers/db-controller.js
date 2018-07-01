@@ -35,13 +35,17 @@ class DbController extends BaseController {
             await new User({
                 email: 'ria.test.acc@gmail.com',
                 password: jwt.sign('admin', config.baseKey),
-                role: 'admin'
+                role: 'admin',
+                pushByPhone: true,
+                pushByEmail: true
             }).save();
             resultedStr+='Creating default user "user" with password "user" <br/>';
             await new User({
                 email: 'user',
                 password: jwt.sign('user', config.baseKey),
-                role: 'user'
+                role: 'user',
+                pushByPhone: true,
+                pushByEmail: true
             }).save();
             resultedStr+="Default users created <br/>";
 

@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import {NavController, ToastController} from "ionic-angular";
+import {NavController, ToastController, Platform} from "ionic-angular";
 import { SignUpPage } from "../sign-up/sign-up";
 import { PasswordRecoveryPage } from "../password-recovery/password-recovery";
 import { MainPage } from "../../main";
 import { AuthService } from "../../../common/services/auth.service";
 import {FcmService} from '../../../common/services/fcm.service';
 import { tap } from 'rxjs/operators';
+import { IUserModel } from '../../../common/models/user';
 
 @Component({
   selector: 'sign-in-page',
@@ -20,8 +21,9 @@ export class SignInPage {
   constructor(
     private _navCtrl: NavController,
     private _authService: AuthService,
+    private _platform: Platform,
     private _toastCtrl: ToastController,
-    private fcm: FcmService
+    private _fcm: FcmService
   ) {}
 
   signIn() {
@@ -36,29 +38,25 @@ export class SignInPage {
       .signIn(this.email, this.password)
       .subscribe(
         () => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            // Get a FCM token
-            this.fcm.registerToken(this.email).then((response) => { 
-              this._toastCtrl.create(
-                {
-                  message: response,
-                  position: 'top',
-                  duration: 10000
-                }).present();
-                // Listen to incoming messages
-                this.fcm.listenToNotifications().pipe(
-                  tap(msg => {
-                    // show a toast
-                    const toast = this._toastCtrl.create({
-                      message: msg.body,
-                      duration: 3000
-                    });
-                    toast.present();
-                  })
-                )
-                .subscribe();
-            });
+            this._authService.getUser().subscribe((user:IUserModel) => { 
+                if( user.pushByPhone && !this._platform.is('browser')) {
+                  this._fcm.registerToken(this.email).then((response) => { 
+                      // Listen to incoming messages
+                      this._fcm.listenToArticles().then((result ) => {
+                        {
+                          // show a toast
+                          const toast = this._toastCtrl.create({
+                            message: result,
+                            duration: 3000
+                          });
+                          toast.present();
+                      }
+                     
+                        });
+                  });
+                }
+                });
+                      
 
            
           this._navCtrl.setRoot(MainPage);

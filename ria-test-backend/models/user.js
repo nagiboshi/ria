@@ -11,7 +11,9 @@ const UserSchema = new Schema({
   sex: { type: String, enum: [ 'male', 'female', 'absent' ], default: 'absent' },
   name: { type: String, default: '' },
   phoneNumber: { type: String, default: '' },
-  created: { type: Number, default: Date.now() }
+  created: { type: Number, default: Date.now() },
+  pushByPhone: { type: Schema.Types.Boolean, required: true, default: true },
+  pushByEmail: {type: Schema.Types.Boolean, required: true, default: true}
 });
 
 UserSchema.statics.findUserByEmail = async function (email) {
