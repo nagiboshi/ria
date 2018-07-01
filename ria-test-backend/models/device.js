@@ -7,5 +7,14 @@ const DeviceSchema = new Schema({
   user: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
 });
 
+DeviceSchema.statics.findOld = async function (email, token) {
+  let device = await this.findOne({ "user.email":email, "token": token });
+
+  if (!device) {
+    return null;
+  }
+
+  return device; 
+};
 
 module.exports = mongoose.model('Device', DeviceSchema);

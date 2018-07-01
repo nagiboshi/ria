@@ -39,21 +39,28 @@ export class SignInPage {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             // Get a FCM token
-            debugger;
-            this.fcm.saveToken(this.email);
+            this.fcm.registerToken(this.email).then((response) => { 
+              this._toastCtrl.create(
+                {
+                  message: response,
+                  position: 'top',
+                  duration: 10000
+                }).present();
+                // Listen to incoming messages
+                this.fcm.listenToNotifications().pipe(
+                  tap(msg => {
+                    // show a toast
+                    const toast = this._toastCtrl.create({
+                      message: msg.body,
+                      duration: 3000
+                    });
+                    toast.present();
+                  })
+                )
+                .subscribe();
+            });
 
-            // Listen to incoming messages
-            this.fcm.listenToNotifications().pipe(
-              tap(msg => {
-                // show a toast
-                const toast = this._toastCtrl.create({
-                  message: msg.body,
-                  duration: 3000
-                });
-                toast.present();
-              })
-            )
-            .subscribe();
+           
           this._navCtrl.setRoot(MainPage);
         },
         err => {

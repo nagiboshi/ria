@@ -16,37 +16,19 @@ export class FcmService {
   ) {}
 
   // Get permission from the user
-  public saveToken(email):Promise<string>  { 
+  public registerToken(email):Promise<string>  { 
     let token =  '';
     const promise = new Promise<string>((resolve, reject)=>{
      
       if (this.platform.is('android')) {
-        this._toastCtrl.create(
-          {
-            message: 'Your device is android',
-            position: 'top',
-            duration: 10000
-          }).present();
         this.firebaseNative.getToken().then((commingToken) => { 
           token = commingToken;
-          console.log('~~~~~~~~TOKEN~~~~~~~~~');
-          console.log(token);
-
-          this._toastCtrl.create(
-            {
-              message: `Your token is ${token} android`,
-              position: 'top',
-              duration: 10000
-            }).present();
           const platform = 'android';
           this.api.post('device/register', {email, token, platform}).subscribe((result)=>{
-           
-            console.log(`email ${email} with token ${token} has been registered on platform ${platform}`);
-            console.log(result);
             resolve(result);
           });
         }).catch((e)=> {
-          console.error(`Not able to save token for ${email}`, e);
+          reject(e);
         });
       } 
     
