@@ -25,7 +25,8 @@ class PushService {
 send(text) {
     let topic = "articles";
     let message = {
-       
+        "topic":"articles",
+        "message": {
             "topic": "articles",
             "notification": {
                 "body":"У вас новые статьи! Посмотрите в рекомендации",
@@ -47,6 +48,7 @@ send(text) {
                   "Urgency": "high"
                 }
               }
+        }
     };
     
     fireBaseAdmin.messaging().send( message).then((response) => {
