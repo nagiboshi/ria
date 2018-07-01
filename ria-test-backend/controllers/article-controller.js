@@ -1,5 +1,5 @@
 const errorService = require('../services/error-service');
-const articleService = require('../services/push-service');
+const pushService = require('../services/push-service');
 const BaseController = require('../controllers/base-controller');
 const Article = require('../models/article');
 const config = require('jconf');
@@ -12,13 +12,13 @@ class ArticleController extends BaseController {
     
     var rule = new schedule.RecurrenceRule();
     // Run notification every wednesday and saturday
-      rule.dayOfWeek = [3,6];
-      rule.hour = 14;
-      rule.minute = 0;
+     // rule.dayOfWeek = [3,6];
+    //rule.hour = 14;
+      rule.minute = 1;
       
-      let j = schedule.scheduleJob(rule, ()=>{
+      let job = schedule.scheduleJob(rule, ()=>{
+          
       });
-    });
   }
 
   getBase64ImageFromBuffer(image) {
@@ -131,7 +131,7 @@ class ArticleController extends BaseController {
       let articleImagePath = this.saveArticleImage(req, next);
       let image = this.getArticleImageNameFromPath(articleImagePath);
       let reqArticle = req.body.article;
-      articleService.send('New artile added ' + reqArticle.title);
+      pushService.send('New artile added ' + reqArticle.title);
         let title = reqArticle.title;
         let body = reqArticle.body;
         let riskGroups = reqArticle.riskGroups;

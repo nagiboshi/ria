@@ -23,20 +23,19 @@ class PushService {
 
 
 send(text) {
-// See documentation on defining a message payload.
-let topic = "articles";
-var message = {
-  data: {
-    updated: true
-  },
-  topic: topic
-};
-fireBaseAdmin.messaging().send(message).then((response) => {
-    console.log(`Message ${response} successfully sended `);
-}).catch((error) => {
-    console.error(`Error sending message. Reason :`, error);
-});
-     //   fireBaseAdmin.messaging().send()
+    let topic = "articles";
+    let message = {
+    data: {
+        updated: true
+    },
+        topic: topic
+    };
+    
+    fireBaseAdmin.messaging().sendToTopic(topic, message).then((response) => {
+        console.log(`Message ${response} successfully sended `);
+    }).catch((error) => {
+        console.error(`Error sending message. Reason :`, error);
+    });
 }
 
 
