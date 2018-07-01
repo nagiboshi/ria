@@ -8,7 +8,7 @@ const DeviceSchema = new Schema({
 });
 
 DeviceSchema.statics.findOld = async function (email, token) {
-  let device = await this.findOne({ "user.email":email, "token": token });
+  let device = await this.findOne({ "user.email":email, "token": token }).populate("user");
 
   if (!device) {
     return null;
