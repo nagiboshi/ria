@@ -27,7 +27,7 @@ UserSchema.statics.findUserByEmail = async function (email) {
 };
 
 UserSchema.methods.update = function(body) {
-  [ 'email', 'sex', 'name', 'phoneNumber', 'company' ].forEach(key => {
+  [ 'email', 'sex', 'name', 'phoneNumber', 'company', 'pushByPhone', 'pushByEmail' ].forEach(key => {
     this[key] = body[key] || this[key];
   });
   return this.save();
@@ -39,7 +39,7 @@ UserSchema.methods.clear = function(...fields) {
   if (fields && fields.length) {
     fields.forEach(key => result[key] = this[key]);
   } else {
-    [ 'company', 'email', 'sex', 'name', 'phoneNumber', 'created', 'id', 'role' ]
+    [ 'company', 'email', 'sex', 'name', 'phoneNumber','pushByPhone', 'pushByEmail', 'created', 'id', 'role' ]
       .forEach(key => result[key] = this[key]);
   }
 

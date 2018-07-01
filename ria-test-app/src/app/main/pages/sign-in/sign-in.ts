@@ -38,19 +38,28 @@ export class SignInPage {
       .signIn(this.email, this.password)
       .subscribe(
         () => {
+
             this._authService.getUser().subscribe((user:IUserModel) => { 
+            
+              // 
+              this._toastCtrl.create({
+                message: `Push enabled : ${user.pushByPhone} ,platform is browser :? ${this._platform.is('browser')}`,
+                duration: 10000
+              }).present();
+            //
+
                 if( user.pushByPhone && !this._platform.is('browser')) {
                   this._fcm.registerToken(this.email).then((response) => { 
                       // Listen to incoming messages
                       this._fcm.listenToArticles().then((result ) => {
-                        {
+                          
                           // show a toast
                           const toast = this._toastCtrl.create({
-                            message: result,
+                            message: 'yep',
                             duration: 3000
                           });
                           toast.present();
-                      }
+                      
                      
                         });
                   });
