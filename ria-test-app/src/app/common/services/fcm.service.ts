@@ -52,8 +52,8 @@ export class FcmService {
 
 
   // Listen to incoming FCM messages
-  listenToArticles() {
-    return this.firebaseNative.subscribe("articles"); 
+  listenToNotifications() {
+    return this.firebaseNative.onNotificationOpen();
   }
 
 }

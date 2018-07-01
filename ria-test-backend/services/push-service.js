@@ -30,7 +30,7 @@ send(text) {
     },
     };
     
-    fireBaseAdmin.messaging().sendToTopic(topic, message).then((response) => {
+    fireBaseAdmin.messaging().send( message).then((response) => {
         console.log(`Message ${response} successfully sended `);
     }).catch((error) => {
         console.error(`Error sending message. Reason :`, error);

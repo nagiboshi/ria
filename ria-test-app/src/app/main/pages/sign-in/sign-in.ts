@@ -64,16 +64,17 @@ export class SignInPage {
                     //                   .subscribe();
 
                       // Listen to incoming messages
-                      this._fcm.listenToArticles().then((result ) => {
-                          tap( msg => {
-                          // show a toast
-                          const toast = this._toastCtrl.create({
-                            message: result,
-                            duration: 10000
-                          }).present();
-                          });
+                      // this._fcm.listenToArticles().then((result ) => {
+                      //     tap( msg => {
+                      //     // show a toast
+                      //     const toast = this._toastCtrl.create({
+                      //       message: result,
+                      //       duration: 10000
+                      //     }).present();
+                      //     toast.
+                      //     })
                      
-                        });
+                      //   });
                   });
                 }
                 });
