@@ -11,10 +11,10 @@ class DeviceController extends BaseController {
 
   async register(req, res, next) {
     try {
-      req.checkBody('device', 'email', 'platform').notEmpty();
+      req.checkBody('token', 'email', 'platform').notEmpty();
 
       let user = await User.findUserByEmail(req.body.email);
-      let device = await new Device({user:user, deviceId: req.body.device, platform: req.body.platform }).save();
+      let device = await new Device({user:user, token: req.body.token, platform: req.body.platform }).save();
       debugger;
       console.log(`device saved ${device}`);
       next();
