@@ -17,7 +17,8 @@ class ArticleController extends BaseController {
       rule.minute = 1;
       
       let job = schedule.scheduleJob(rule, ()=>{
-          
+          console.log("Scheduling job run ...");
+          pushService.send('true');
       });
   }
 
