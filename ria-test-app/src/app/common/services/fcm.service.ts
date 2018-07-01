@@ -45,11 +45,7 @@ export class FcmService {
       } 
     });
     return promise;
-    
-    
-    // return this.saveTokenToFirestore(token);
   }
-
 
   // Listen to incoming FCM messages
   listenToNotifications() {
