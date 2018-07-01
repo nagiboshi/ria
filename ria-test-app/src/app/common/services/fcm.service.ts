@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ApiService } from './api.service';
 
@@ -15,23 +15,40 @@ export class FcmService {
   ) {}
 
   // Get permission from the user
-  async saveToken(email) { 
-
-    if (this.platform.is('android')) {
-      const token = await this.firebaseNative.getToken();
-      console.log('~~~~~~~~TOKEN~~~~~~~~~');
-      console.log(token);
-      const platform = 'android';
-      debugger;
-      this.api.post('device/register', {email, token, platform});
-    } 
-  
-    if (this.platform.is('ios')) {
-      const token = await this.firebaseNative.getToken();
-      const platform = 'ios';
-      await this.firebaseNative.grantPermission();
-      this.api.post('device/register', {email, token, platform});
-    } 
+  public saveToken(email):Promise<string>  { 
+    let token =  '';
+    const promise = new Promise<string>((resolve, reject)=>{
+      if (this.platform.is('android')) {
+        this.firebaseNative.getToken().then((commingToken) => { 
+          token = commingToken;
+          console.log('~~~~~~~~TOKEN~~~~~~~~~');
+          console.log(token);
+          const platform = 'android';
+          this.api.post('device/register', {email, token, platform}).subscribe((result)=>{
+           
+            console.log(`email ${email} with token ${token} has been registered on platform ${platform}`);
+            console.log(result);
+            resolve(result);
+          });
+        }).catch((e)=> {
+          console.error(`Not able to take token for ${email}`, e);
+        });
+      } 
+    
+      if (this.platform.is('ios')) {
+        let token = '';
+        this.firebaseNative.getToken().then((commingToken) => { 
+          token = commingToken;
+          const platform = 'ios';
+          this.api.post('device/register', {email, token, platform});
+          this.firebaseNative.grantPermission();
+        }).catch((e)=> {
+          console.error(`Not able to take token for ${email}`, e);
+        });
+      } 
+    });
+    return promise;
+    
     
     // return this.saveTokenToFirestore(token);
   }

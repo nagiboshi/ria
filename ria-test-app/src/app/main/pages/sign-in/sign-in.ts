@@ -39,6 +39,7 @@ export class SignInPage {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             // Get a FCM token
+            debugger;
             this.fcm.saveToken(this.email);
 
             // Listen to incoming messages

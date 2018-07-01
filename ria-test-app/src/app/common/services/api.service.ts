@@ -41,7 +41,7 @@ export class ApiService {
       });
   }
 
-  post(path, body = null) {
+  post(path, body = null):Observable<any> {
     let resultPath = `${this._basePath}${path}`;
 
     return this._http
