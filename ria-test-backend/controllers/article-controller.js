@@ -15,7 +15,7 @@ class ArticleController extends BaseController {
      // rule.dayOfWeek = [3,6];
     //rule.hour = 14;
       rule.minute = 1;
-      
+        debugger;
       let job = schedule.scheduleJob(rule, ()=>{
           console.log("Scheduling job run ...");
           pushService.send('true');

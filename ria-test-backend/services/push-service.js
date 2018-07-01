@@ -28,7 +28,6 @@ send(text) {
     data: {
         updated: true
     },
-        topic: topic
     };
     
     fireBaseAdmin.messaging().sendToTopic(topic, message).then((response) => {
