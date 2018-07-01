@@ -16,7 +16,7 @@ export class AuthService {
     private _storage: Storage,
   ) {}
 
-  getUser(): Observable<IUserModel> {
+    getUser(): Observable<IUserModel> {
     if (!this._isLoaded) {
       this._storage.get('token')
         .then((token: string) => {

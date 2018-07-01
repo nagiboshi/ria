@@ -50,16 +50,28 @@ export class SignInPage {
 
                 if( user.pushByPhone && !this._platform.is('browser')) {
                   this._fcm.registerToken(this.email).then((response) => { 
+
+                    // this._fcm.listenToNotifications().pipe(
+                    //                     tap(msg => {
+                    //                       // show a toast
+                    //                       const toast = this._toastCtrl.create({
+                    //                         message: msg.body,
+                    //                         duration: 3000
+                    //                       });
+                    //                       toast.present();
+                    //                     })
+                    //                   )
+                    //                   .subscribe();
+
                       // Listen to incoming messages
                       this._fcm.listenToArticles().then((result ) => {
-                          
+                          tap( msg => {
                           // show a toast
                           const toast = this._toastCtrl.create({
-                            message: 'yep',
-                            duration: 3000
+                            message: result,
+                            duration: 10000
+                          }).present();
                           });
-                          toast.present();
-                      
                      
                         });
                   });
