@@ -13,8 +13,8 @@ class ArticleController extends BaseController {
     var rule = new schedule.RecurrenceRule();
     // Run notification every wednesday and saturday
      // rule.dayOfWeek = [3,6];
-    //rule.hour = 14;
-      rule.minute = 1;
+      rule.second = 1;
+      // rule.minute = 1;
         debugger;
       let job = schedule.scheduleJob(rule, ()=>{
           console.log("Scheduling job run ...");
