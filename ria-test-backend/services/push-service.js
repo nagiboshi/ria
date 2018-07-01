@@ -26,7 +26,7 @@ send(text) {
     let topic = "articles";
     let message = {
     data: {
-        updated: true
+        updated: 'true'
     },
     };
     
