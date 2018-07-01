@@ -15,6 +15,7 @@ class DeviceController extends BaseController {
 
       let device = await Device.findOld(req.body.email, req.body.token); 
       if( !device ) {
+        let user = await User.findUserByEmail(req.body.email);
         console.log(`device with email ${req.body.email} and token ${req.body.token} doesn\'t exist. We register new`);
         device = await new Device({user:user, token: req.body.token, platform: req.body.platform }).save();
       }
