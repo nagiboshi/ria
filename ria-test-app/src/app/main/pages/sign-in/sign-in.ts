@@ -4,6 +4,8 @@ import { SignUpPage } from "../sign-up/sign-up";
 import { PasswordRecoveryPage } from "../password-recovery/password-recovery";
 import { MainPage } from "../../main";
 import { AuthService } from "../../../common/services/auth.service";
+import {FcmService} from '../../../common/services/fcm.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'sign-in-page',
@@ -18,7 +20,8 @@ export class SignInPage {
   constructor(
     private _navCtrl: NavController,
     private _authService: AuthService,
-    private _toastCtrl: ToastController
+    private _toastCtrl: ToastController,
+    private fcm: FcmService
   ) {}
 
   signIn() {
@@ -36,13 +39,13 @@ export class SignInPage {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             // Get a FCM token
-            fcm.saveToken(this.email);
+            this.fcm.saveToken(this.email);
 
             // Listen to incoming messages
-            fcm.listenToNotifications().pipe(
+            this.fcm.listenToNotifications().pipe(
               tap(msg => {
                 // show a toast
-                const toast = toastCtrl.create({
+                const toast = this._toastCtrl.create({
                   message: msg.body,
                   duration: 3000
                 });

@@ -11,6 +11,8 @@ router.use(require('./request'));
 
 router.use(require('./article'));
 
+router.use(require('./device'));
+
 router.use(require('./riskgroups'));
 
 router.use(require('./db'));

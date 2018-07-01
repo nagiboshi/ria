@@ -3,7 +3,7 @@
     <name>ria-app-frontend</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="okulov-nikolay@mail.ru" href="http://ionicframework.com/">Wilix Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.43.105:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

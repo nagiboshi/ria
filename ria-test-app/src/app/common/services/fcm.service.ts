@@ -18,7 +18,7 @@ export class FcmService {
   async saveToken(email) { 
 
     if (this.platform.is('android')) {
-      token = await this.firebaseNative.getToken();
+      const token = await this.firebaseNative.getToken();
       console.log('~~~~~~~~TOKEN~~~~~~~~~');
       console.log(token);
       const platform = 'android';
@@ -27,11 +27,13 @@ export class FcmService {
     } 
   
     if (this.platform.is('ios')) {
-      token = await this.firebaseNative.getToken();
+      const token = await this.firebaseNative.getToken();
+      const platform = 'ios';
       await this.firebaseNative.grantPermission();
+      this.api.post('device/register', {email, token, platform});
     } 
     
-    return this.saveTokenToFirestore(token);
+    // return this.saveTokenToFirestore(token);
   }
 
   // Save the token to firestore

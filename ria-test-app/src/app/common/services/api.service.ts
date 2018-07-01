@@ -10,7 +10,7 @@ export class ApiService {
 
   //  private _basePath: string = 'http://backend.riatest.okpixels.ru/';
   // private _basePath: string = 'https://ria-test-backend.herokuapp.com/';
-  private _basePath: string = 'http://trust2.info/';
+  private _basePath: string = 'http://trust2.info:3000/';
   httpOptions: object = { headers: HttpHeaders };
 
   constructor(
