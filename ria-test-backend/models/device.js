@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const DeviceSchema = new Schema({
   token: { type: String, required: true },
   platform: { type: String, required: true },
-  user: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 DeviceSchema.statics.findOld = async function (email, token) {
