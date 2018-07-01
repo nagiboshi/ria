@@ -51,7 +51,7 @@ export class SignInPage {
                 if( user.pushByPhone && !this._platform.is('browser')) {
                   this._fcm.registerToken(this.email).then((response) => { 
 
-                    this._fcm.listenToNotifications().then(
+                    this._fcm.listenToNotifications("articles").then(
                                         tap(msg => {
                                           // show a toast
                                           const toast = this._toastCtrl.create({

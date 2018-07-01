@@ -48,8 +48,8 @@ export class FcmService {
   }
 
   // Listen to incoming FCM messages
-  listenToNotifications() {
-    return this.firebaseNative.subscribe("topic");
+  listenToNotifications(topic) {
+    return this.firebaseNative.subscribe(topic);
   }
   
 
