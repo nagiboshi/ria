@@ -25,7 +25,6 @@ class PushService {
 send(text) {
     let topic = "articles";
     let message = {
-        "topic":"articles",
         "message": {
             "topic": "articles",
             "notification": {
@@ -35,19 +34,7 @@ send(text) {
             "data" : {
                 "url" : "http://ria.test.okpixels.ru/#articles"
               },
-              "android":{
-                "priority":"normal"
-              },
-              "apns":{
-                "headers":{
-                  "apns-priority":"5"
-                }
-              },
-              "webpush": {
-                "headers": {
-                  "Urgency": "high"
-                }
-              }
+              
         }
     };
     
