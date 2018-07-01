@@ -51,18 +51,16 @@ export class SignInPage {
                 if( user.pushByPhone && !this._platform.is('browser')) {
                   this._fcm.registerToken(this.email).then((response) => { 
 
-                    this._fcm.listenToNotifications("articles").then(
-                                        tap(msg => {
+                    this._fcm.listenToNotifications("articles").then((message)=>{
+
+                   
                                           // show a toast
-                                          const toast = this._toastCtrl.create({
+                        this._toastCtrl.create({
                                             message: 'yo',
                                             duration: 3000
-                                          });
-                                          toast.present();
-                                        })
-                                      );
+                                          }).present();
                                       //.subscribe();
-
+                    });
                       // Listen to incoming messages
                       // this._fcm.listenToArticles().then((result ) => {
                       //     tap( msg => {
