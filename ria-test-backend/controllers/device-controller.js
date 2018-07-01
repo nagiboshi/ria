@@ -13,10 +13,6 @@ class DeviceController extends BaseController {
     try {
       req.checkBody('device', 'email', 'platform').notEmpty();
 
-      if(!req.user) {
-        throw errorService.user.notFound;
-      }
-
       let user = await User.findUserByEmail(req.body.email);
       let device = await new Device({user:user, deviceId: req.body.device, platform: req.body.platform }).save();
       debugger;

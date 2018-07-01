@@ -156,7 +156,7 @@ let listError = {
 
     notResult: {
       code: 6003,
-      message: 'Not results for this test.'
+      message: 'No results for this test.'
     }
   }
 

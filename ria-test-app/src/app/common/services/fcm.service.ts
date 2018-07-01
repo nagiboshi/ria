@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ApiService } from './api.service';
 
@@ -11,18 +11,33 @@ export class FcmService {
     public firebaseNative: Firebase,
     public afs: AngularFirestore,
     private platform: Platform,
-    private api: ApiService
+    private api: ApiService,
+    private _toastCtrl : ToastController,
   ) {}
 
   // Get permission from the user
   public saveToken(email):Promise<string>  { 
     let token =  '';
     const promise = new Promise<string>((resolve, reject)=>{
+     
       if (this.platform.is('android')) {
+        this._toastCtrl.create(
+          {
+            message: 'Your device is android',
+            position: 'top',
+            duration: 10000
+          }).present();
         this.firebaseNative.getToken().then((commingToken) => { 
           token = commingToken;
           console.log('~~~~~~~~TOKEN~~~~~~~~~');
           console.log(token);
+
+          this._toastCtrl.create(
+            {
+              message: `Your token is ${token} android`,
+              position: 'top',
+              duration: 10000
+            }).present();
           const platform = 'android';
           this.api.post('device/register', {email, token, platform}).subscribe((result)=>{
            
@@ -31,7 +46,7 @@ export class FcmService {
             resolve(result);
           });
         }).catch((e)=> {
-          console.error(`Not able to take token for ${email}`, e);
+          console.error(`Not able to save token for ${email}`, e);
         });
       } 
     
