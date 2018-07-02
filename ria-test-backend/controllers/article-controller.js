@@ -40,8 +40,9 @@ class ArticleController extends BaseController {
     try {
       // if( req )
       debugger;
+      req.checkParams('riskGroups');
       let articles = await Article
-      .find({ "token": token }).populate({"riskGroups": {"$in": req.riskGroups}}).exec();
+      .find({ "token": token }).populate({"riskGroups": {"id":{"$in": req.riskGroups}}}).exec();
         req.dataOut = articles;
         res.body = articles;
         next();
