@@ -7,5 +7,6 @@ const articleCtrl = require('../controllers/article-controller');
 router.post('/article/add', articleCtrl.addArticle.bind(articleCtrl));
 router.post('/article/update', articleCtrl.updateArticle.bind(articleCtrl));
 router.get('/articles',  articleCtrl.getAll.bind(articleCtrl));
+router.get('/articles/getByGroupRisks', articleCtrl.getByGroupRisk.bind(articleCtrl));
 router.post('/article/remove', articleCtrl.removeArticle.bind(articleCtrl));
 module.exports = router;

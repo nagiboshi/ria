@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from "./api.service";
+import { Injectable } from '@angular/core';
 import { File } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
 

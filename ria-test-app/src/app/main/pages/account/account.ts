@@ -5,7 +5,7 @@ import { SignInPage } from "../sign-in/sign-in";
 import {IUserModel} from "../../../common/models/user";
 import {FieldUpdate} from "../../../common/models/field-update";
 import {ModalChangeFields} from "../../../common/components/modal-change-fields/modal-change-fields";
-
+import {FcmService} from "../../../common/services/fcm.service";
 @Component({
   selector: 'account-page',
   templateUrl: 'account.html'
@@ -14,15 +14,14 @@ import {ModalChangeFields} from "../../../common/components/modal-change-fields/
 export class AccountPage implements OnInit, OnDestroy {
   private user: IUserModel;
   private subList = [];
-
+  pushByPhone = true;
+  pushByEmail = true;
   constructor(
     private _authService: AuthService,
     private _navCtrl: NavController,
+    private _fcmService: FcmService,
     public modalCtrl: ModalController
   ) {}
-
-  isOnPushApp = true;
-  isOnPushEmail = true;
 
   ngOnInit() {
     this.subList.push(
@@ -30,6 +29,8 @@ export class AccountPage implements OnInit, OnDestroy {
         .subscribe((user) => {
           if(user) {
             this.user = user;
+            this.pushByPhone = this.user.pushByPhone;
+            this.pushByEmail = this.user.pushByEmail;
           }
         })
     );
@@ -38,7 +39,12 @@ export class AccountPage implements OnInit, OnDestroy {
   signOut() {
     this._authService
       .signOut()
-      .subscribe(() => this._navCtrl.setRoot(SignInPage));
+      .subscribe(() => { 
+        this._navCtrl.setRoot(SignInPage);
+        this._fcmService.stopListeningNotifications("articles");
+      }
+
+    );
   }
 
   changeName() {

@@ -6,26 +6,47 @@ import { ApiService } from './api.service';
 
 @Injectable()
 export class FcmService {
-
+  private token;
   constructor(
     public firebaseNative: Firebase,
     public afs: AngularFirestore,
     private platform: Platform,
     private api: ApiService,
     private _toastCtrl : ToastController,
-  ) {}
+  ) {
+  }
 
+
+  public onTokenRefresh(email){
+    this.firebaseNative.onTokenRefresh().subscribe((newToken) => {
+      this.token = newToken;
+      this.registerToken(email);
+    });
+  
+  }
+
+  public onNotification() {
+  return this.firebaseNative.onNotificationOpen(); 
+  }
+
+  private saveToBackend(email, commingToken, platform):Promise<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      this.api.post('device/register', {email:email, token:commingToken, platform:platform}).subscribe((result)=>{
+        resolve(result);
+      });
+    });
+    return promise;
+  }
   // Get permission from the user
   public registerToken(email):Promise<string>  { 
-    let token =  '';
     const promise = new Promise<string>((resolve, reject)=>{
      
       if (this.platform.is('android')) {
         this.firebaseNative.getToken().then((commingToken) => { 
-          token = commingToken;
+          this.token = commingToken;
           const platform = 'android';
-          this.api.post('device/register', {email, token, platform}).subscribe((result)=>{
-            resolve(result);
+          this.saveToBackend(email, this.token, platform).then(() => {
+            resolve();
           });
         }).catch((e)=> {
           reject(e);
@@ -33,18 +54,24 @@ export class FcmService {
       } 
     
       if (this.platform.is('ios')) {
-        let token = '';
         this.firebaseNative.getToken().then((commingToken) => { 
-          token = commingToken;
+          this.token = commingToken;
           const platform = 'ios';
-          this.api.post('device/register', {email, token, platform});
           this.firebaseNative.grantPermission();
+          this.saveToBackend(email, this.token, platform).then(() => { 
+            resolve();
+          })
         }).catch((e)=> {
           console.error(`Not able to take token for ${email}`, e);
+          reject(e);
         });
       } 
     });
     return promise;
+  }
+
+  stopListeningNotifications(topic) {
+    return this.firebaseNative.unsubscribe(topic);
   }
 
   // Listen to incoming FCM messages

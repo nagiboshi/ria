@@ -3,17 +3,7 @@ const fireBaseAdmin = require('firebase-admin');
 class PushService { 
     // iosPushOptions;
     constructor() {
-        // this.iosPushOptions = {
-        //     keyFile  : 'key.pem',
-        //     certFile : 'cert.pem',
-        //     debug    : true,
-        //     gateway  : 'gateway.sandbox.push.apple.com',
-        //     errorCallback : function(num, err) {
-        //         console.error(err);
-        //     }
-        // };
-
-        const serviceAccount = "./serviceAccountKey.json";
+            const serviceAccount = "./serviceAccountKey.json";
 
         fireBaseAdmin.initializeApp({
         credential: fireBaseAdmin.credential.cert(serviceAccount),
@@ -32,8 +22,7 @@ send(text) {
             },
             "data" : {
                 "url" : "http://ria.test.okpixels.ru/#articles"
-              },
-              
+            },
     };
     
     fireBaseAdmin.messaging().send( message).then((response) => {

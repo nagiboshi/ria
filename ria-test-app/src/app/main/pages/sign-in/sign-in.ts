@@ -38,41 +38,14 @@ export class SignInPage {
       .signIn(this.email, this.password)
       .subscribe(
         () => {
-
-            this._authService.getUser().subscribe((user:IUserModel) => { 
+          
+          this._authService.getUser().subscribe((user:IUserModel) => { 
             
-              // 
-              this._toastCtrl.create({
-                message: `Push enabled : ${user.pushByPhone} ,platform is browser :? ${this._platform.is('browser')}`,
-                duration: 10000
-              }).present();
-            //
-
-                if( user.pushByPhone && !this._platform.is('browser')) {
+            
+            if( user.pushByPhone && !this._platform.is('browser')) {
+                  this._fcm.onTokenRefresh(this.email);
                   this._fcm.registerToken(this.email).then((response) => { 
-
-                    this._fcm.listenToNotifications("articles").then((message)=>{
-
-                   
-                                          // show a toast
-                        this._toastCtrl.create({
-                                            message: 'yo',
-                                            duration: 3000
-                                          }).present();
-                                      //.subscribe();
-                    });
-                      // Listen to incoming messages
-                      // this._fcm.listenToArticles().then((result ) => {
-                      //     tap( msg => {
-                      //     // show a toast
-                      //     const toast = this._toastCtrl.create({
-                      //       message: result,
-                      //       duration: 10000
-                      //     }).present();
-                      //     toast.
-                      //     })
-                     
-                      //   });
+                    this._fcm.listenToNotifications("articles");
                   });
                 }
                 });

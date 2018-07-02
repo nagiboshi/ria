@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams} from "ionic-angular";
+import { ArticleService } from '../../../common/services/article.service';
+import { UserService } from '../../../common/services/user.service';
+import { AuthService } from '../../../common/services/auth.service';
+import { IUserModel } from '../../../common/models/user';
 
 @Component({
   selector: 'article-page',
@@ -37,11 +41,21 @@ export class ArticlePage implements OnInit {
 
   constructor(
     private _navCtrl: NavController,
-    private _navParams: NavParams
+    private _navParams: NavParams,
+    private _articleService: ArticleService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
+    this._authService.getUser().subscribe((user:IUserModel)=> {
+          let riskGroups = user.riskGroups;
+          // this._articleService.getArticles().subscribe((articles) => {
+
+          // });
+    });
+
     let idArticle = this._navParams.get('id');
+   
     this.listArticles.forEach(itemArticle => {
       if(itemArticle.id === idArticle) {
         this.viewArticle = itemArticle;

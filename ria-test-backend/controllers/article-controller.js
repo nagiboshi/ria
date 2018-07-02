@@ -26,6 +26,7 @@ class ArticleController extends BaseController {
   return `data:${image.contentType};base64,${image.data.toString('base64')}`
   }
 
+  
   getArticleFromModel(articleModel) {
   return  { _id: articleModel._id,
             title:articleModel.title,
@@ -33,6 +34,20 @@ class ArticleController extends BaseController {
             image: articleModel.image,
             riskGroups: articleModel.riskGroups
           };
+  }
+
+  async getByGroupRisks(req,res, next) {
+    try {
+      // if( req )
+      let articles = await Article
+        .find({ "token": token }).populate({"riskGroups": {"$in": req.riskGroups}}).exec();
+        req.dataOut = articles;
+        res.body = articles;
+        next();
+    } catch(e) {
+      next(errorService.article.default.ex(e));
+    }
+
   }
 
   async getAll(req, res, next) {

@@ -4,4 +4,5 @@ export interface IUserModel {
   phoneNumber: string;
   pushByPhone: boolean;
   pushByEmail: boolean;
+  riskGroups: any;
 }
