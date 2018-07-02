@@ -39,6 +39,7 @@ class ArticleController extends BaseController {
   async getByGroupRisks(req,res, next) {
     try {
       req.checkQuery('riskGroups').notEmpty();
+      debugger;
       let articles = await Article
       .find({"riskGroup":{"$in": [req.query.riskGroups]}}).populate("riskGroups").exec();
         req.dataOut = articles;
