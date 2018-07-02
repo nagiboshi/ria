@@ -41,7 +41,7 @@ class ArticleController extends BaseController {
       req.checkQuery('riskGroups').notEmpty();
       debugger;
       let articles = await Article
-      .find({"riskGroup":{"$in": [req.query.riskGroups]}}).populate("riskGroups").exec();
+      .find({"riskGroup._id":{"$in": req.query.riskGroups}}).populate("riskGroups").exec();
         req.dataOut = articles;
         res.body = articles;
         next();
