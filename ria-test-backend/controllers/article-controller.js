@@ -42,6 +42,7 @@ class ArticleController extends BaseController {
       debugger;
       let articles = await Article
       .find({"riskGroup._id":{"$in": req.query.riskGroups}}).populate("riskGroups").exec();
+      debugger;
         req.dataOut = articles;
         res.body = articles;
         next();
